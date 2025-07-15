@@ -13,12 +13,12 @@ plugins {
 
 android {
     namespace = "com.github.droidworksstudio.launcher"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "app.easy.launcher"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 33
         versionName = "0.3.3"
 
