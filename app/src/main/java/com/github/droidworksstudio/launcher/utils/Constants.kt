@@ -153,6 +153,7 @@ object Constants {
     const val SWIPE_RIGHT_APP = "SWIPE_RIGHT_APP"
     const val DOUBLE_TAP_ACTION = "DOUBLE_TAP_ACTION"
     const val DOUBLE_TAP_APP = "DOUBLE_TAP_APP"
+    const val WORD_TAP_APP = "WORD_TAP_APP"
 
     enum class Action {
         OpenApp,
@@ -195,7 +196,8 @@ object Constants {
         Up,
         Down,
         Left,
-        Right;
+        Right,
+        WordTap
     }
 
     enum class Units {

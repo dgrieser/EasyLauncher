@@ -283,6 +283,10 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getString(Constants.DOUBLE_TAP_APP, "").toString()
         set(value) = prefs.edit().putString(Constants.DOUBLE_TAP_APP, value).apply()
 
+    var wordTapApp: String
+        get() = prefs.getString(Constants.WORD_TAP_APP, "").toString()
+        set(value) = prefs.edit().putString(Constants.WORD_TAP_APP, value).apply()
+
     var appLanguage: Constants.Language
         get() {
             return try {

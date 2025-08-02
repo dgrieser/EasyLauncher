@@ -84,6 +84,7 @@ class SettingsFeaturesFragment : Fragment(),
             miscellaneousAppLanguageControl.text = preferenceHelper.appLanguage.name
             miscellaneousFilterStrengthControl.text = "${preferenceHelper.filterStrength}"
             miscellaneousSwipeThresholdControl.text = "${preferenceHelper.swipeThreshold}"
+            updateWordTapControlText(context, preferenceHelper.wordTapApp, miscellaneousWordTapAppControl)
         }
 
         val actions = listOf(
@@ -113,6 +114,15 @@ class SettingsFeaturesFragment : Fragment(),
             action.getString(context)
         }
         textView.text = actionText
+    }
+
+    private fun updateWordTapControlText(
+        context: Context,
+        appPackageName: String?,
+        textView: TextView,
+    ) {
+        val appName = appPackageName?.let { context.getAppNameFromPackageName(it) }
+        textView.text = appName ?: getString(R.string.settings_word_tap_app_title)
     }
 
     override fun onStop() {
@@ -171,6 +181,10 @@ class SettingsFeaturesFragment : Fragment(),
 
             miscellaneousSwipeThresholdControl.setOnClickListener {
                 showSwipeThresholdDialog()
+            }
+
+            miscellaneousWordTapAppControl.setOnClickListener {
+                showAppSelectionDialog(Constants.Swipe.WordTap)
             }
         }
     }
@@ -398,7 +412,9 @@ class SettingsFeaturesFragment : Fragment(),
                             Constants.Swipe.Down,
                             Constants.Swipe.Left,
                             Constants.Swipe.Right,
-                                -> handleSwipeAction(swipeType, selectedPackageName)
+                            -> handleSwipeAction(swipeType, selectedPackageName)
+
+                            Constants.Swipe.WordTap -> handleWordTapAction(selectedPackageName)
                         }
                         val feedbackType = "select"
                         appHelper.triggerHapticFeedback(context, feedbackType)
@@ -515,6 +531,12 @@ class SettingsFeaturesFragment : Fragment(),
                 preferenceHelper.swipeRightApp = selectedPackageName
             }
         }
+    }
+
+    private fun handleWordTapAction(selectedPackageName: String) {
+        val selectedApp = context.getAppNameFromPackageName(selectedPackageName)
+        binding.miscellaneousWordTapAppControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
+        preferenceHelper.wordTapApp = selectedPackageName
     }
 
     // Function to handle setting action and updating UI

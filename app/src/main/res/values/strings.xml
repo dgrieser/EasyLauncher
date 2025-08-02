@@ -57,7 +57,8 @@
     <string name="advanced_settings_community_support_title">Community Support</string>
 
     <string name="advanced_settings_share_application_title">Share Application</string>
-    <string name="advanced_settings_share_application_description">Elevate your experience with %1$s! Get it now on fDroid and see what everyone is talking about!\n</string>
+    <string name="advanced_settings_share_application_description">Elevate your experience with %1$s! Get it now on fDroid and see what everyone is talking about!
+</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="home_fragment_label">Home Fragment</string>
@@ -136,6 +137,9 @@
     <string name="settings_swipe_down">Swipe Down</string>
     <string name="settings_swipe_left">Swipe Left</string>
     <string name="settings_swipe_right">Swipe Right</string>
+
+    <string name="settings_word_tap_app_title">Word Tap Action</string>
+    <string name="settings_word_tap_app_description">Launch an app when tapping on the daily word</string>
 
     <string name="settings_select_search_engine">Select a Search Engine</string>
     <string name="settings_search_engine">Search Engine</string>

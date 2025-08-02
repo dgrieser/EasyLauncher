@@ -241,6 +241,19 @@ class HomeFragment : Fragment(),
             clock.setOnClickListener { context.launchClock() }
             date.setOnClickListener { context.launchCalendar() }
             battery.setOnClickListener { context.openBatteryManager() }
+            word.setOnClickListener {
+                val packageName = preferenceHelper.wordTapApp
+                if (packageName.isNotEmpty()) {
+                    if (context.isPackageInstalled(packageName)) {
+                        openApp(packageName)
+                    } else {
+                        Log.e("HomeViewHolder", "App $packageName is not installed")
+                        context.showLongToast("App $packageName is not installed")
+                    }
+                } else {
+                    Log.e("HomeViewHolder", "No package name found in preferences")
+                }
+            }
         }
     }
 
