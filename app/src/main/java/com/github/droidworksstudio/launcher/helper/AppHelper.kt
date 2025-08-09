@@ -471,6 +471,15 @@ class AppHelper @Inject constructor() {
                     .setPopExitAnim(R.anim.slide_out_right)
                     .build()
             }
+
+            Constants.Swipe.WordTap -> {
+                NavOptions.Builder()
+                    .setEnterAnim(R.anim.zoom_in)
+                    .setExitAnim(R.anim.zoom_out)
+                    .setPopEnterAnim(R.anim.zoom_in)
+                    .setPopExitAnim(R.anim.zoom_out)
+                    .build()
+            }
         }
     }
 

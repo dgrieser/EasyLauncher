@@ -410,13 +410,15 @@ class HomeFragment : Fragment(),
                     Constants.Swipe.Down,
                     Constants.Swipe.Left,
                     Constants.Swipe.Right,
-                        -> {
+                    Constants.Swipe.WordTap,
+                    -> {
                         val packageName = when (actionType) {
                             Constants.Swipe.DoubleTap -> preferenceHelper.doubleTapApp
                             Constants.Swipe.Up -> preferenceHelper.swipeUpApp
                             Constants.Swipe.Down -> preferenceHelper.swipeDownApp
                             Constants.Swipe.Left -> preferenceHelper.swipeLeftApp
                             Constants.Swipe.Right -> preferenceHelper.swipeRightApp
+                            Constants.Swipe.WordTap -> preferenceHelper.wordTapApp
                         }
 
                         if (packageName.isNotEmpty()) {

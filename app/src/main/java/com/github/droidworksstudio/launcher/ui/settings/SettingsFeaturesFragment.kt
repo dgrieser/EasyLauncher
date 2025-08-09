@@ -491,6 +491,7 @@ class SettingsFeaturesFragment : Fragment(),
                     Constants.Swipe.Down -> handleSwipeAction(context, Constants.Swipe.Down, selectedAction, binding)
                     Constants.Swipe.Left -> handleSwipeAction(context, Constants.Swipe.Left, selectedAction, binding)
                     Constants.Swipe.Right -> handleSwipeAction(context, Constants.Swipe.Right, selectedAction, binding)
+                    else -> {}
                 }
                 val feedbackType = "select"
                 appHelper.triggerHapticFeedback(context, feedbackType)
@@ -530,6 +531,7 @@ class SettingsFeaturesFragment : Fragment(),
                 binding.gesturesSwipeRightControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
                 preferenceHelper.swipeRightApp = selectedPackageName
             }
+            else -> {}
         }
     }
 
@@ -552,6 +554,7 @@ class SettingsFeaturesFragment : Fragment(),
                     Constants.Swipe.Down -> context.getAppNameFromPackageName(preferenceHelper.swipeDownApp)
                     Constants.Swipe.Left -> context.getAppNameFromPackageName(preferenceHelper.swipeLeftApp)
                     Constants.Swipe.Right -> context.getAppNameFromPackageName(preferenceHelper.swipeRightApp)
+                    else -> ""
                 }
                 binding.apply {
                     when (swipe) {
@@ -560,6 +563,7 @@ class SettingsFeaturesFragment : Fragment(),
                         Constants.Swipe.Down -> gesturesSwipeDownControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
                         Constants.Swipe.Left -> gesturesSwipeLeftControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
                         Constants.Swipe.Right -> gesturesSwipeRightControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
+                        else -> {}
                     }
                 }
                 showAppSelectionDialog(swipe)
@@ -573,6 +577,7 @@ class SettingsFeaturesFragment : Fragment(),
                         Constants.Swipe.Down -> gesturesSwipeDownControl.text = preferenceHelper.swipeDownAction.getString(context)
                         Constants.Swipe.Left -> gesturesSwipeLeftControl.text = preferenceHelper.swipeLeftAction.getString(context)
                         Constants.Swipe.Right -> gesturesSwipeRightControl.text = preferenceHelper.swipeRightAction.getString(context)
+                        else -> {}
                     }
                 }
             }
@@ -587,6 +592,7 @@ class SettingsFeaturesFragment : Fragment(),
             Constants.Swipe.Down -> setSwipeDown(action)
             Constants.Swipe.Left -> setSwipeLeft(action)
             Constants.Swipe.Right -> setSwipeRight(action)
+            else -> {}
         }
     }
 
