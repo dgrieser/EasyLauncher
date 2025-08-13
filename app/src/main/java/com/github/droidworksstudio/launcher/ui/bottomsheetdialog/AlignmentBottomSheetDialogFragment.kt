@@ -191,7 +191,7 @@ class AlignmentBottomSheetDialogFragment : BottomSheetDialogFragment() {
             }
 
             REQUEST_KEY_TIME_ALIGNMENT -> {
-                alignmentPreference = { preferenceViewModel.setHomeTimeAppAlignment(it) }
+                alignmentPreference = { preferenceViewModel.setHomeTimeAlignment(it) }
                 alignmentGetter = { preferenceHelper.homeTimeAlignment }
             }
 
@@ -201,12 +201,12 @@ class AlignmentBottomSheetDialogFragment : BottomSheetDialogFragment() {
             }
 
             REQUEST_KEY_WORD_ALIGNMENT -> {
-                alignmentPreference = { preferenceViewModel.setHomeDailyWordAppAlignment(it) }
+                alignmentPreference = { preferenceViewModel.setHomeDailyWordAlignment(it) }
                 alignmentGetter = { preferenceHelper.homeDailyWordAlignment }
             }
 
             REQUEST_KEY_ALARM_CLOCK_ALIGNMENT -> {
-                alignmentPreference = { preferenceViewModel.setHomeAlarmClockAppAlignment(it) }
+                alignmentPreference = { preferenceViewModel.setHomeAlarmClockAlignment(it) }
                 alignmentGetter = { preferenceHelper.homeAlarmClockAlignment }
             }
 
