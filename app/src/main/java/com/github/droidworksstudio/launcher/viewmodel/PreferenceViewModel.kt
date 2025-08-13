@@ -50,7 +50,10 @@ class PreferenceViewModel @Inject constructor(
     private val lockSettingsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val disableAnimationsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val appGroupPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
-    private val appPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    val appPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    val clockDatePaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    val dateAlarmPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    val alarmWordPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
 
     private val weatherOrderNumberLiveData: MutableLiveData<Int> = MutableLiveData()
     private val batteryOrderNumberLiveData: MutableLiveData<Int> = MutableLiveData()
@@ -240,6 +243,21 @@ class PreferenceViewModel @Inject constructor(
     fun setAppGroupPaddingSize(appPaddingSize: Float) {
         preferenceHelper.homeAppsPadding = appPaddingSize
         appGroupPaddingSizeLiveData.postValue(preferenceHelper.homeAppsPadding)
+    }
+
+    fun setClockDatePaddingSize(padding: Float) {
+        preferenceHelper.homeClockDatePadding = padding
+        clockDatePaddingSizeLiveData.postValue(preferenceHelper.homeClockDatePadding)
+    }
+
+    fun setDateAlarmPaddingSize(padding: Float) {
+        preferenceHelper.homeDateAlarmPadding = padding
+        dateAlarmPaddingSizeLiveData.postValue(preferenceHelper.homeDateAlarmPadding)
+    }
+
+    fun setAlarmWordPaddingSize(padding: Float) {
+        preferenceHelper.homeAlarmWordPadding = padding
+        alarmWordPaddingSizeLiveData.postValue(preferenceHelper.homeAlarmWordPadding)
     }
 
     fun setDoubleTap(action: Constants.Action) {

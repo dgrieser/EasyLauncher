@@ -64,9 +64,15 @@ class PaddingBottomSheetDialogFragment : BottomSheetDialogFragment() {
         binding.apply {
             selectAppPaddingSize.setText("${preferenceHelper.homeAppPadding}")
             selectAppGroupPaddingSize.setText("${preferenceHelper.homeAppsPadding}")
+            selectClockDatePaddingSize.setText("${preferenceHelper.homeClockDatePadding}")
+            selectDateAlarmPaddingSize.setText("${preferenceHelper.homeDateAlarmPadding}")
+            selectAlarmWordPaddingSize.setText("${preferenceHelper.homeAlarmWordPadding}")
 
             addMinMaxConstraint(selectAppPaddingSize, Constants.APP_PADDING_MIN, Constants.APP_PADDING_MAX)
             addMinMaxConstraint(selectAppGroupPaddingSize, Constants.APP_GROUP_PADDING_MIN, Constants.APP_GROUP_PADDING_MAX)
+            addMinMaxConstraint(selectClockDatePaddingSize, Constants.APP_PADDING_MIN, Constants.APP_PADDING_MAX)
+            addMinMaxConstraint(selectDateAlarmPaddingSize, Constants.APP_PADDING_MIN, Constants.APP_PADDING_MAX)
+            addMinMaxConstraint(selectAlarmWordPaddingSize, Constants.APP_PADDING_MIN, Constants.APP_PADDING_MAX)
         }
     }
 
@@ -75,13 +81,22 @@ class PaddingBottomSheetDialogFragment : BottomSheetDialogFragment() {
         binding.apply {
             val appPaddingValue = selectAppPaddingSize.text.toString()
             val appGroupPaddingValue = selectAppGroupPaddingSize.text.toString()
+            val clockDatePaddingValue = selectClockDatePaddingSize.text.toString()
+            val dateAlarmPaddingValue = selectDateAlarmPaddingSize.text.toString()
+            val alarmWordPaddingValue = selectAlarmWordPaddingSize.text.toString()
 
             val appPaddingFloatValue = parseFloatValue(appPaddingValue, preferenceHelper.homeAppPadding)
             val appGroupPaddingFloatValue = parseFloatValue(appGroupPaddingValue, preferenceHelper.homeAppsPadding)
+            val clockDatePaddingFloatValue = parseFloatValue(clockDatePaddingValue, preferenceHelper.homeClockDatePadding)
+            val dateAlarmPaddingFloatValue = parseFloatValue(dateAlarmPaddingValue, preferenceHelper.homeDateAlarmPadding)
+            val alarmWordPaddingFloatValue = parseFloatValue(alarmWordPaddingValue, preferenceHelper.homeAlarmWordPadding)
             dismiss()
 
             preferenceViewModel.setAppPaddingSize(appPaddingFloatValue)
             preferenceViewModel.setAppGroupPaddingSize(appGroupPaddingFloatValue)
+            preferenceViewModel.setClockDatePaddingSize(clockDatePaddingFloatValue)
+            preferenceViewModel.setDateAlarmPaddingSize(dateAlarmPaddingFloatValue)
+            preferenceViewModel.setAlarmWordPaddingSize(alarmWordPaddingFloatValue)
 
             val feedbackType = "select"
             appHelper.triggerHapticFeedback(context, feedbackType)

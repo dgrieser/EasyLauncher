@@ -138,6 +138,18 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getFloat(Constants.APP_TEXT_PADDING, 10f)
         set(value) = prefs.edit().putFloat(Constants.APP_TEXT_PADDING, value).apply()
 
+    var homeClockDatePadding: Float
+        get() = prefs.getFloat(Constants.HOME_CLOCK_DATE_PADDING, 2f)
+        set(value) = prefs.edit().putFloat(Constants.HOME_CLOCK_DATE_PADDING, value).apply()
+
+    var homeDateAlarmPadding: Float
+        get() = prefs.getFloat(Constants.HOME_DATE_ALARM_PADDING, 2f)
+        set(value) = prefs.edit().putFloat(Constants.HOME_DATE_ALARM_PADDING, value).apply()
+
+    var homeAlarmWordPadding: Float
+        get() = prefs.getFloat(Constants.HOME_ALARM_WORD_PADDING, 2f)
+        set(value) = prefs.edit().putFloat(Constants.HOME_ALARM_WORD_PADDING, value).apply()
+
     var homeDateAlignment: Int
         get() = prefs.getInt(Constants.HOME_DATE_ALIGNMENT, Gravity.START)
         set(value) = prefs.edit().putInt(Constants.HOME_DATE_ALIGNMENT, value).apply()
