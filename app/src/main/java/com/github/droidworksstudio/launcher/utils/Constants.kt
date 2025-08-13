@@ -59,6 +59,10 @@ object Constants {
     const val APPS_PADDING = "APPS_PADDING"
     const val APP_TEXT_PADDING = "APP_TEXT_PADDING"
 
+    const val HOME_CLOCK_DATE_PADDING = "home_clock_date_padding"
+    const val HOME_DATE_ALARM_PADDING = "home_date_alarm_padding"
+    const val HOME_ALARM_WORD_PADDING = "home_alarm_word_padding"
+
     const val SHOW_APP_ICON = "SHOW_APP_ICON"
 
     const val AUTOMATIC_KEYBOARD = "AUTOMATIC_KEYBOARD"
