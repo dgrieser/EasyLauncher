@@ -24,7 +24,8 @@ class PreferenceViewModel @Inject constructor(
     private val showWeatherWidgetSunSetRiseLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val showBatteryWidgetLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val showAppIconLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    private val homeAppAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val favoriteAppAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val allAppAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
     private val homeDateAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
     private val homeTimeAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
     private val homeAlarmClockAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
@@ -49,6 +50,7 @@ class PreferenceViewModel @Inject constructor(
     private val autoKeyboardLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val lockSettingsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val disableAnimationsLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val allAppsSortingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val appGroupPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
     val appPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
     val clockDatePaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
@@ -180,9 +182,14 @@ class PreferenceViewModel @Inject constructor(
         batteryColorLiveData.postValue(preferenceHelper.batteryColor)
     }
 
-    fun setHomeAppAlignment(homeAppAlignment: Int) {
-        preferenceHelper.homeAppAlignment = homeAppAlignment
-        homeAppAlignmentLiveData.postValue(preferenceHelper.homeAppAlignment)
+    fun setFavoriteAppAlignment(favoriteAppAlignment: Int) {
+        preferenceHelper.favoriteAppAlignment = favoriteAppAlignment
+        favoriteAppAlignmentLiveData.postValue(preferenceHelper.favoriteAppAlignment)
+    }
+
+    fun setAllAppAlignment(allAppAlignment: Int) {
+        preferenceHelper.allAppAlignment = allAppAlignment
+        allAppAlignmentLiveData.postValue(preferenceHelper.allAppAlignment)
     }
 
     fun setHomeDateAlignment(homeDateAlignment: Int) {
@@ -313,6 +320,11 @@ class PreferenceViewModel @Inject constructor(
     fun setDisableAnimations(disableAnimations: Boolean) {
         preferenceHelper.disableAnimations = disableAnimations
         disableAnimationsLiveData.postValue((preferenceHelper.disableAnimations))
+    }
+
+    fun setAllAppsSorting(allAppsSorting: Boolean) {
+        preferenceHelper.allAppsSorting = allAppsSorting
+        allAppsSortingLiveData.postValue((preferenceHelper.allAppsSorting))
     }
 
     fun setAppLanguage(appLanguage: Constants.Language) {

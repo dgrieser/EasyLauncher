@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">Favorite Apps</string>
     <string name="hidden_apps">Hidden Apps</string>
+    <string name="all_apps">All Apps</string>
 
     <!-- Strings used for actions within the app -->
     <string name="action_settings">Settings</string>
@@ -111,6 +112,7 @@
     <string name="settings_search_from_start">Search From Start</string>
     <string name="settings_display_lock_settings">Lock Settings</string>
     <string name="settings_display_disable_animations">Disable Animations</string>
+    <string name="settings_all_apps_sorting">Enable All Apps Sorting</string>
 
     <string name="settings_appearance_text_size_title">Size</string>
     <string name="settings_appearance_color_title">Color</string>
@@ -123,7 +125,8 @@
     <string name="appearance_bottom_dialog_alignment_title">Alignment</string>
     <string name="appearance_bottom_dialog_desc_date">Date\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Time\u0020:\u0020 </string>
-    <string name="appearance_bottom_dialog_desc_app">Apps\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">Favorite Apps\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">All Apps\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Apps Group\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_clock_date">Padding Clock/Date\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_date_alarm">Padding Date/Alarm\u0020:\u0020</string>
