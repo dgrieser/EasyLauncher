@@ -315,26 +315,26 @@ class HomeFragment : Fragment(),
         }
 
         preferenceViewModel.clockDatePaddingSizeLiveData.observe(viewLifecycleOwner) { padding ->
-            (binding.clock.layoutParams as? LinearLayout.LayoutParams)?.bottomMargin = padding.toInt()
+            binding.clock.setPadding(0, 0, 0, padding.toInt())
             binding.clock.requestLayout()
         }
 
         preferenceViewModel.dateAlarmPaddingSizeLiveData.observe(viewLifecycleOwner) { padding ->
-            (binding.date.layoutParams as? LinearLayout.LayoutParams)?.bottomMargin = padding.toInt()
+            binding.date.setPadding(0, 0, 0, padding.toInt())
             binding.date.requestLayout()
         }
 
         preferenceViewModel.alarmWordPaddingSizeLiveData.observe(viewLifecycleOwner) { padding ->
-            (binding.alarm.layoutParams as? LinearLayout.LayoutParams)?.bottomMargin = padding.toInt()
+            binding.alarm.setPadding(0, 0, 0, padding.toInt())
             binding.alarm.requestLayout()
         }
 
         binding.apply {
             mainView.hideKeyboard()
 
-            (clock.layoutParams as? LinearLayout.LayoutParams)?.bottomMargin = preferenceHelper.homeClockDatePadding.toInt()
-            (date.layoutParams as? LinearLayout.LayoutParams)?.bottomMargin = preferenceHelper.homeDateAlarmPadding.toInt()
-            (alarm.layoutParams as? LinearLayout.LayoutParams)?.bottomMargin = preferenceHelper.homeAlarmWordPadding.toInt()
+            clock.setPadding(0, 0, 0, preferenceHelper.homeClockDatePadding.toInt())
+            date.setPadding(0, 0, 0, preferenceHelper.homeDateAlarmPadding.toInt())
+            alarm.setPadding(0, 0, 0, preferenceHelper.homeAlarmWordPadding.toInt())
 
             val is24HourFormat = DateFormat.is24HourFormat(requireContext())
             val localLocale = preferenceHelper.appLanguage.timezone()
