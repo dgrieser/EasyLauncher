@@ -114,7 +114,7 @@ object Constants {
     const val APP_GROUP_PADDING_MAX = 1000.0
 
     const val APP_PADDING_MIN = 0.0
-    const val APP_PADDING_MAX = 100.0
+    const val APP_PADDING_MAX = 1000.0
 
     const val BACKUP_WRITE = 987
     const val BACKUP_READ = 876
