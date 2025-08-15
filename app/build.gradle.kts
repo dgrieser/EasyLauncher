@@ -28,6 +28,10 @@ android {
         manifestPlaceholders["coarseLocationPermission"] = "android.permission.ACCESS_COARSE_LOCATION"
     }
 
+    lint {
+        disable.add("UseRequiresApi")
+    }
+
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
