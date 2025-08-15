@@ -125,6 +125,7 @@
     <string name="appearance_bottom_dialog_alignment_title">Alignment</string>
     <string name="appearance_bottom_dialog_desc_date">Date\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Time\u0020:\u0020 </string>
+    <string name="appearance_bottom_dialog_desc_app">Apps\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_favorite_app">Favorite Apps\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_all_app">All Apps\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Apps Group\u0020:\u0020</string>
