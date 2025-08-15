@@ -64,4 +64,10 @@
         android:label="@string/hidden_fragment_label"
         tools:layout="@layout/fragment_hidden" />
 
+    <fragment
+        android:id="@+id/DrawFragmentMod"
+        android:name="com.github.droidworksstudio.launcher.ui.drawer.DrawFragmentMod"
+        android:label="@string/draw_fragment_label"
+        tools:layout="@layout/fragment_draw_mod" />
+
 </navigation>

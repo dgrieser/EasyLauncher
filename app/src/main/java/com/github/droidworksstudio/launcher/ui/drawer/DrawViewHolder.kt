@@ -40,7 +40,7 @@ class DrawViewHolder(
             appDrawName.text = appInfo.appName
             appDrawName.setTextColor(preferenceHelper.appColor)
             appDrawName.textSize = preferenceHelper.appTextSize
-            appDrawName.gravity = preferenceHelper.homeAppAlignment
+            appDrawName.gravity = preferenceHelper.allAppAlignment
 
             if (preferenceHelper.showAppIcon) {
                 val appInfoMap = root.context.getAllProfileAppIcons()
@@ -77,7 +77,7 @@ class DrawViewHolder(
                         parentLayout.orientation = LinearLayoutCompat.HORIZONTAL
                         parentLayout.removeAllViews()
 
-                        when (preferenceHelper.homeAppAlignment) {
+                        when (preferenceHelper.allAppAlignment) {
                             Gravity.START -> {
                                 layoutParams.marginEnd = 10.dpToPx()
                                 parentLayout.addView(appDrawIcon)
