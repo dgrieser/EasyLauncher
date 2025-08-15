@@ -73,7 +73,7 @@
                 android:layout_marginVertical="20dp"
                 android:background="@android:color/transparent"
                 android:gravity="left|center"
-                android:text="@string/appearance_bottom_dialog_desc_app"
+                android:text="@string/appearance_bottom_dialog_desc_all_app"
                 android:textSize="@dimen/text_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

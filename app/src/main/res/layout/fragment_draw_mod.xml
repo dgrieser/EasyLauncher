@@ -20,7 +20,7 @@
             android:layout_marginVertical="20dp"
             android:gravity="center"
             android:text="@string/hidden_fragment_no_apps"
-            android:textSize="@dimen/text_xxxx_large"
+            android:textSize="@dimen/text_super_large"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
