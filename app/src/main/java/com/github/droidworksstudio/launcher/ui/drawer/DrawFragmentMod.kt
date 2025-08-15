@@ -38,6 +38,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DrawFragmentMod : Fragment(),
     OnItemClickedListener.OnAppsClickedListener,
+    OnItemClickedListener.OnAppLongClickedListener,
     OnItemClickedListener.OnAppStateClickListener,
     OnItemClickedListener.BottomSheetDismissListener,
     OnItemMoveListener.OnItemActionListener,
@@ -252,6 +253,10 @@ class DrawFragmentMod : Fragment(),
     }
 
     override fun onAppLongClicked(appInfo: AppInfo) {
+        //
+    }
+
+    override fun onBottomSheetDismissed() {
         //
     }
 }

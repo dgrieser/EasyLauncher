@@ -40,7 +40,7 @@ class HomeViewHolder @Inject constructor(
             appHomeName.text = appInfo.appName
             appHomeName.setTextColor(preferenceHelper.appColor)
             appHomeName.textSize = preferenceHelper.appTextSize
-            appHomeName.gravity = preferenceHelper.homeAppAlignment
+            appHomeName.gravity = preferenceHelper.favoriteAppAlignment
 
             if (preferenceHelper.showAppIcon) {
                 val appInfoMap = root.context.getAllProfileAppIcons()
@@ -77,7 +77,7 @@ class HomeViewHolder @Inject constructor(
                         parentLayout.orientation = LinearLayoutCompat.HORIZONTAL
                         parentLayout.removeAllViews()
 
-                        when (preferenceHelper.homeAppAlignment) {
+                        when (preferenceHelper.favoriteAppAlignment) {
                             Gravity.START -> {
                                 layoutParams.marginEnd = 10.dpToPx()
                                 parentLayout.addView(appHomeIcon)
