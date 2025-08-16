@@ -126,9 +126,13 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getInt(Constants.SWIPE_THRESHOLD, 100)
         set(value) = prefs.edit().putInt(Constants.SWIPE_THRESHOLD, value).apply()
 
-    var homeAppAlignment: Int
-        get() = prefs.getInt(Constants.HOME_APP_ALIGNMENT, Gravity.START)
-        set(value) = prefs.edit().putInt(Constants.HOME_APP_ALIGNMENT, value).apply()
+    var favoriteAppAlignment: Int
+        get() = prefs.getInt(Constants.FAVORITE_APP_ALIGNMENT, Gravity.START)
+        set(value) = prefs.edit().putInt(Constants.FAVORITE_APP_ALIGNMENT, value).apply()
+
+    var allAppAlignment: Int
+        get() = prefs.getInt(Constants.ALL_APP_ALIGNMENT, Gravity.START)
+        set(value) = prefs.edit().putInt(Constants.ALL_APP_ALIGNMENT, value).apply()
 
     var homeAppsPadding: Float
         get() = prefs.getFloat(Constants.APPS_PADDING, 128f)
@@ -209,6 +213,10 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
     var disableAnimations: Boolean
         get() = prefs.getBoolean(Constants.DISABLE_ANIMATIONS, false)
         set(value) = prefs.edit().putBoolean(Constants.DISABLE_ANIMATIONS, value).apply()
+
+    var allAppsSorting: Boolean
+        get() = prefs.getBoolean(Constants.ALL_APPS_SORTING, false)
+        set(value) = prefs.edit().putBoolean(Constants.ALL_APPS_SORTING, value).apply()
 
     var searchEngines: Constants.SearchEngines
         get() {

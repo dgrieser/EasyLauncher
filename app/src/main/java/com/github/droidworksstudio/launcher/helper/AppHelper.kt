@@ -153,6 +153,7 @@ class AppHelper @Inject constructor() {
         view.layoutParams = layoutParams
 
         if (view is TextView) {
+            view.gravity = gravity
             view.setTextColor(selectColor)
             view.textSize = textSize
             view.visibility = if (isVisible) View.VISIBLE else View.GONE

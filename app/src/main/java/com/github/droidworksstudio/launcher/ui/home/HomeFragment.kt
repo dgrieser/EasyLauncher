@@ -202,7 +202,7 @@ class HomeFragment : Fragment(),
 
 
         // Set gravity to align RecyclerView to the bottom
-        layoutParams.gravity = when (preferenceHelper.homeAppAlignment) {
+        layoutParams.gravity = when (preferenceHelper.favoriteAppAlignment) {
             Gravity.START -> Gravity.START or Gravity.BOTTOM
             Gravity.CENTER -> Gravity.CENTER or Gravity.BOTTOM
             Gravity.END -> Gravity.END or Gravity.BOTTOM

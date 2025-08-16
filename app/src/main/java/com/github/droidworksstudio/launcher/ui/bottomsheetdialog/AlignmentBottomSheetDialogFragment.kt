@@ -71,8 +71,12 @@ class AlignmentBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 text = appHelper.gravityToString(preferenceHelper.homeTimeAlignment)
             }
 
-            selectAppTextSize.apply {
-                text = appHelper.gravityToString(preferenceHelper.homeAppAlignment)
+            selectFavoriteAppTextSize.apply {
+                text = appHelper.gravityToString(preferenceHelper.favoriteAppAlignment)
+            }
+
+            selectAllAppTextSize.apply {
+                text = appHelper.gravityToString(preferenceHelper.allAppAlignment)
             }
 
             selectWordTextSize.apply {
@@ -99,8 +103,13 @@ class AlignmentBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 showListDialog(selectedAlignment)
             }
 
-            bottomAlignmentAppView.setOnClickListener {
-                selectedAlignment = REQUEST_KEY_APP_ALIGNMENT
+            bottomAlignmentFavoriteAppView.setOnClickListener {
+                selectedAlignment = REQUEST_KEY_FAVORITE_APP_ALIGNMENT
+                showListDialog(selectedAlignment)
+            }
+
+            bottomAlignmentAllAppView.setOnClickListener {
+                selectedAlignment = REQUEST_KEY_ALL_APP_ALIGNMENT
                 showListDialog(selectedAlignment)
             }
 
@@ -130,11 +139,19 @@ class AlignmentBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
             binding.apply {
                 when (selectedAlignment) {
-                    REQUEST_KEY_APP_ALIGNMENT -> {
+                    REQUEST_KEY_FAVORITE_APP_ALIGNMENT -> {
                         setAlignment(
                             selectedAlignment,
                             gravity,
-                            selectAppTextSize
+                            selectFavoriteAppTextSize
+                        )
+                    }
+
+                    REQUEST_KEY_ALL_APP_ALIGNMENT -> {
+                        setAlignment(
+                            selectedAlignment,
+                            gravity,
+                            selectAllAppTextSize
                         )
                     }
 
@@ -185,9 +202,14 @@ class AlignmentBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val alignmentGetter: () -> Int
 
         when (alignmentType) {
-            REQUEST_KEY_APP_ALIGNMENT -> {
-                alignmentPreference = { preferenceViewModel.setHomeAppAlignment(it) }
-                alignmentGetter = { preferenceHelper.homeAppAlignment }
+            REQUEST_KEY_FAVORITE_APP_ALIGNMENT -> {
+                alignmentPreference = { preferenceViewModel.setFavoriteAppAlignment(it) }
+                alignmentGetter = { preferenceHelper.favoriteAppAlignment }
+            }
+
+            REQUEST_KEY_ALL_APP_ALIGNMENT -> {
+                alignmentPreference = { preferenceViewModel.setAllAppAlignment(it) }
+                alignmentGetter = { preferenceHelper.allAppAlignment }
             }
 
             REQUEST_KEY_TIME_ALIGNMENT -> {
@@ -223,7 +245,8 @@ class AlignmentBottomSheetDialogFragment : BottomSheetDialogFragment() {
         private const val DIALOG_TITLE = "Select Alignment"
         private const val REQUEST_KEY_DATE_ALIGNMENT = "REQUEST_KEY_DATE_ALIGNMENT"
         private const val REQUEST_KEY_TIME_ALIGNMENT = "REQUEST_KEY_TIME_ALIGNMENT"
-        private const val REQUEST_KEY_APP_ALIGNMENT = "REQUEST_KEY_APP_ALIGNMENT"
+        private const val REQUEST_KEY_FAVORITE_APP_ALIGNMENT = "REQUEST_KEY_FAVORITE_APP_ALIGNMENT"
+        private const val REQUEST_KEY_ALL_APP_ALIGNMENT = "REQUEST_KEY_ALL_APP_ALIGNMENT"
         private const val REQUEST_KEY_ALARM_CLOCK_ALIGNMENT = "REQUEST_KEY_ALARM_CLOCK_ALIGNMENT"
         private const val REQUEST_KEY_WORD_ALIGNMENT = "REQUEST_KEY_WORD_ALIGNMENT"
     }

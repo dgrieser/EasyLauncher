@@ -40,7 +40,13 @@ class DrawViewHolder(
             appDrawName.text = appInfo.appName
             appDrawName.setTextColor(preferenceHelper.appColor)
             appDrawName.textSize = preferenceHelper.appTextSize
-            appDrawName.gravity = preferenceHelper.homeAppAlignment
+            appDrawName.gravity = preferenceHelper.allAppAlignment
+
+            if (preferenceHelper.allAppsSorting) {
+                appDrawDragIcon.visibility = View.VISIBLE
+            } else {
+                appDrawDragIcon.visibility = View.GONE
+            }
 
             if (preferenceHelper.showAppIcon) {
                 val appInfoMap = root.context.getAllProfileAppIcons()
@@ -77,21 +83,24 @@ class DrawViewHolder(
                         parentLayout.orientation = LinearLayoutCompat.HORIZONTAL
                         parentLayout.removeAllViews()
 
-                        when (preferenceHelper.homeAppAlignment) {
+                        when (preferenceHelper.allAppAlignment) {
                             Gravity.START -> {
                                 layoutParams.marginEnd = 10.dpToPx()
                                 parentLayout.addView(appDrawIcon)
                                 parentLayout.addView(appDrawName)
+                                parentLayout.addView(appDrawDragIcon)
                             }
 
                             Gravity.END -> {
                                 layoutParams.marginStart = 10.dpToPx()
                                 parentLayout.addView(appDrawName)
                                 parentLayout.addView(appDrawIcon)
+                                parentLayout.addView(appDrawDragIcon)
                             }
 
                             else -> {
                                 parentLayout.addView(appDrawName)
+                                parentLayout.addView(appDrawDragIcon)
                             }
                         }
                     }

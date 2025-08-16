@@ -119,7 +119,7 @@ class DrawFragment : Fragment(),
             )
 
         // Set gravity to align RecyclerView to the bottom
-        layoutParams.gravity = when (preferenceHelper.homeAppAlignment) {
+        layoutParams.gravity = when (preferenceHelper.allAppAlignment) {
             Gravity.START -> Gravity.START or Gravity.BOTTOM
             Gravity.CENTER -> Gravity.CENTER or Gravity.BOTTOM
             Gravity.END -> Gravity.END or Gravity.BOTTOM
@@ -147,10 +147,15 @@ class DrawFragment : Fragment(),
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 // Collect the drawer apps from the ViewModel
                 viewModel.drawApps.collect { apps ->
+                    val sortedApps = if (preferenceHelper.allAppsSorting) {
+                        apps.sortedBy { it.appOrder }
+                    } else {
+                        apps.sortedBy { it.appName }
+                    }
                     // Update the adapter with the new list of apps
-                    drawAdapter.submitList(apps)
+                    drawAdapter.submitList(sortedApps)
                     // Update the adapter's data with the new state flow
-                    drawAdapter.updateDataWithStateFlow(apps)
+                    drawAdapter.updateDataWithStateFlow(sortedApps)
                 }
             }
         }
