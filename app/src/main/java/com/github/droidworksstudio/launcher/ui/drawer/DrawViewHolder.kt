@@ -13,6 +13,8 @@ import com.github.droidworksstudio.launcher.R
 import com.github.droidworksstudio.launcher.data.entities.AppInfo
 import com.github.droidworksstudio.launcher.databinding.ItemDrawBinding
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
+import android.annotation.SuppressLint
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.github.droidworksstudio.launcher.listener.OnItemClickedListener
 import com.github.droidworksstudio.launcher.utils.Constants
 
@@ -21,12 +23,23 @@ class DrawViewHolder(
     private val onAppClickedListener: OnItemClickedListener.OnAppsClickedListener,
     private val onAppLongClickedListener: OnItemClickedListener.OnAppLongClickedListener,
     private val preferenceHelper: PreferenceHelper,
+    private val itemTouchHelper: ItemTouchHelper,
 ) :
 
     RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("ClickableViewAccessibility")
     fun bind(appInfo: AppInfo) {
         binding.apply {
+            if (preferenceHelper.allAppsSorting) {
+                appDrawDragIcon.visibility = View.VISIBLE
+                appDrawDragIcon.setOnTouchListener { _, _ ->
+                    itemTouchHelper.startDrag(this@DrawViewHolder)
+                    true
+                }
+            } else {
+                appDrawDragIcon.visibility = View.GONE
+            }
             // Get the current LayoutParams of appHiddenName
             val layoutAppNameParams = appDrawName.layoutParams as LinearLayoutCompat.LayoutParams
 
