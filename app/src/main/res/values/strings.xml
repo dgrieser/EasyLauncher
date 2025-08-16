@@ -70,6 +70,7 @@
     <string name="widgets_fragment_label">Widgets Fragment</string>
 
     <!-- Strings used for fragments header labels -->
+    <string name="draw_fragment_name">All Apps</string>
     <string name="favorite_fragment_name">Favorite Apps</string>
     <string name="hidden_fragment_name">Hidden Apps</string>
 

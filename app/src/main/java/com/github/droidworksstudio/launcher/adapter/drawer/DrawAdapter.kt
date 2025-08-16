@@ -38,7 +38,8 @@ class DrawAdapter(
             binding,
             onAppClickedListener,
             onAppLongClickedListener,
-            preferenceHelper
+            preferenceHelper,
+            itemTouchHelper
         )
     }
 
