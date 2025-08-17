@@ -81,8 +81,8 @@ class DrawFragmentMod : Fragment(),
         context = requireContext()
 
         setupRecyclerView()
-        observeFavorite()
         observeHomeAppOrder()
+        observeFavorite()
         observeSwipeTouchListener()
     }
 
