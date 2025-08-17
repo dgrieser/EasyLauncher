@@ -70,4 +70,10 @@
         android:label="@string/draw_fragment_label"
         tools:layout="@layout/fragment_draw_mod" />
 
+    <fragment
+        android:id="@+id/DrawOrderFragment"
+        android:name="com.github.droidworksstudio.launcher.ui.drawer.DrawOrderFragment"
+        android:label="DrawOrderFragment"
+        tools:layout="@layout/fragment_draw_order" />
+
 </navigation>

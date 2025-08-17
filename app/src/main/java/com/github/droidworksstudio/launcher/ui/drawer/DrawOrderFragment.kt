@@ -19,9 +19,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.droidworksstudio.common.launchApp
 import com.github.droidworksstudio.common.showLongToast
 import com.github.droidworksstudio.launcher.R
-import com.github.droidworksstudio.launcher.adapter.drawer.DrawAdapter
+import com.github.droidworksstudio.launcher.adapter.drawer.DrawOrderAdapter
 import com.github.droidworksstudio.launcher.data.entities.AppInfo
-import com.github.droidworksstudio.launcher.databinding.FragmentDrawModBinding
+import com.github.droidworksstudio.launcher.databinding.FragmentDrawOrderBinding
 import com.github.droidworksstudio.launcher.helper.AppHelper
 import com.github.droidworksstudio.launcher.helper.BiometricHelper
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
@@ -36,14 +36,13 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class DrawFragmentMod : Fragment(),
+class DrawOrderFragment : Fragment(),
     OnItemClickedListener.OnAppsClickedListener,
-    OnItemClickedListener.OnAppLongClickedListener,
     OnItemClickedListener.OnAppStateClickListener,
     OnItemClickedListener.BottomSheetDismissListener,
     OnItemMoveListener.OnItemActionListener,
     BiometricHelper.Callback {
-    private var _binding: FragmentDrawModBinding? = null
+    private var _binding: FragmentDrawOrderBinding? = null
 
     private val binding get() = _binding!!
 
@@ -60,43 +59,40 @@ class DrawFragmentMod : Fragment(),
     @Inject
     lateinit var appHelper: AppHelper
 
-    private val drawAdapter: DrawAdapter by lazy { DrawAdapter(this, this, preferenceHelper) }
+    private val drawOrderAdapter: DrawOrderAdapter by lazy { DrawOrderAdapter(this, preferenceHelper) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-
-        _binding = FragmentDrawModBinding.inflate(inflater, container, false)
+        _binding = FragmentDrawOrderBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        appHelper.dayNightMod(requireContext(), binding.drawView)
+        appHelper.dayNightMod(requireContext(), binding.drawOrderView)
         super.onViewCreated(view, savedInstanceState)
 
         context = requireContext()
 
         setupRecyclerView()
-        observeFavorite()
+        observeDrawApps()
         observeHomeAppOrder()
         observeSwipeTouchListener()
     }
 
     private fun setupRecyclerView() {
-
-        binding.drawAdapter.apply {
-            adapter = drawAdapter
+        binding.drawOrderAdapter.apply {
+            adapter = drawOrderAdapter
             layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
             setHasFixedSize(false)
         }
     }
 
     private fun handleDragAndDrop(oldPosition: Int, newPosition: Int) {
-        val items = drawAdapter.currentList.toMutableList()
+        val items = drawOrderAdapter.currentList.toMutableList()
         Collections.swap(items, oldPosition, newPosition)
 
         items.forEachIndexed { index, appInfo ->
@@ -109,11 +105,11 @@ class DrawFragmentMod : Fragment(),
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    private fun observeFavorite() {
+    private fun observeDrawApps() {
         viewModel.compareInstalledAppInfo()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.drawApps.collect {
-                drawAdapter.submitList(it)
+                drawOrderAdapter.submitList(it)
                 updateNoAppsTextViewVisibility(it.isEmpty())
             }
         }
@@ -122,16 +118,16 @@ class DrawFragmentMod : Fragment(),
     private fun updateNoAppsTextViewVisibility(isEmpty: Boolean) {
         if (isEmpty) {
             binding.noApps.visibility = View.VISIBLE
-            binding.drawAdapter.visibility = View.GONE
+            binding.drawOrderAdapter.visibility = View.GONE
         } else {
             binding.noApps.visibility = View.GONE
-            binding.drawAdapter.visibility = View.VISIBLE
+            binding.drawOrderAdapter.visibility = View.VISIBLE
         }
     }
 
     private fun observeHomeAppOrder() {
-        binding.drawAdapter.adapter = drawAdapter
-        val listener: OnItemMoveListener.OnItemActionListener = drawAdapter
+        binding.drawOrderAdapter.adapter = drawOrderAdapter
+        val listener: OnItemMoveListener.OnItemActionListener = drawOrderAdapter
 
         val simpleItemTouchCallback = object : ItemTouchHelper.Callback() {
 
@@ -175,7 +171,6 @@ class DrawFragmentMod : Fragment(),
                     viewHolder.bindingAdapterPosition,
                     target.bindingAdapterPosition
                 )
-
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -188,15 +183,15 @@ class DrawFragmentMod : Fragment(),
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
 
-        drawAdapter.setItemTouchHelper(itemTouchHelper)
-        itemTouchHelper.attachToRecyclerView(binding.drawAdapter)
+        drawOrderAdapter.setItemTouchHelper(itemTouchHelper)
+        itemTouchHelper.attachToRecyclerView(binding.drawOrderAdapter)
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun observeSwipeTouchListener() {
         binding.apply {
             fragmentContainer.setOnTouchListener(getSwipeGestureListener(context))
-            drawAdapter.setOnTouchListener(getSwipeGestureListener(context))
+            drawOrderAdapter.setOnTouchListener(getSwipeGestureListener(context))
         }
     }
 
@@ -250,13 +245,5 @@ class DrawFragmentMod : Fragment(),
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {
         return true
-    }
-
-    override fun onAppLongClicked(appInfo: AppInfo) {
-        //
-    }
-
-    override fun onBottomSheetDismissed() {
-        //
     }
 }

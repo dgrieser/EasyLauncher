@@ -90,7 +90,7 @@ class SettingsFragment : Fragment(),
             }
 
         binding.allApps.setOnClickListener {
-            navController.navigate(R.id.DrawFragmentMod)
+            navController.navigate(R.id.DrawOrderFragment)
         }
 
             advancedSettings.setOnClickListener {
