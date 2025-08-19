@@ -147,15 +147,8 @@ class DrawFragment : Fragment(),
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 // Collect the drawer apps from the ViewModel
                 viewModel.drawApps.collect { apps ->
-                    val sortedApps = if (preferenceHelper.allAppsSorting) {
-                        apps.sortedBy { it.appOrder }
-                    } else {
-                        apps.sortedBy { it.appName }
-                    }
-                    // Update the adapter with the new list of apps
-                    drawAdapter.submitList(sortedApps)
-                    // Update the adapter's data with the new state flow
-                    drawAdapter.updateDataWithStateFlow(sortedApps)
+                    // The list is already sorted by the DAO, so just submit it
+                    drawAdapter.submitList(apps)
                 }
             }
         }
