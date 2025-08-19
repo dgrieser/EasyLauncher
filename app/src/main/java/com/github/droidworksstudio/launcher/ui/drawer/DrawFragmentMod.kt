@@ -41,7 +41,6 @@ class DrawFragmentMod : Fragment(),
     OnItemClickedListener.OnAppLongClickedListener,
     OnItemClickedListener.OnAppStateClickListener,
     OnItemClickedListener.BottomSheetDismissListener,
-    OnItemMoveListener.OnItemActionListener,
     BiometricHelper.Callback {
     private var _binding: FragmentDrawModBinding? = null
 
@@ -82,7 +81,6 @@ class DrawFragmentMod : Fragment(),
 
         setupRecyclerView()
         observeFavorite()
-        observeHomeAppOrder()
         observeSwipeTouchListener()
     }
 
@@ -95,18 +93,6 @@ class DrawFragmentMod : Fragment(),
         }
     }
 
-    private fun handleDragAndDrop(oldPosition: Int, newPosition: Int) {
-        val items = drawAdapter.currentList.toMutableList()
-        Collections.swap(items, oldPosition, newPosition)
-
-        items.forEachIndexed { index, appInfo ->
-            appInfo.appOrder = index
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.updateAppOrder(items)
-        }
-    }
 
     @RequiresApi(Build.VERSION_CODES.R)
     private fun observeFavorite() {
@@ -129,68 +115,6 @@ class DrawFragmentMod : Fragment(),
         }
     }
 
-    private fun observeHomeAppOrder() {
-        binding.drawAdapter.adapter = drawAdapter
-        val listener: OnItemMoveListener.OnItemActionListener = drawAdapter
-
-        val simpleItemTouchCallback = object : ItemTouchHelper.Callback() {
-
-            override fun onChildDraw(
-                canvas: Canvas, recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder, dX: Float,
-                dY: Float, actionState: Int, isCurrentlyActive: Boolean,
-            ) {
-                if (isCurrentlyActive) {
-                    viewHolder.itemView.alpha = 0.5f
-                } else {
-                    viewHolder.itemView.alpha = 1f
-                }
-                super.onChildDraw(
-                    canvas, recyclerView, viewHolder,
-                    dX, dY,
-                    actionState, isCurrentlyActive
-                )
-            }
-
-            override fun getMovementFlags(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-            ): Int {
-                val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-                val swipeFlags = 0
-                return makeMovementFlags(dragFlags, swipeFlags)
-            }
-
-            override fun onMove(
-                recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder,
-            ): Boolean {
-
-                val oldPosition = viewHolder.bindingAdapterPosition
-                val newPosition = target.bindingAdapterPosition
-
-                handleDragAndDrop(oldPosition, newPosition)
-
-                return listener.onViewMoved(
-                    viewHolder.bindingAdapterPosition,
-                    target.bindingAdapterPosition
-                )
-
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                @Suppress("DEPRECATION")
-                listener.onViewSwiped(viewHolder.adapterPosition)
-            }
-
-            override fun isLongPressDragEnabled() = false
-        }
-
-        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-
-        drawAdapter.setItemTouchHelper(itemTouchHelper)
-        itemTouchHelper.attachToRecyclerView(binding.drawAdapter)
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun observeSwipeTouchListener() {
@@ -246,10 +170,6 @@ class DrawFragmentMod : Fragment(),
                 errorCode
             )
         )
-    }
-
-    override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {
-        return true
     }
 
     override fun onAppLongClicked(appInfo: AppInfo) {
