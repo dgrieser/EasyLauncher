@@ -96,7 +96,7 @@ class DrawOrderFragment : Fragment(),
         Collections.swap(items, oldPosition, newPosition)
 
         items.forEachIndexed { index, appInfo ->
-            appInfo.appOrder = index
+            appInfo.globalAppOrder = index
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

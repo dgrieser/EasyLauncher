@@ -34,4 +34,7 @@ data class AppInfo(
 
     @ColumnInfo(name = "app_order")
     var appOrder: Int = -1,
+
+    @ColumnInfo(name = "global_app_order")
+    var globalAppOrder: Int = -1,
 )
