@@ -130,20 +130,20 @@ class AppInfoRepository @Inject constructor(
 
             val allApps = appDao.getAllAppsFlow().firstOrNull()
 
-            // Migration for existing apps with no order
-            val appsToFix = allApps?.filter { it.appOrder == -1 }
+            // Migration for existing apps with no global order
+            val appsToFix = allApps?.filter { it.globalAppOrder == -1 }
             if (appsToFix?.isNotEmpty() == true) {
-                var maxOrder = appDao.getMaxOrder()
+                var maxGlobalOrder = appDao.getMaxGlobalOrder()
                 val fixedApps = appsToFix.map { app ->
-                    maxOrder++
-                    app.copy(appOrder = maxOrder)
+                    maxGlobalOrder++
+                    app.copy(globalAppOrder = maxGlobalOrder)
                 }
                 appDao.updateAppOrder(fixedApps)
             }
 
             val existingPackageNames = allApps?.map { it.packageName } ?: emptyList()
 
-            var maxOrder = appDao.getMaxOrder()
+            var maxGlobalOrder = appDao.getMaxGlobalOrder()
             val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
             val launcherApps =
                 context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
@@ -165,7 +165,7 @@ class AppInfoRepository @Inject constructor(
                                     val packageName = app.applicationInfo.packageName
                                     val currentDateTime = LocalDateTime.now()
                                     if (packageName !in existingPackageNames && packageName !in excludedPackageNames) {
-                                        maxOrder++
+                                        maxGlobalOrder++
                                         AppInfo(
                                             appName = app.label.toString(),
                                             packageName = packageName,
@@ -174,7 +174,7 @@ class AppInfoRepository @Inject constructor(
                                             lock = false,
                                             createTime = currentDateTime.toString(),
                                             userHandle = userId,
-                                            appOrder = maxOrder
+                                            globalAppOrder = maxGlobalOrder
                                         )
                                     } else {
                                         val existingApp = getAppByPackageName(packageName)
@@ -191,7 +191,7 @@ class AppInfoRepository @Inject constructor(
                                     val packageName = app.applicationInfo.packageName
                                     val currentDateTime = LocalDateTime.now()
                                     if (packageName !in existingPackageNames && packageName !in excludedPackageNames) {
-                                        maxOrder++
+                                        maxGlobalOrder++
                                         AppInfo(
                                             appName = app.label.toString(),
                                             packageName = packageName,
@@ -200,7 +200,7 @@ class AppInfoRepository @Inject constructor(
                                             lock = false,
                                             createTime = currentDateTime.toString(),
                                             userHandle = userId,
-                                            appOrder = maxOrder
+                                            globalAppOrder = maxGlobalOrder
                                         )
                                     } else {
                                         val existingApp = getAppByPackageNameWork(packageName)
