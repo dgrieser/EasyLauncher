@@ -23,6 +23,7 @@ import javax.inject.Inject
 
 class AppInfoRepository @Inject constructor(
     private val appDao: AppInfoDAO,
+    private val preferenceHelper: PreferenceHelper,
 ) {
 
     private val context: Context
@@ -32,7 +33,11 @@ class AppInfoRepository @Inject constructor(
     lateinit var packageManager: PackageManager
 
     fun getDrawApps(): Flow<List<AppInfo>> {
-        return appDao.getDrawAppsFlow()
+        return if (preferenceHelper.hideFavoritesInAllApps) {
+            appDao.getDrawAppsWithoutFavorites()
+        } else {
+            appDao.getDrawAppsWithFavorites()
+        }
     }
 
     fun getFavoriteApps(): Flow<List<AppInfo>> {
@@ -54,7 +59,11 @@ class AppInfoRepository @Inject constructor(
     }
 
     fun searchNote(): Flow<List<AppInfo>> {
-        return appDao.searchApps()
+        return if (preferenceHelper.hideFavoritesInAllApps) {
+            appDao.searchAppsWithoutFavorites()
+        } else {
+            appDao.searchAppsWithFavorites()
+        }
     }
 
     suspend fun updateFavoriteAppInfo(appInfo: AppInfo) = withContext(Dispatchers.IO) {
