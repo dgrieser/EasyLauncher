@@ -218,6 +218,10 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getBoolean(Constants.ALL_APPS_SORTING, false)
         set(value) = prefs.edit().putBoolean(Constants.ALL_APPS_SORTING, value).apply()
 
+    var hideFavoritesInAllApps: Boolean
+        get() = prefs.getBoolean(Constants.HIDE_FAVORITES_IN_ALL_APPS, false)
+        set(value) = prefs.edit().putBoolean(Constants.HIDE_FAVORITES_IN_ALL_APPS, value).apply()
+
     var searchEngines: Constants.SearchEngines
         get() {
             return try {
