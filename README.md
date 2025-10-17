@@ -19,24 +19,27 @@
 	    </tr>
     </table>
     <p>
-        <a href='https://f-droid.org/packages/app.easy.launcher'><img src='https://github.com/DroidWorksStudio/mLauncher/assets/9284733/a1e7c86f-1c76-46c0-9193-8fde9c9f531c' width="150" alt="fDroid"></a>
-        <a href='http://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://github.com/DroidWorksStudio/EasyLauncher'><img src='https://github.com/DroidWorksStudio/mLauncher/assets/9284733/071cccfa-207b-45fb-8be4-7e668eeec4e5' width="150" alt="Obtanium"></a>
+        <a href='https://apt.izzysoft.de/fdroid/index/apk/app.easy.launcher'><img src='https://codeworkscreativehub.github.io/mLauncher/IzzyOnDroid.png' width="150" alt="IzzyOnDroid"></a>
+        <a href='http://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://github.com/CodeWorksCreativeHub/EasyLauncher'><img src='https://codeworkscreativehub.github.io/mLauncher/obtanium.png' width="150" alt="Obtanium"></a>
+	<a href='https://play.google.com/store/apps/details?id=app.easy.launcher'><img src='https://codeworkscreativehub.github.io/mLauncher/google_play.png' width="150" alt="Obtanium"></a>	    
+	<a href='https://f-droid.org/packages/app.easy.launcher'><img src='https://codeworkscreativehub.github.io/mLauncher/fdroid.png' width="150" alt="fDroid"></a>
     </p>
-</div>
-
-<div align='center'>
-    <p>
-        <img src='https://img.shields.io/badge/Android-SDK_34-BD93F9?style=flat-square&logo=android&logoColor=white' alt="SDK-34">
-        <a href='https://github.com/DroidWorksStudio/EasyLauncher/blob/main/LICENSE'><img src='https://img.shields.io/github/license/DroidWorksStudio/EasyLauncher?color=BD93F9&style=flat-square' alt="LICENSE"></a>
-        <br>
-        <a href='https://github.com/DroidWorksStudio/EasyLauncher/releases/latest'><img src='https://img.shields.io/github/downloads/DroidWorksStudio/EasyLauncher/total?color=50FA7B&style=flat-square' alt="releases"></a>
-        <a href='https://github.com/DroidWorksStudio/EasyLauncher/releases/latest'><img src="https://img.shields.io/github/downloads/DroidWorksStudio/EasyLauncher/latest/total?color=50FA7B&style=flat-square" alt="GitHub Downloads (all assets, latest release)"></a>
-        <br>
-        <a href='https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/app.easy.launcher.yml'><img alt="F-Droid (including pre-releases)" src="https://img.shields.io/f-droid/v/app.easy.launcher?color=FFB86C&style=flat-square"></a>
-        <a href='https://github.com/DroidWorksStudio/EasyLauncher/releases/latest'><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/DroidWorksStudio/EasyLauncher?color=FFB86C&style=flat-square"></a>
-        <br>
-        <img src='https://img.shields.io/badge/Maintained-yes-FF5555?style=flat-square' alt="Maintained">
-    </p>
+    <div align='center'>
+        <p>
+            <img src='https://img.shields.io/badge/Android-SDK_36-BD93F9?style=flat-square&logo=android&logoColor=white' alt="SDK-36">
+            <a href='https://github.com/CodeWorksCreativeHub/mLauncher/blob/main/LICENSE'><img src='https://img.shields.io/github/license/CodeWorksCreativeHub/EasyLauncher?color=BD93F9&style=flat-square' alt="LICENSE"></a>
+            <br>
+            <a href='https://github.com/CodeWorksCreativeHub/mLauncher/releases/latest'><img src='https://img.shields.io/github/downloads/CodeWorksCreativeHub/EasyLauncher/total?color=50FA7B&style=flat-square&label=Overall&logo=github' alt="releases"></a>
+            <a href='https://github.com/CodeWorksCreativeHub/mLauncher/releases/latest'><img src="https://img.shields.io/github/downloads/CodeWorksCreativeHub/EasyLauncher/latest/total?color=50FA7B&style=flat-square&label=Latest&logo=github" alt="GitHub Downloads (all assets, latest release)"></a>
+			<br>
+	    	<a href='https://apt.izzysoft.de/fdroid/index/apk/app.easy.launcher'><img alt="IzzyOnDroid (including pre-releases)" src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/app.easy.launcher&color=FFB86C&style=flat-square&label=IzzyOnDroid"></a>
+            <a href='https://github.com/CodeWorksCreativeHub/EasyLauncher/releases/latest'><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/CodeWorksCreativeHub/EasyLauncher?color=FFB86C&style=flat-square&label=Github"></a>
+	    	<br>
+            <a href='https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/app.easy.launcher.yml'><img alt="F-Droid (including pre-releases)" src="https://img.shields.io/f-droid/v/app.easy.launcher?color=FFB86C&style=flat-square&label=F-Droid"></a>
+            <br>
+            <img src='https://img.shields.io/badge/Maintained-yes-FF5555?style=flat-square' alt="Maintained">
+        </p>
+    </div>
 </div>
 
 ## About
