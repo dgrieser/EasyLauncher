@@ -37,7 +37,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class DrawOrderFragment : Fragment(),
-    OnItemClickedListener.OnAppsClickedListener,
     OnItemClickedListener.OnAppStateClickListener,
     OnItemClickedListener.BottomSheetDismissListener,
     OnItemClickedListener.OnAppLongClickedListener,
@@ -60,13 +59,18 @@ class DrawOrderFragment : Fragment(),
     @Inject
     lateinit var appHelper: AppHelper
 
-    private val drawOrderAdapter: DrawOrderAdapter by lazy { DrawOrderAdapter(this, this, preferenceHelper) }
+    private val drawOrderAdapter: DrawOrderAdapter by lazy { DrawOrderAdapter(this, preferenceHelper) }
 
     override fun onSortManually(appInfo: AppInfo) {
         val items = drawOrderAdapter.currentList.toMutableList()
-        val manuallySortedCount = items.count { it.globalAppOrder != -1 }
-        appInfo.globalAppOrder = manuallySortedCount
-        viewModel.update(appInfo)
+        val manuallySortedApps = items.filter { it.globalAppOrder != -1 }.toMutableList()
+        manuallySortedApps.add(appInfo)
+        manuallySortedApps.forEachIndexed { index, app ->
+            app.globalAppOrder = index
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.updateAppOrder(manuallySortedApps)
+        }
     }
 
     override fun onSortAutomatically(appInfo: AppInfo) {
@@ -106,14 +110,16 @@ class DrawOrderFragment : Fragment(),
 
     private fun handleDragAndDrop(oldPosition: Int, newPosition: Int) {
         val items = drawOrderAdapter.currentList.toMutableList()
-        Collections.swap(items, oldPosition, newPosition)
+        val movedItem = items.removeAt(oldPosition)
+        items.add(newPosition, movedItem)
 
-        items.forEachIndexed { index, appInfo ->
+        val manuallySortedApps = items.filter { it.globalAppOrder != -1 }
+        manuallySortedApps.forEachIndexed { index, appInfo ->
             appInfo.globalAppOrder = index
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.updateAppOrder(items)
+            viewModel.updateAppOrder(manuallySortedApps)
         }
     }
 
@@ -165,7 +171,12 @@ class DrawOrderFragment : Fragment(),
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
             ): Int {
-                val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
+                val appInfo = drawOrderAdapter.currentList[viewHolder.bindingAdapterPosition]
+                val dragFlags = if (appInfo.globalAppOrder != -1) {
+                    ItemTouchHelper.UP or ItemTouchHelper.DOWN
+                } else {
+                    0
+                }
                 val swipeFlags = 0
                 return makeMovementFlags(dragFlags, swipeFlags)
             }
@@ -174,16 +185,15 @@ class DrawOrderFragment : Fragment(),
                 recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder,
             ): Boolean {
-
-                val oldPosition = viewHolder.bindingAdapterPosition
-                val newPosition = target.bindingAdapterPosition
-
-                handleDragAndDrop(oldPosition, newPosition)
-
-                return listener.onViewMoved(
-                    viewHolder.bindingAdapterPosition,
-                    target.bindingAdapterPosition
-                )
+                val items = drawOrderAdapter.currentList.toMutableList()
+                val manuallySortedCount = items.count { it.globalAppOrder != -1 }
+                val fromPosition = viewHolder.bindingAdapterPosition
+                val toPosition = target.bindingAdapterPosition
+                if (toPosition >= manuallySortedCount) {
+                    return false
+                }
+                handleDragAndDrop(fromPosition, toPosition)
+                return listener.onViewMoved(fromPosition, toPosition)
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -222,38 +232,8 @@ class DrawOrderFragment : Fragment(),
         }
     }
 
-    private fun observeBioAuthCheck(appInfo: AppInfo) {
-        if (!appInfo.lock) {
-            context.launchApp(appInfo)
-        } else {
-            fingerHelper.startBiometricAuth(appInfo, this)
-        }
-    }
-
     override fun onAppStateClicked(appInfo: AppInfo) {
         viewModel.update(appInfo)
-    }
-
-    override fun onAppClicked(appInfo: AppInfo) {
-        observeBioAuthCheck(appInfo)
-    }
-
-    override fun onAuthenticationSucceeded(appInfo: AppInfo) {
-        context.showLongToast(getString(R.string.authentication_succeeded))
-        context.launchApp(appInfo)
-    }
-
-    override fun onAuthenticationFailed() {
-        context.showLongToast(getString(R.string.authentication_failed))
-    }
-
-    override fun onAuthenticationError(errorCode: Int, errorMessage: CharSequence?) {
-        context.showLongToast(
-            getString(R.string.authentication_error).format(
-                errorMessage,
-                errorCode
-            )
-        )
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {

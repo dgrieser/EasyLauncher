@@ -17,7 +17,6 @@ import com.github.droidworksstudio.launcher.listener.OnItemClickedListener
 @SuppressLint("ClickableViewAccessibility")
 class DrawOrderViewHolder(
     private val binding: ItemFavoriteBinding,
-    private val onAppClickedListener: OnItemClickedListener.OnAppsClickedListener,
     private val onAppLongClickedListener: OnItemClickedListener.OnAppLongClickedListener,
     private val preferenceHelper: PreferenceHelper,
     private val touchHelper: ItemTouchHelper?,
@@ -64,10 +63,6 @@ class DrawOrderViewHolder(
         }
 
         itemView.setOnClickListener {
-            onAppClickedListener.onAppClicked(appInfo)
-        }
-
-        itemView.setOnLongClickListener {
             val popupMenu = PopupMenu(itemView.context, itemView)
             popupMenu.menuInflater.inflate(R.menu.menu_app_order, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { menuItem ->
@@ -84,7 +79,6 @@ class DrawOrderViewHolder(
                 }
             }
             popupMenu.show()
-            true
         }
     }
 }
