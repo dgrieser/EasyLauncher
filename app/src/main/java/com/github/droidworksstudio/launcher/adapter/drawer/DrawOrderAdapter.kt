@@ -13,7 +13,6 @@ import com.github.droidworksstudio.launcher.listener.OnItemMoveListener
 import com.github.droidworksstudio.launcher.ui.drawer.DrawOrderViewHolder
 
 class DrawOrderAdapter(
-    private val onAppClickedListener: OnItemClickedListener.OnAppsClickedListener,
     private val onAppLongClickedListener: OnItemClickedListener.OnAppLongClickedListener,
     private val preferenceHelperProvider: PreferenceHelper
 ) : ListAdapter<AppInfo, RecyclerView.ViewHolder>(DiffCallback()),
@@ -33,7 +32,6 @@ class DrawOrderAdapter(
         val preferenceHelper = preferenceHelperProvider
         return DrawOrderViewHolder(
             binding,
-            onAppClickedListener,
             onAppLongClickedListener,
             preferenceHelper,
             touchHelper
