@@ -38,7 +38,10 @@ interface AppInfoDAO {
     fun getAllAppsFlow(): Flow<List<AppInfo>>
 
     @Query("SELECT * FROM app WHERE is_hidden = 0 ORDER BY global_app_order ASC, app_name COLLATE NOCASE ASC")
-    fun getDrawAppsFlow(): Flow<List<AppInfo>>
+    fun getDrawAppsWithFavorites(): Flow<List<AppInfo>>
+
+    @Query("SELECT * FROM app WHERE is_hidden = 0 AND is_favorite = 0 ORDER BY global_app_order ASC, app_name COLLATE NOCASE ASC")
+    fun getDrawAppsWithoutFavorites(): Flow<List<AppInfo>>
 
     @Query("SELECT * FROM app WHERE is_favorite = 1 ORDER BY app_order ASC, id ASC")
     fun getFavoriteAppsFlow(): Flow<List<AppInfo>>
@@ -50,7 +53,10 @@ interface AppInfoDAO {
     fun getLockAppsFlow(): Flow<List<AppInfo>>
 
     @Query("SELECT * FROM app WHERE is_hidden = 0 ORDER BY global_app_order ASC, app_name COLLATE NOCASE ASC")
-    fun searchApps(): Flow<List<AppInfo>>
+    fun searchAppsWithFavorites(): Flow<List<AppInfo>>
+
+    @Query("SELECT * FROM app WHERE is_hidden = 0 AND is_favorite = 0 ORDER BY global_app_order ASC, app_name COLLATE NOCASE ASC")
+    fun searchAppsWithoutFavorites(): Flow<List<AppInfo>>
 
     @Update
     suspend fun updateAppInfo(appInfo: AppInfo)
