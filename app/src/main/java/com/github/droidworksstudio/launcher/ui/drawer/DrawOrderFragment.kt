@@ -40,8 +40,7 @@ class DrawOrderFragment : Fragment(),
     OnItemClickedListener.OnAppStateClickListener,
     OnItemClickedListener.BottomSheetDismissListener,
     OnItemClickedListener.OnAppLongClickedListener,
-    OnItemMoveListener.OnItemActionListener,
-    BiometricHelper.Callback {
+    OnItemMoveListener.OnItemActionListener {
     private var _binding: FragmentDrawOrderBinding? = null
 
     private val binding get() = _binding!!
@@ -52,9 +51,6 @@ class DrawOrderFragment : Fragment(),
 
     @Inject
     lateinit var preferenceHelper: PreferenceHelper
-
-    @Inject
-    lateinit var fingerHelper: BiometricHelper
 
     @Inject
     lateinit var appHelper: AppHelper
