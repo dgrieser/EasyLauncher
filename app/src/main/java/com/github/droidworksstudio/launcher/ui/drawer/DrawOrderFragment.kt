@@ -40,6 +40,7 @@ class DrawOrderFragment : Fragment(),
     OnItemClickedListener.OnAppsClickedListener,
     OnItemClickedListener.OnAppStateClickListener,
     OnItemClickedListener.BottomSheetDismissListener,
+    OnItemClickedListener.OnAppLongClickedListener,
     OnItemMoveListener.OnItemActionListener,
     BiometricHelper.Callback {
     private var _binding: FragmentDrawOrderBinding? = null
@@ -59,7 +60,19 @@ class DrawOrderFragment : Fragment(),
     @Inject
     lateinit var appHelper: AppHelper
 
-    private val drawOrderAdapter: DrawOrderAdapter by lazy { DrawOrderAdapter(this, preferenceHelper) }
+    private val drawOrderAdapter: DrawOrderAdapter by lazy { DrawOrderAdapter(this, this, preferenceHelper) }
+
+    override fun onSortManually(appInfo: AppInfo) {
+        val items = drawOrderAdapter.currentList.toMutableList()
+        val manuallySortedCount = items.count { it.globalAppOrder != -1 }
+        appInfo.globalAppOrder = manuallySortedCount
+        viewModel.update(appInfo)
+    }
+
+    override fun onSortAutomatically(appInfo: AppInfo) {
+        appInfo.globalAppOrder = -1
+        viewModel.update(appInfo)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
