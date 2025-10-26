@@ -6,7 +6,9 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.ItemTouchHelper
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import com.github.droidworksstudio.launcher.R
 import com.github.droidworksstudio.launcher.data.entities.AppInfo
 import com.github.droidworksstudio.launcher.databinding.ItemFavoriteBinding
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
@@ -16,6 +18,7 @@ import com.github.droidworksstudio.launcher.listener.OnItemClickedListener
 class DrawOrderViewHolder(
     private val binding: ItemFavoriteBinding,
     private val onAppClickedListener: OnItemClickedListener.OnAppsClickedListener,
+    private val onAppLongClickedListener: OnItemClickedListener.OnAppLongClickedListener,
     private val preferenceHelper: PreferenceHelper,
     private val touchHelper: ItemTouchHelper?,
 ) :
@@ -55,10 +58,33 @@ class DrawOrderViewHolder(
                     preferenceHelper.appTextSize.toInt() * 3
                 appFavoriteLeftIcon.visibility = View.VISIBLE
             }
+
+            appFavoriteDragIcon.isEnabled = appInfo.globalAppOrder != -1
+            appFavoriteDragIcon.alpha = if (appInfo.globalAppOrder != -1) 1f else 0.3f
         }
 
         itemView.setOnClickListener {
             onAppClickedListener.onAppClicked(appInfo)
+        }
+
+        itemView.setOnLongClickListener {
+            val popupMenu = PopupMenu(itemView.context, itemView)
+            popupMenu.menuInflater.inflate(R.menu.menu_app_order, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.action_sort_manually -> {
+                        onAppLongClickedListener.onSortManually(appInfo)
+                        true
+                    }
+                    R.id.action_sort_automatically -> {
+                        onAppLongClickedListener.onSortAutomatically(appInfo)
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.show()
+            true
         }
     }
 }
