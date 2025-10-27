@@ -80,7 +80,6 @@ object Constants {
     const val ALL_APP_ALIGNMENT = "ALL_APP_ALIGNMENT"
     const val HOME_ALARM_CLOCK_ALIGNMENT = "HOME_ALARM_CLOCK_ALIGNMENT"
     const val HOME_DAILY_WORD_ALIGNMENT = "HOME_DAILY_WORD_ALIGNMENT"
-    const val ALL_APPS_SORTING = "ALL_APPS_SORTING"
     const val HIDE_FAVORITES_IN_ALL_APPS = "hide_favorites_in_all_apps"
 
     const val NOTIFICATION_SERVICE = "statusbar"

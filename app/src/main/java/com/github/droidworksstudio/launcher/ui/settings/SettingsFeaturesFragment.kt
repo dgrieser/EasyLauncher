@@ -133,7 +133,6 @@ class SettingsFeaturesFragment : Fragment(),
     private fun initializeInjectedDependencies() {
         // Set initial values and listeners for switches
         binding.apply {
-            allAppsSortingSwitchCompat.isChecked = preferenceHelper.allAppsSorting
             hideFavoritesInAllAppsSwitchCompat.isChecked = preferenceHelper.hideFavoritesInAllApps
             automaticKeyboardSwitchCompat.isChecked = preferenceHelper.automaticKeyboard
             automaticOpenAppSwitchCompat.isChecked = preferenceHelper.automaticOpenApp
@@ -459,12 +458,6 @@ class SettingsFeaturesFragment : Fragment(),
 
             homeAlignmentBottomSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
                 preferenceViewModel.setHomeAlignmentBottom(isChecked)
-                val feedbackType = if (isChecked) "on" else "off"
-                appHelper.triggerHapticFeedback(context, feedbackType)
-            }
-
-            allAppsSortingSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
-                preferenceViewModel.setAllAppsSorting(isChecked)
                 val feedbackType = if (isChecked) "on" else "off"
                 appHelper.triggerHapticFeedback(context, feedbackType)
             }

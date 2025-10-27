@@ -50,7 +50,6 @@ class PreferenceViewModel @Inject constructor(
     private val autoKeyboardLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val lockSettingsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val disableAnimationsLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    private val allAppsSortingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val hideFavoritesInAllAppsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val appGroupPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
     val appPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
@@ -321,11 +320,6 @@ class PreferenceViewModel @Inject constructor(
     fun setDisableAnimations(disableAnimations: Boolean) {
         preferenceHelper.disableAnimations = disableAnimations
         disableAnimationsLiveData.postValue((preferenceHelper.disableAnimations))
-    }
-
-    fun setAllAppsSorting(allAppsSorting: Boolean) {
-        preferenceHelper.allAppsSorting = allAppsSorting
-        allAppsSortingLiveData.postValue((preferenceHelper.allAppsSorting))
     }
 
     fun setHideFavoritesInAllApps(hideFavoritesInAllApps: Boolean) {
