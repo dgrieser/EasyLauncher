@@ -191,7 +191,7 @@
                         android:layout_height="24dp"
                         android:layout_marginEnd="16dp"
                         android:contentDescription="@string/all_apps"
-                        android:src="@drawable/ic_hidden"
+                        android:src="@drawable/ic_all_apps_config"
                         app:tint="?attr/colorPrimary" />
 
                     <LinearLayout
