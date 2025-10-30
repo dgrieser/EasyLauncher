@@ -185,4 +185,6 @@
         <item>Rechts</item>
     </string-array>
     <string name="home_no_alarm_set">No alarm is set.</string>
+    <string name="sort_manually">Manuell sortieren</string>
+    <string name="sort_automatically">Automatisch sortieren</string>
 </resources>

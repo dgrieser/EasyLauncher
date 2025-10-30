@@ -185,4 +185,6 @@
         <item>Správny</item>
     </string-array>
     <string name="home_no_alarm_set">No alarm is set.</string>
+    <string name="sort_manually">Triediť manuálne</string>
+    <string name="sort_automatically">Triediť automaticky</string>
 </resources>

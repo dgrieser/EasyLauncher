@@ -249,7 +249,6 @@
         <item>Right</item>
     </string-array>
     <string name="home_no_alarm_set">No alarm is set.</string>
-    <string name="bottom_sheet_dialog_tag">BottomSheetDialog</string>
-    <string name="app_not_installed">App %s is not installed</string>
-    <string name="no_package_name_found">No package name found in preferences</string>
+    <string name="sort_manually">Sort manually</string>
+    <string name="sort_automatically">Sort automatically</string>
 </resources>

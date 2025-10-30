@@ -364,7 +364,7 @@ class HomeFragment : Fragment(),
         val bottomSheetFragment = AppInfoBottomSheetFragment(appInfo)
         bottomSheetFragment.setOnBottomSheetDismissedListener(this)
         bottomSheetFragment.setOnAppStateClickListener(this)
-        bottomSheetFragment.show(parentFragmentManager, getString(R.string.bottom_sheet_dialog_tag))
+        bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialog")
 
     }
 
@@ -444,16 +444,11 @@ class HomeFragment : Fragment(),
                             if (context.isPackageInstalled(packageName)) {
                                 openApp(packageName)
                             } else {
-                                val errorMessage =
-                                    getString(R.string.app_not_installed, packageName)
-                                Log.e("HomeViewHolder", errorMessage)
-                                context.showLongToast(errorMessage)
+                                Log.e("HomeViewHolder", "App $packageName is not installed")
+                                context.showLongToast("App $packageName is not installed")
                             }
                         } else {
-                            Log.e(
-                                "HomeViewHolder",
-                                getString(R.string.no_package_name_found)
-                            )
+                            Log.e("HomeViewHolder", "No package name found in preferences")
                         }
                     }
                 }

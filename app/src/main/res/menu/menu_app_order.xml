@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_sort_manually"
-        android:title="Sort manually" />
+        android:title="@string/sort_manually" />
     <item
         android:id="@+id/action_sort_automatically"
-        android:title="Sort automatically" />
+        android:title="@string/sort_automatically" />
 </menu>
