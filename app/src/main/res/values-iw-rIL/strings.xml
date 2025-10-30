@@ -185,4 +185,6 @@
         <item>ימין</item>
     </string-array>
     <string name="home_no_alarm_set">No alarm is set.</string>
+    <string name="sort_manually">מיין ידנית</string>
+    <string name="sort_automatically">מיין אוטומטית</string>
 </resources>

@@ -184,4 +184,6 @@
         <item>يمين</item>
     </string-array>
     <string name="home_no_alarm_set">No alarm is set.</string>
+    <string name="sort_manually">فرز يدوي</string>
+    <string name="sort_automatically">فرز تلقائي</string>
 </resources>

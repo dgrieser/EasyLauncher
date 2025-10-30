@@ -185,4 +185,6 @@
         <item>Teisingai</item>
     </string-array>
     <string name="home_no_alarm_set">No alarm is set.</string>
+    <string name="sort_manually">Rūšiuoti rankiniu būdu</string>
+    <string name="sort_automatically">Rūšiuoti automatiškai</string>
 </resources>

@@ -185,4 +185,6 @@
         <item>правильно</item>
     </string-array>
     <string name="home_no_alarm_set">No alarm is set.</string>
+    <string name="sort_manually">Сортувати вручну</string>
+    <string name="sort_automatically">Сортувати автоматично</string>
 </resources>
