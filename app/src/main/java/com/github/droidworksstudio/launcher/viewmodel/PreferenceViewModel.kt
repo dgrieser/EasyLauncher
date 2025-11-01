@@ -51,6 +51,7 @@ class PreferenceViewModel @Inject constructor(
     private val lockSettingsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val disableAnimationsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val hideFavoritesInAllAppsLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val hideSearchButtonLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val appGroupPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
     val appPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
     val clockDatePaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
@@ -325,6 +326,11 @@ class PreferenceViewModel @Inject constructor(
     fun setHideFavoritesInAllApps(hideFavoritesInAllApps: Boolean) {
         preferenceHelper.hideFavoritesInAllApps = hideFavoritesInAllApps
         hideFavoritesInAllAppsLiveData.postValue((preferenceHelper.hideFavoritesInAllApps))
+    }
+
+    fun setHideSearchButton(hideSearchButton: Boolean) {
+        preferenceHelper.hideSearchButton = hideSearchButton
+        hideSearchButtonLiveData.postValue((preferenceHelper.hideSearchButton))
     }
 
     fun setAppLanguage(appLanguage: Constants.Language) {

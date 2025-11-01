@@ -84,6 +84,7 @@
     <string name="settings_search_from_start">Пошук із початку</string>
     <string name="settings_display_lock_settings">Налаштування блокування</string>
     <string name="settings_display_disable_animations">Вимкнути анімацію</string>
+    <string name="settings_hide_search_button">Сховати кнопку пошуку</string>
     <string name="settings_appearance_text_size_title">Розмір</string>
     <string name="settings_appearance_color_title">Колір</string>
     <string name="settings_appearance_alignment_title">Вирівнювання</string>

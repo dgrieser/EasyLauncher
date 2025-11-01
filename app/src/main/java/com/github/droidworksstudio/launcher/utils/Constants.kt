@@ -81,6 +81,7 @@ object Constants {
     const val HOME_ALARM_CLOCK_ALIGNMENT = "HOME_ALARM_CLOCK_ALIGNMENT"
     const val HOME_DAILY_WORD_ALIGNMENT = "HOME_DAILY_WORD_ALIGNMENT"
     const val HIDE_FAVORITES_IN_ALL_APPS = "hide_favorites_in_all_apps"
+    const val HIDE_SEARCH_BUTTON = "hide_search_button"
 
     const val NOTIFICATION_SERVICE = "statusbar"
     const val NOTIFICATION_MANAGER = "android.app.StatusBarManager"

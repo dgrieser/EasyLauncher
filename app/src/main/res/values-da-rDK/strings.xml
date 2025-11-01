@@ -84,6 +84,7 @@
     <string name="settings_search_from_start">Søg fra start</string>
     <string name="settings_display_lock_settings">Lås Indstillinger</string>
     <string name="settings_display_disable_animations">Deaktiver animationer</string>
+    <string name="settings_hide_search_button">Skjul søgeknap</string>
     <string name="settings_appearance_text_size_title">Størrelse</string>
     <string name="settings_appearance_color_title">Farve</string>
     <string name="settings_appearance_alignment_title">Justering</string>

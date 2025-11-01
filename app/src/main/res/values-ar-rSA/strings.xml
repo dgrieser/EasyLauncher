@@ -84,6 +84,7 @@
     <string name="settings_search_from_start">البحث من البداية</string>
     <string name="settings_display_lock_settings">قفل الإعدادات</string>
     <string name="settings_display_disable_animations">تعطيل الرسوم المتحركة</string>
+    <string name="settings_hide_search_button">إخفاء زر البحث</string>
     <string name="settings_appearance_text_size_title">الحجم</string>
     <string name="settings_appearance_color_title">اللون</string>
     <string name="settings_appearance_alignment_title">المحاذاة</string>
