@@ -84,6 +84,7 @@
     <string name="settings_search_from_start">Von Anfang an suchen</string>
     <string name="settings_display_lock_settings">Sperreinstellungen</string>
     <string name="settings_display_disable_animations">Animationen deaktivieren</string>
+    <string name="settings_hide_search_button">Such-Button ausblenden</string>
     <string name="settings_appearance_text_size_title">Größe</string>
     <string name="settings_appearance_color_title">Farbe</string>
     <string name="settings_appearance_alignment_title">Ausrichtung</string>

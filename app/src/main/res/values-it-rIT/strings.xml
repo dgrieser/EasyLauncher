@@ -84,6 +84,7 @@
     <string name="settings_search_from_start">Cerca dall\'inizio</string>
     <string name="settings_display_lock_settings">Blocca impostazioni</string>
     <string name="settings_display_disable_animations">Disabilitare le animazioni</string>
+    <string name="settings_hide_search_button">Nascondi pulsante di ricerca</string>
     <string name="settings_appearance_text_size_title">Misurare</string>
     <string name="settings_appearance_color_title">Colore</string>
     <string name="settings_appearance_alignment_title">Allineamento</string>

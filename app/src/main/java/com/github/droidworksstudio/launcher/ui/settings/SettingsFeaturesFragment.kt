@@ -140,6 +140,7 @@ class SettingsFeaturesFragment : Fragment(),
             homeAlignmentBottomSwitchCompat.isChecked = preferenceHelper.homeAlignmentBottom
             lockSettingsSwitchCompat.isChecked = preferenceHelper.settingsLock
             disableAnimationsSwitchCompat.isChecked = preferenceHelper.disableAnimations
+            hideSearchButtonSwitchCompat.isChecked = preferenceHelper.hideSearchButton
         }
     }
 
@@ -470,6 +471,12 @@ class SettingsFeaturesFragment : Fragment(),
 
             disableAnimationsSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
                 preferenceViewModel.setDisableAnimations(isChecked)
+                val feedbackType = if (isChecked) "on" else "off"
+                appHelper.triggerHapticFeedback(context, feedbackType)
+            }
+
+            hideSearchButtonSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
+                preferenceViewModel.setHideSearchButton(isChecked)
                 val feedbackType = if (isChecked) "on" else "off"
                 appHelper.triggerHapticFeedback(context, feedbackType)
             }

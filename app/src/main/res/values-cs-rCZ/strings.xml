@@ -84,6 +84,7 @@
     <string name="settings_search_from_start">Hledat od začátku</string>
     <string name="settings_display_lock_settings">Nastavení zámku</string>
     <string name="settings_display_disable_animations">Zakázat animace</string>
+    <string name="settings_hide_search_button">Skrýt tlačítko hledání</string>
     <string name="settings_appearance_text_size_title">Velikost</string>
     <string name="settings_appearance_color_title">Barva</string>
     <string name="settings_appearance_alignment_title">Zarovnání</string>

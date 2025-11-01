@@ -72,6 +72,7 @@ class DrawFragment : Fragment(),
     lateinit var fingerHelper: BiometricHelper
 
     private val viewModel: AppViewModel by viewModels()
+    private val preferenceViewModel: com.github.droidworksstudio.launcher.viewmodel.PreferenceViewModel by viewModels()
 
     private val drawAdapter: DrawAdapter by lazy {
         DrawAdapter(
@@ -104,6 +105,10 @@ class DrawFragment : Fragment(),
         observeClickListener()
         observeSwipeTouchListener()
         observeScrollTouchListener()
+
+        preferenceViewModel.hideSearchButtonLiveData.observe(viewLifecycleOwner) { hide ->
+            binding.drawSearchButton.visibility = if (hide) View.GONE else View.VISIBLE
+        }
 
         // Initialize observation of drawer apps
         observeDrawerApps()

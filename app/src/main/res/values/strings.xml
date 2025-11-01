@@ -113,6 +113,7 @@
     <string name="settings_search_from_start">Search From Start</string>
     <string name="settings_display_lock_settings">Lock Settings</string>
     <string name="settings_display_disable_animations">Disable Animations</string>
+    <string name="settings_hide_search_button">Hide search button</string>
     <string name="settings_hide_favorites_in_all_apps">Hide Favorite Apps in All Apps</string>
 
     <string name="settings_appearance_text_size_title">Size</string>
