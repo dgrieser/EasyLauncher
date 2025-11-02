@@ -73,6 +73,10 @@ class PreferenceViewModel @Inject constructor(
     private val swipeLeftActionLiveData: MutableLiveData<Constants.Action> = MutableLiveData()
     private val swipeRightActionLiveData: MutableLiveData<Constants.Action> = MutableLiveData()
 
+    init {
+        hideSearchButtonLiveData.postValue(preferenceHelper.hideSearchButton)
+    }
+
     fun setFirstLaunch(firstLaunch: Boolean) {
         preferenceHelper.firstLaunch = firstLaunch
         firstLaunchLiveData.postValue(preferenceHelper.firstLaunch)
