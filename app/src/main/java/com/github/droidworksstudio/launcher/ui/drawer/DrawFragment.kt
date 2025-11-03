@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -72,7 +73,7 @@ class DrawFragment : Fragment(),
     lateinit var fingerHelper: BiometricHelper
 
     private val viewModel: AppViewModel by viewModels()
-    private val preferenceViewModel: com.github.droidworksstudio.launcher.viewmodel.PreferenceViewModel by viewModels()
+    private val preferenceViewModel: com.github.droidworksstudio.launcher.viewmodel.PreferenceViewModel by activityViewModels()
 
     private val drawAdapter: DrawAdapter by lazy {
         DrawAdapter(
