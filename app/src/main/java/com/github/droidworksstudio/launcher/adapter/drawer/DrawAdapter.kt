@@ -22,7 +22,6 @@ class DrawAdapter(
     ListAdapter<AppInfo, RecyclerView.ViewHolder>(DiffCallback()),
     OnItemMoveListener.OnItemActionListener {
 
-    private lateinit var itemTouchHelper: ItemTouchHelper
     override fun onCreateViewHolder(
         parent: android.view.ViewGroup,
         viewType: Int
@@ -59,10 +58,6 @@ class DrawAdapter(
     fun updateDataWithStateFlow(newData: List<AppInfo>) {
         submitList(newData.toMutableList())
         notifyDataSetChanged()
-    }
-
-    fun setItemTouchHelper(itemTouchHelper: ItemTouchHelper) {
-        this.itemTouchHelper = itemTouchHelper
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {
