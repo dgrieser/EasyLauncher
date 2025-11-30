@@ -21,7 +21,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.droidworksstudio.common.hideKeyboard
@@ -103,7 +102,6 @@ class DrawFragment : Fragment(),
 
         context = requireContext()
         setupRecyclerView()
-        setupItemTouchHelper()
         setupSearch()
         observeClickListener()
         observeSwipeTouchListener()
@@ -115,28 +113,6 @@ class DrawFragment : Fragment(),
 
         // Initialize observation of drawer apps
         observeDrawerApps()
-    }
-
-    private fun setupItemTouchHelper() {
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
-            0
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                val fromPosition = viewHolder.adapterPosition
-                val toPosition = target.adapterPosition
-                drawAdapter.onViewMoved(fromPosition, toPosition)
-                return true
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // No action needed
-            }
-        }).attachToRecyclerView(binding.drawAdapter)
     }
 
     private fun setupRecyclerView() {
