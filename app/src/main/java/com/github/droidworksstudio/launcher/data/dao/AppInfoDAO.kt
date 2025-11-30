@@ -52,10 +52,10 @@ interface AppInfoDAO {
     @Query("SELECT * FROM app WHERE is_lock = 1 ORDER BY app_order ASC")
     fun getLockAppsFlow(): Flow<List<AppInfo>>
 
-    @Query("SELECT * FROM app WHERE is_hidden = 0 ORDER BY global_app_order ASC, app_name COLLATE NOCASE ASC")
+    @Query("SELECT * FROM app WHERE is_hidden = 0 ORDER BY CASE WHEN global_app_order = -1 THEN 1 ELSE 0 END, global_app_order ASC, app_name COLLATE NOCASE ASC")
     fun searchAppsWithFavorites(): Flow<List<AppInfo>>
 
-    @Query("SELECT * FROM app WHERE is_hidden = 0 AND is_favorite = 0 ORDER BY global_app_order ASC, app_name COLLATE NOCASE ASC")
+    @Query("SELECT * FROM app WHERE is_hidden = 0 AND is_favorite = 0 ORDER BY CASE WHEN global_app_order = -1 THEN 1 ELSE 0 END, global_app_order ASC, app_name COLLATE NOCASE ASC")
     fun searchAppsWithoutFavorites(): Flow<List<AppInfo>>
 
     @Update
