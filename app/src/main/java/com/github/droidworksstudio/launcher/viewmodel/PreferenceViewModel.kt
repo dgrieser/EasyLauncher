@@ -366,4 +366,8 @@ class PreferenceViewModel @Inject constructor(
         preferenceHelper.launcherFont = launcherFont
         launcherFontLiveData.postValue((preferenceHelper.launcherFont))
     }
+
+    fun setDailyWordSentences(sentences: List<String>) {
+        preferenceHelper.dailyWordSentences = sentences
+    }
 }

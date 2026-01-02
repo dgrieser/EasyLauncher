@@ -326,6 +326,20 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         }
         set(value) = prefs.edit().putString(Constants.PACKAGE_LANGUAGE, value.name).apply()
 
+    var dailyWordSentences: List<String>
+        get() {
+            val json = prefs.getString(Constants.DAILY_WORD_SENTENCES, null)
+            return if (json != null) {
+                val type = object : TypeToken<List<String>>() {}.type
+                Gson().fromJson(json, type)
+            } else {
+                emptyList()
+            }
+        }
+        set(value) {
+            val json = Gson().toJson(value)
+            prefs.edit().putString(Constants.DAILY_WORD_SENTENCES, json).apply()
+        }
 
     var weatherUnits: Constants.Units
         get() {
