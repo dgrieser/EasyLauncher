@@ -37,17 +37,6 @@ import javax.inject.Inject
 class SettingsLookFeelFragment : Fragment(),
     ScrollEventListener {
 
-    private val importDailyWords =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            result.data?.data?.let { uri ->
-                val words = requireContext().contentResolver.openInputStream(uri)?.use {
-                    BufferedReader(InputStreamReader(it)).readLines().toList()
-                }
-                words?.let {
-                    preferenceViewModel.setDailyWords(it)
-                }
-            }
-        }
 
     private var _binding: FragmentSettingsLookFeelBinding? = null
     private val binding get() = _binding!!
@@ -151,13 +140,6 @@ class SettingsLookFeelFragment : Fragment(),
                 showLauncherFontDialog()
             }
 
-            importDailyWord.setOnClickListener {
-                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                    addCategory(Intent.CATEGORY_OPENABLE)
-                    type = "text/plain"
-                }
-                importDailyWords.launch(intent)
-            }
         }
     }
 
