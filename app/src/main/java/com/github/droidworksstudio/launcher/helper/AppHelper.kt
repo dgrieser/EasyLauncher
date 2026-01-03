@@ -251,8 +251,8 @@ class AppHelper @Inject constructor() {
     }
 
     fun wordOfTheDay(resources: Resources, preferenceHelper: PreferenceHelper): String {
-        val customSentences = preferenceHelper.dailyWordSentences
-        val dailyWordsArray = customSentences.takeIf { it.isNotEmpty() }
+        val customWords = preferenceHelper.dailyWords
+        val dailyWordsArray = customWords.takeIf { it.isNotEmpty() }
             ?: resources.getStringArray(R.array.settings_appearance_daily_word_default).toList()
 
         val dayOfYear = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)

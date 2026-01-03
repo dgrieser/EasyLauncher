@@ -37,14 +37,14 @@ import javax.inject.Inject
 class SettingsLookFeelFragment : Fragment(),
     ScrollEventListener {
 
-    private val importSentences =
+    private val importDailyWords =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             result.data?.data?.let { uri ->
-                val sentences = requireContext().contentResolver.openInputStream(uri)?.use {
+                val words = requireContext().contentResolver.openInputStream(uri)?.use {
                     BufferedReader(InputStreamReader(it)).readLines().toList()
                 }
-                sentences?.let {
-                    preferenceViewModel.setDailyWordSentences(it)
+                words?.let {
+                    preferenceViewModel.setDailyWords(it)
                 }
             }
         }
@@ -156,7 +156,7 @@ class SettingsLookFeelFragment : Fragment(),
                     addCategory(Intent.CATEGORY_OPENABLE)
                     type = "text/plain"
                 }
-                importSentences.launch(intent)
+                importDailyWords.launch(intent)
             }
         }
     }
