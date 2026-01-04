@@ -304,6 +304,10 @@ class HomeFragment : Fragment(),
             )
         }
 
+        preferenceViewModel.dailyWordsLiveData.observe(viewLifecycleOwner) {
+            binding.word.text = appHelper.wordOfTheDay(resources, preferenceHelper)
+        }
+
         preferenceViewModel.showDailyWordLiveData.observe(viewLifecycleOwner) {
             appHelper.updateUI(
                 binding.alarm,

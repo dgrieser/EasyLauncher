@@ -1,5 +1,6 @@
 package com.github.droidworksstudio.launcher.ui.settings
 
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -44,12 +45,14 @@ class SettingsFeaturesFragment : Fragment(),
 
     private val importDailyWords =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            result.data?.data?.let { uri ->
-                val words = requireContext().contentResolver.openInputStream(uri)?.use {
-                    BufferedReader(InputStreamReader(it)).readLines().toList()
-                }
-                words?.let {
-                    preferenceViewModel.setDailyWords(it)
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    val words = requireContext().contentResolver.openInputStream(uri)?.use {
+                        BufferedReader(InputStreamReader(it)).readLines().toList()
+                    }
+                    words?.let {
+                        preferenceViewModel.setDailyWords(it)
+                    }
                 }
             }
         }

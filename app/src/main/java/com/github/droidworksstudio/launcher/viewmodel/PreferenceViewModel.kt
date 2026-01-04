@@ -367,7 +367,10 @@ class PreferenceViewModel @Inject constructor(
         launcherFontLiveData.postValue((preferenceHelper.launcherFont))
     }
 
+    val dailyWordsLiveData: MutableLiveData<List<String>> = MutableLiveData()
+
     fun setDailyWords(words: List<String>) {
         preferenceHelper.dailyWords = words
+        dailyWordsLiveData.postValue(words)
     }
 }
