@@ -377,6 +377,17 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        val handledRequestCodes = listOf(
+            Constants.BACKUP_READ,
+            Constants.BACKUP_WRITE,
+            Constants.BACKUP_WRITE_APPS,
+            Constants.BACKUP_READ_APPS
+        )
+
+        if (requestCode !in handledRequestCodes) {
+            return
+        }
+
         if (resultCode != RESULT_OK) {
             applicationContext.showLongToast("Intent Error")
             return
