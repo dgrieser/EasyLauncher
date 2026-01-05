@@ -375,8 +375,6 @@ class MainActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
         val handledRequestCodes = listOf(
             Constants.BACKUP_READ,
             Constants.BACKUP_WRITE,
@@ -384,73 +382,73 @@ class MainActivity : AppCompatActivity() {
             Constants.BACKUP_READ_APPS
         )
 
-        if (requestCode !in handledRequestCodes) {
-            return
-        }
+        if (requestCode in handledRequestCodes) {
+            if (resultCode != RESULT_OK) {
+                applicationContext.showLongToast("Intent Error")
+                return
+            }
 
-        if (resultCode != RESULT_OK) {
-            applicationContext.showLongToast("Intent Error")
-            return
-        }
+            when (requestCode) {
+                Constants.BACKUP_READ -> {
+                    data?.data?.also { uri ->
+                        applicationContext.contentResolver.openInputStream(uri)?.use { inputStream ->
+                            val stringBuilder = StringBuilder()
+                            BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                                var line: String? = reader.readLine()
+                                while (line != null) {
+                                    stringBuilder.append(line)
+                                    line = reader.readLine()
+                                }
+                            }
 
-        when (requestCode) {
-            Constants.BACKUP_READ -> {
-                data?.data?.also { uri ->
-                    applicationContext.contentResolver.openInputStream(uri)?.use { inputStream ->
-                        val stringBuilder = StringBuilder()
-                        BufferedReader(InputStreamReader(inputStream)).use { reader ->
-                            var line: String? = reader.readLine()
-                            while (line != null) {
-                                stringBuilder.append(line)
-                                line = reader.readLine()
+                            val string = stringBuilder.toString()
+                            val prefs = PreferenceHelper(applicationContext)
+                            prefs.clear()
+                            prefs.loadFromString(string)
+                        }
+                    }
+                    applicationContext.showShortToast(getString(R.string.settings_reload_app_restore))
+                    AppReloader.restartApp(applicationContext)
+                }
+
+                Constants.BACKUP_WRITE -> {
+                    data?.data?.also { uri ->
+                        applicationContext.contentResolver.openFileDescriptor(uri, "w")?.use { file ->
+                            FileOutputStream(file.fileDescriptor).use { stream ->
+                                val text = PreferenceHelper(applicationContext).saveToString()
+                                stream.channel.truncate(0)
+                                stream.write(text.toByteArray())
                             }
                         }
-
-                        val string = stringBuilder.toString()
-                        val prefs = PreferenceHelper(applicationContext)
-                        prefs.clear()
-                        prefs.loadFromString(string)
                     }
+                    applicationContext.showShortToast(getString(R.string.settings_reload_app_backup))
                 }
-                applicationContext.showShortToast(getString(R.string.settings_reload_app_restore))
-                AppReloader.restartApp(applicationContext)
-            }
 
-            Constants.BACKUP_WRITE -> {
-                data?.data?.also { uri ->
-                    applicationContext.contentResolver.openFileDescriptor(uri, "w")?.use { file ->
-                        FileOutputStream(file.fileDescriptor).use { stream ->
-                            val text = PreferenceHelper(applicationContext).saveToString()
-                            stream.channel.truncate(0)
-                            stream.write(text.toByteArray())
+                Constants.BACKUP_WRITE_APPS -> {
+                    data?.data?.also { uri ->
+                        lifecycleScope.launch {
+                            appHelper.backupAppInfo(applicationContext, appDao, uri)
                         }
                     }
                 }
-                applicationContext.showShortToast(getString(R.string.settings_reload_app_backup))
-            }
 
-            Constants.BACKUP_WRITE_APPS -> {
-                data?.data?.also { uri ->
-                    lifecycleScope.launch {
-                        appHelper.backupAppInfo(applicationContext, appDao, uri)
-                    }
-                }
-            }
-
-            Constants.BACKUP_READ_APPS -> {
-                data?.data?.also { uri ->
-                    lifecycleScope.launch {
-                        try {
-                            withContext(Dispatchers.IO) {
-                                appHelper.restoreAppInfo(applicationContext, appDao, uri)
+                Constants.BACKUP_READ_APPS -> {
+                    data?.data?.also { uri ->
+                        lifecycleScope.launch {
+                            try {
+                                withContext(Dispatchers.IO) {
+                                    appHelper.restoreAppInfo(applicationContext, appDao, uri)
+                                }
+                                AppReloader.restartApp(applicationContext)
+                            } catch (t: Throwable) {
+                                applicationContext.showLongToast("Restore failed: ${t.message}")
                             }
-                            AppReloader.restartApp(applicationContext)
-                        } catch (t: Throwable) {
-                            applicationContext.showLongToast("Restore failed: ${t.message}")
                         }
                     }
                 }
             }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
