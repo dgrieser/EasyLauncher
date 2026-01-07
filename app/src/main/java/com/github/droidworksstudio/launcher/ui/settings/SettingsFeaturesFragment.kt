@@ -32,27 +32,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import javax.inject.Inject
-import androidx.activity.result.contract.ActivityResultContracts
-import android.content.Intent
 
 @AndroidEntryPoint
 class SettingsFeaturesFragment : Fragment(),
     ScrollEventListener {
-
-    private val importDailyWords =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            result.data?.data?.let { uri ->
-                val words = requireContext().contentResolver.openInputStream(uri)?.use {
-                    BufferedReader(InputStreamReader(it)).readLines().toList()
-                }
-                words?.let {
-                    preferenceViewModel.setDailyWords(it)
-                }
-            }
-        }
 
     private var _binding: FragmentSettingsFeaturesBinding? = null
     private val binding get() = _binding!!
@@ -204,14 +188,6 @@ class SettingsFeaturesFragment : Fragment(),
 
             miscellaneousWordTapAppControl.setOnClickListener {
                 showAppSelectionDialog(Constants.Swipe.WordTap)
-            }
-
-            importDailyWord.setOnClickListener {
-                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                    addCategory(Intent.CATEGORY_OPENABLE)
-                    type = "text/plain"
-                }
-                importDailyWords.launch(intent)
             }
         }
     }

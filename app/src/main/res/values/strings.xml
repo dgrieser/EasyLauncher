@@ -252,5 +252,4 @@
     <string name="home_no_alarm_set">No alarm is set.</string>
     <string name="sort_manually">Sort manually</string>
     <string name="sort_automatically">Sort automatically</string>
-    <string name="settings_import_daily_words">Import Custom Words</string>
 </resources>

@@ -25,18 +25,14 @@ import com.github.droidworksstudio.launcher.ui.bottomsheetdialog.ColorBottomShee
 import com.github.droidworksstudio.launcher.ui.bottomsheetdialog.PaddingBottomSheetDialogFragment
 import com.github.droidworksstudio.launcher.ui.bottomsheetdialog.TextBottomSheetDialogFragment
 import com.github.droidworksstudio.launcher.utils.Constants
-import androidx.activity.result.contract.ActivityResultContracts
 import com.github.droidworksstudio.launcher.viewmodel.PreferenceViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsLookFeelFragment : Fragment(),
     ScrollEventListener {
-
 
     private var _binding: FragmentSettingsLookFeelBinding? = null
     private val binding get() = _binding!!
@@ -139,7 +135,6 @@ class SettingsLookFeelFragment : Fragment(),
             miscellaneousLauncherFontsControl.setOnClickListener {
                 showLauncherFontDialog()
             }
-
         }
     }
 
