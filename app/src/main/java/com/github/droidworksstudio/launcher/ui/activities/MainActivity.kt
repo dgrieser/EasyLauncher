@@ -377,6 +377,10 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        if (resultCode == RESULT_CANCELED) {
+            return
+        }
+
         if (resultCode != RESULT_OK) {
             applicationContext.showLongToast("Intent Error")
             return
@@ -444,16 +448,10 @@ class MainActivity : AppCompatActivity() {
             Constants.DAILY_WORD_IMPORT -> {
                 data?.data?.also { uri ->
                     applicationContext.contentResolver.openInputStream(uri)?.use { inputStream ->
-                        val stringBuilder = StringBuilder()
-                        BufferedReader(InputStreamReader(inputStream)).use { reader ->
-                            var line: String? = reader.readLine()
-                            while (line != null) {
-                                stringBuilder.append(line).append("\n")
-                                line = reader.readLine()
-                            }
+                        val content = BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                            reader.readText()
                         }
-                        val words = stringBuilder.toString()
-                            .lineSequence()
+                        val words = content.lineSequence()
                             .map { it.trim() }
                             .filter { it.isNotEmpty() }
                             .toList()
