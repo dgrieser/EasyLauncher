@@ -458,7 +458,7 @@ class MainActivity : AppCompatActivity() {
                         if (words.isEmpty()) {
                             applicationContext.showLongToast(getString(R.string.settings_word_import_empty))
                         } else {
-                            preferenceHelper.dailyWordList = words.joinToString("\n")
+                            preferenceHelper.dailyWordList = words
                             applicationContext.showShortToast(getString(R.string.settings_word_import_success))
                             AppReloader.restartApp(applicationContext)
                         }

@@ -194,9 +194,20 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getFloat(Constants.DAILY_WORD_TEXT_SIZE, 18f)
         set(value) = prefs.edit().putFloat(Constants.DAILY_WORD_TEXT_SIZE, value).apply()
 
-    var dailyWordList: String?
+    var dailyWordList: List<String>
         get() = prefs.getString(Constants.DAILY_WORD_LIST, null)
-        set(value) = prefs.edit().putString(Constants.DAILY_WORD_LIST, value).apply()
+            ?.lineSequence()
+            ?.map { it.trim() }
+            ?.filter { it.isNotEmpty() }
+            ?.toList()
+            ?: emptyList()
+        set(value) {
+            if (value.isEmpty()) {
+                prefs.edit().remove(Constants.DAILY_WORD_LIST).apply()
+            } else {
+                prefs.edit().putString(Constants.DAILY_WORD_LIST, value.joinToString("\n")).apply()
+            }
+        }
 
     var weatherOrderNumber: Int
         get() = prefs.getInt(Constants.WIDGET_WEATHER, 1)
@@ -376,6 +387,10 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
 
     fun saveToString(): String {
         val all: HashMap<String, Any?> = HashMap(prefs.all)
+        val customWords = dailyWordList
+        if (customWords.isNotEmpty()) {
+            all[Constants.DAILY_WORD_LIST] = customWords
+        }
         return Gson().toJson(all)
     }
 
@@ -410,13 +425,17 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
 
                         value.isJsonArray -> {
                             val jsonArray = value.asJsonArray
-                            val set = mutableSetOf<String>()
+                            val list = mutableListOf<String>()
                             for (element in jsonArray) {
                                 if (element.isJsonPrimitive && element.asJsonPrimitive.isString) {
-                                    set.add(element.asString)
+                                    list.add(element.asString)
                                 }
                             }
-                            map[key] = set
+                            map[key] = if (key == Constants.DAILY_WORD_LIST) {
+                                list
+                            } else {
+                                list.toSet()
+                            }
                         }
 
                         else -> {
@@ -444,6 +463,14 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
                     is MutableSet<*> -> {
                         val list = value.filterIsInstance<String>().toSet()
                         editor.putStringSet(key, list)
+                    }
+                    is List<*> -> {
+                        if (key == Constants.DAILY_WORD_LIST) {
+                            val list = value.filterIsInstance<String>()
+                            if (list.isNotEmpty()) {
+                                editor.putString(key, list.joinToString("\n"))
+                            }
+                        }
                     }
 
                     else -> {

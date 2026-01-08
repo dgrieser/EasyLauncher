@@ -350,11 +350,10 @@ class HomeFragment : Fragment(),
 
             alarm.text = appHelper.getNextAlarm(context, preferenceHelper)
             val customWords = preferenceHelper.dailyWordList
-                ?.lineSequence()
-                ?.map { it.trim() }
-                ?.filter { it.isNotEmpty() }
-                ?.toList()
-            word.text = appHelper.wordOfTheDay(resources, customWords)
+            word.text = appHelper.wordOfTheDay(
+                resources,
+                customWords.ifEmpty { null }
+            )
         }
     }
 
