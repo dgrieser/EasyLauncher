@@ -194,11 +194,19 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getFloat(Constants.DAILY_WORD_TEXT_SIZE, 18f)
         set(value) = prefs.edit().putFloat(Constants.DAILY_WORD_TEXT_SIZE, value).apply()
 
+    private var _dailyWordList: List<String>? = null
+
     var dailyWordList: List<String>
-        get() = prefs.getString(Constants.DAILY_WORD_LIST, null)
-            ?.let { parseDailyWordListContent(it) }
-            ?: emptyList()
+        get() {
+            if (_dailyWordList == null) {
+                _dailyWordList = prefs.getString(Constants.DAILY_WORD_LIST, null)
+                    ?.let { parseDailyWordListContent(it) }
+                    ?: emptyList()
+            }
+            return _dailyWordList!!
+        }
         set(value) {
+            _dailyWordList = value
             if (value.isEmpty()) {
                 prefs.edit().remove(Constants.DAILY_WORD_LIST).apply()
             } else {
