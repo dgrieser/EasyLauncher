@@ -377,6 +377,10 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        if (resultCode == RESULT_CANCELED) {
+            return
+        }
+
         if (resultCode != RESULT_OK) {
             applicationContext.showLongToast("Intent Error")
             return
@@ -440,6 +444,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
         }
     }
 }

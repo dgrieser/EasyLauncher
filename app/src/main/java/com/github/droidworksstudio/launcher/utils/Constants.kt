@@ -55,6 +55,7 @@ object Constants {
     const val APP_TEXT_SIZE = "APP_TEXT_SIZE"
     const val ALARM_CLOCK_TEXT_SIZE = "ALARM_CLOCK_TEXT_SIZE"
     const val DAILY_WORD_TEXT_SIZE = "DAILY_WORD_TEXT_SIZE"
+    const val DAILY_WORD_LIST = "DAILY_WORD_LIST"
 
     const val APPS_PADDING = "APPS_PADDING"
     const val APP_TEXT_PADDING = "APP_TEXT_PADDING"
@@ -124,7 +125,6 @@ object Constants {
 
     const val BACKUP_WRITE_APPS = 456
     const val BACKUP_READ_APPS = 654
-
     const val TRIPLE_TAP_DELAY_MS = 300
     const val LONG_PRESS_DELAY_MS = 500
 

@@ -250,9 +250,12 @@ class AppHelper @Inject constructor() {
         }
     }
 
-    fun wordOfTheDay(resources: Resources): String {
-        val dailyWordsArray =
-            resources.getStringArray(R.array.settings_appearance_daily_word_default)
+    fun wordOfTheDay(resources: Resources, customWords: List<String>? = null): String {
+        val dailyWordsArray = if (!customWords.isNullOrEmpty()) {
+            customWords
+        } else {
+            resources.getStringArray(R.array.settings_appearance_daily_word_default).toList()
+        }
         val dayOfYear = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
         val wordIndex =
             (dayOfYear - 1) % dailyWordsArray.size // Subtracting 1 to align with array indexing

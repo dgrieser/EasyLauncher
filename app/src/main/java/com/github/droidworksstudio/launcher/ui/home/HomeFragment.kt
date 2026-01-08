@@ -349,7 +349,11 @@ class HomeFragment : Fragment(),
             date.format24Hour = datePattern
 
             alarm.text = appHelper.getNextAlarm(context, preferenceHelper)
-            word.text = appHelper.wordOfTheDay(resources)
+            val customWords = preferenceHelper.dailyWordList
+            word.text = appHelper.wordOfTheDay(
+                resources,
+                customWords.ifEmpty { null }
+            )
         }
     }
 
