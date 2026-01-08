@@ -20,6 +20,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.github.droidworksstudio.common.getAppNameFromPackageName
+import com.github.droidworksstudio.common.showLongToast
+import com.github.droidworksstudio.common.showShortToast
 import com.github.droidworksstudio.launcher.R
 import com.github.droidworksstudio.launcher.databinding.FragmentSettingsFeaturesBinding
 import com.github.droidworksstudio.launcher.helper.AppHelper
