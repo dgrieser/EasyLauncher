@@ -149,6 +149,9 @@
 
     <string name="settings_word_tap_app_title">Word Tap Action</string>
     <string name="settings_word_tap_app_description">Launch an app when tapping on the daily word</string>
+    <string name="settings_word_import">Import</string>
+    <string name="settings_word_import_success">Word list imported</string>
+    <string name="settings_word_import_empty">No words found in file</string>
 
     <string name="settings_select_search_engine">Select a Search Engine</string>
     <string name="settings_search_engine">Search Engine</string>

@@ -643,15 +643,34 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlHardcoded" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/miscellaneous_wordTapApp_control"
-                        style="@style/TextDefaultStyle"
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="left|center"
-                        android:text="@string/settings_word_tap_app_title"
-                        android:textSize="@dimen/text_large"
-                        tools:ignore="RtlHardcoded" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/miscellaneous_wordTapApp_control"
+                            style="@style/TextDefaultStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center"
+                            android:text="@string/settings_word_tap_app_title"
+                            android:textSize="@dimen/text_large"
+                            tools:ignore="RtlHardcoded" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/miscellaneous_wordTapImport_control"
+                            style="@style/TextDefaultStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:gravity="left|center"
+                            android:text="@string/settings_word_import"
+                            android:textSize="@dimen/text_large"
+                            tools:ignore="RtlHardcoded" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

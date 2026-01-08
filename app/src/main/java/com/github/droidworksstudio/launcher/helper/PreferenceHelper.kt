@@ -194,6 +194,10 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getFloat(Constants.DAILY_WORD_TEXT_SIZE, 18f)
         set(value) = prefs.edit().putFloat(Constants.DAILY_WORD_TEXT_SIZE, value).apply()
 
+    var dailyWordList: String?
+        get() = prefs.getString(Constants.DAILY_WORD_LIST, null)
+        set(value) = prefs.edit().putString(Constants.DAILY_WORD_LIST, value).apply()
+
     var weatherOrderNumber: Int
         get() = prefs.getInt(Constants.WIDGET_WEATHER, 1)
         set(value) = prefs.edit().putInt(Constants.WIDGET_WEATHER, value).apply()

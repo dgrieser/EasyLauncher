@@ -440,6 +440,33 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
+            Constants.DAILY_WORD_IMPORT -> {
+                data?.data?.also { uri ->
+                    applicationContext.contentResolver.openInputStream(uri)?.use { inputStream ->
+                        val stringBuilder = StringBuilder()
+                        BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                            var line: String? = reader.readLine()
+                            while (line != null) {
+                                stringBuilder.append(line).append("\n")
+                                line = reader.readLine()
+                            }
+                        }
+                        val words = stringBuilder.toString()
+                            .lineSequence()
+                            .map { it.trim() }
+                            .filter { it.isNotEmpty() }
+                            .toList()
+                        if (words.isEmpty()) {
+                            applicationContext.showLongToast(getString(R.string.settings_word_import_empty))
+                        } else {
+                            preferenceHelper.dailyWordList = words.joinToString("\n")
+                            applicationContext.showShortToast(getString(R.string.settings_word_import_success))
+                            AppReloader.restartApp(applicationContext)
+                        }
+                    }
+                }
+            }
         }
     }
 }

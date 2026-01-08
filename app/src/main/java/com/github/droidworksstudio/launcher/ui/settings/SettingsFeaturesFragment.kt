@@ -189,6 +189,10 @@ class SettingsFeaturesFragment : Fragment(),
             miscellaneousWordTapAppControl.setOnClickListener {
                 showAppSelectionDialog(Constants.Swipe.WordTap)
             }
+
+            miscellaneousWordTapImportControl.setOnClickListener {
+                appHelper.loadDailyWordFile(requireActivity())
+            }
         }
     }
 

@@ -250,9 +250,12 @@ class AppHelper @Inject constructor() {
         }
     }
 
-    fun wordOfTheDay(resources: Resources): String {
-        val dailyWordsArray =
-            resources.getStringArray(R.array.settings_appearance_daily_word_default)
+    fun wordOfTheDay(resources: Resources, customWords: List<String>? = null): String {
+        val dailyWordsArray = if (!customWords.isNullOrEmpty()) {
+            customWords
+        } else {
+            resources.getStringArray(R.array.settings_appearance_daily_word_default).toList()
+        }
         val dayOfYear = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
         val wordIndex =
             (dayOfYear - 1) % dailyWordsArray.size // Subtracting 1 to align with array indexing
@@ -362,6 +365,14 @@ class AppHelper @Inject constructor() {
             type = "application/json"
         }
         activity.startActivityForResult(intent, Constants.BACKUP_READ_APPS, null)
+    }
+
+    fun loadDailyWordFile(activity: Activity) {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/plain"
+        }
+        activity.startActivityForResult(intent, Constants.DAILY_WORD_IMPORT, null)
     }
 
     suspend fun backupAppInfo(context: Context, dao: AppInfoDAO, uri: Uri) {
