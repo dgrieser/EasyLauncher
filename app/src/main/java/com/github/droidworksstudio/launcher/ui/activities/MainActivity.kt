@@ -445,26 +445,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            Constants.DAILY_WORD_IMPORT -> {
-                data?.data?.also { uri ->
-                    applicationContext.contentResolver.openInputStream(uri)?.use { inputStream ->
-                        val content = BufferedReader(InputStreamReader(inputStream)).use { reader ->
-                            reader.readText()
-                        }
-                        val words = content.lineSequence()
-                            .map { it.trim() }
-                            .filter { it.isNotEmpty() }
-                            .toList()
-                        if (words.isEmpty()) {
-                            applicationContext.showLongToast(getString(R.string.settings_word_import_empty))
-                        } else {
-                            preferenceHelper.dailyWordList = words
-                            applicationContext.showShortToast(getString(R.string.settings_word_import_success))
-                            AppReloader.restartApp(applicationContext)
-                        }
-                    }
-                }
-            }
         }
     }
 }

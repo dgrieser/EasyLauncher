@@ -12,6 +12,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -55,6 +56,24 @@ class SettingsFeaturesFragment : Fragment(),
     private lateinit var navController: NavController
 
     private lateinit var context: Context
+
+    private val importDailyWordsLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri ?: return@registerForActivityResult
+            context.contentResolver.openInputStream(uri)?.use { inputStream ->
+                val content = inputStream.bufferedReader().use { reader ->
+                    reader.readText()
+                }
+                val words = preferenceHelper.parseDailyWordListContent(content)
+                if (words.isEmpty()) {
+                    context.showLongToast(getString(R.string.settings_word_import_empty))
+                } else {
+                    preferenceHelper.dailyWordList = words
+                    context.showShortToast(getString(R.string.settings_word_import_success))
+                    AppReloader.restartApp(context)
+                }
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -191,7 +210,7 @@ class SettingsFeaturesFragment : Fragment(),
             }
 
             miscellaneousWordTapImportControl.setOnClickListener {
-                appHelper.loadDailyWordFile(requireActivity())
+                importDailyWordsLauncher.launch("text/plain")
             }
         }
     }

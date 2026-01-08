@@ -367,14 +367,6 @@ class AppHelper @Inject constructor() {
         activity.startActivityForResult(intent, Constants.BACKUP_READ_APPS, null)
     }
 
-    fun loadDailyWordFile(activity: Activity) {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "text/plain"
-        }
-        activity.startActivityForResult(intent, Constants.DAILY_WORD_IMPORT, null)
-    }
-
     suspend fun backupAppInfo(context: Context, dao: AppInfoDAO, uri: Uri) {
         try {
             dao.getAllAppsFlow()

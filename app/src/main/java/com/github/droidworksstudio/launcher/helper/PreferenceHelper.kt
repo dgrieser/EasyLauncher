@@ -196,16 +196,13 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
 
     var dailyWordList: List<String>
         get() = prefs.getString(Constants.DAILY_WORD_LIST, null)
-            ?.lineSequence()
-            ?.map { it.trim() }
-            ?.filter { it.isNotEmpty() }
-            ?.toList()
+            ?.let { parseDailyWordListContent(it) }
             ?: emptyList()
         set(value) {
             if (value.isEmpty()) {
                 prefs.edit().remove(Constants.DAILY_WORD_LIST).apply()
             } else {
-                prefs.edit().putString(Constants.DAILY_WORD_LIST, value.joinToString("\n")).apply()
+                prefs.edit().putString(Constants.DAILY_WORD_LIST, serializeDailyWordList(value)).apply()
             }
         }
 
@@ -394,6 +391,17 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         return Gson().toJson(all)
     }
 
+    fun parseDailyWordListContent(content: String): List<String> {
+        return content.lineSequence()
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .toList()
+    }
+
+    private fun serializeDailyWordList(list: List<String>): String {
+        return list.joinToString("\n")
+    }
+
     @SuppressLint("CommitPrefEdits")
     fun loadFromString(json: String) {
         val editor = prefs.edit()
@@ -458,12 +466,9 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
                 when (value) {
                     is String -> {
                         if (key == Constants.DAILY_WORD_LIST) {
-                            val list = value.lineSequence()
-                                .map { it.trim() }
-                                .filter { it.isNotEmpty() }
-                                .toList()
+                            val list = parseDailyWordListContent(value)
                             if (list.isNotEmpty()) {
-                                editor.putString(key, list.joinToString("\n"))
+                                editor.putString(key, serializeDailyWordList(list))
                             }
                         } else {
                             editor.putString(key, value)
@@ -480,7 +485,7 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
                         if (key == Constants.DAILY_WORD_LIST) {
                             val list = value.filterIsInstance<String>()
                             if (list.isNotEmpty()) {
-                                editor.putString(key, list.joinToString("\n"))
+                                editor.putString(key, serializeDailyWordList(list))
                             }
                         }
                     }
