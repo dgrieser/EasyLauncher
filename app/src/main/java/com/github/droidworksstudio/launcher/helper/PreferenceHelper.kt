@@ -456,7 +456,19 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
 
             for ((key, value) in all) {
                 when (value) {
-                    is String -> editor.putString(key, value)
+                    is String -> {
+                        if (key == Constants.DAILY_WORD_LIST) {
+                            val list = value.lineSequence()
+                                .map { it.trim() }
+                                .filter { it.isNotEmpty() }
+                                .toList()
+                            if (list.isNotEmpty()) {
+                                editor.putString(key, list.joinToString("\n"))
+                            }
+                        } else {
+                            editor.putString(key, value)
+                        }
+                    }
                     is Boolean -> editor.putBoolean(key, value)
                     is Int -> editor.putInt(key, value)
                     is Float -> editor.putFloat(key, value)
