@@ -3,6 +3,7 @@ package com.github.droidworksstudio.launcher.ui.settings
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -62,18 +63,23 @@ class SettingsFeaturesFragment : Fragment(),
     private val importDailyWordsLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             uri ?: return@registerForActivityResult
-            context.contentResolver.openInputStream(uri)?.use { inputStream ->
-                val content = inputStream.bufferedReader().use { reader ->
-                    reader.readText()
+            try {
+                context.contentResolver.openInputStream(uri)?.use { inputStream ->
+                    val content = inputStream.bufferedReader().use { reader ->
+                        reader.readText()
+                    }
+                    val words = preferenceHelper.parseDailyWordListContent(content)
+                    if (words.isEmpty()) {
+                        context.showLongToast(getString(R.string.settings_word_import_empty))
+                    } else {
+                        preferenceHelper.dailyWordList = words
+                        context.showShortToast(getString(R.string.settings_word_import_success))
+                        AppReloader.restartApp(context)
+                    }
                 }
-                val words = preferenceHelper.parseDailyWordListContent(content)
-                if (words.isEmpty()) {
-                    context.showLongToast(getString(R.string.settings_word_import_empty))
-                } else {
-                    preferenceHelper.dailyWordList = words
-                    context.showShortToast(getString(R.string.settings_word_import_success))
-                    AppReloader.restartApp(context)
-                }
+            } catch (e: Exception) {
+                Log.e("SettingsFeatures", "Failed to import word list", e)
+                context.showLongToast("Failed to import word list.")
             }
         }
 
