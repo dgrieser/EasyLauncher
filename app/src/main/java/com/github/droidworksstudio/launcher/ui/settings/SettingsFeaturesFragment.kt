@@ -75,8 +75,8 @@ class SettingsFeaturesFragment : Fragment(),
     }
 
     override fun onDetach() {
-        dailyWordImportHost = null
         super.onDetach()
+        dailyWordImportHost = null
     }
 
     // Called after the fragment view is created
