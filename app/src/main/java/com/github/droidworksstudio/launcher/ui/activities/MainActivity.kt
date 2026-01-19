@@ -91,9 +91,7 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
             uri ?: return@registerForActivityResult
             try {
                 contentResolver.openInputStream(uri)?.use { inputStream ->
-                    val content = inputStream.bufferedReader().use { reader ->
-                        reader.readText()
-                    }
+                    val content = inputStream.bufferedReader().readText()
                     val words = preferenceHelper.parseDailyWordListContent(content)
                     if (words.isEmpty()) {
                         showLongToast(getString(R.string.settings_word_import_empty))
@@ -101,6 +99,9 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
                         preferenceHelper.dailyWordList = words
                         showShortToast(getString(R.string.settings_word_import_success))
                     }
+                } ?: run {
+                    Log.e("MainActivity", "Failed to open input stream for URI: $uri")
+                    showLongToast(getString(R.string.settings_word_import_failed))
                 }
             } catch (e: Exception) {
                 Log.e("MainActivity", "Failed to import word list", e)
