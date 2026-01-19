@@ -18,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.github.droidworksstudio.common.getAppNameFromPackageName
+import com.github.droidworksstudio.common.showShortToast
 import com.github.droidworksstudio.launcher.R
 import com.github.droidworksstudio.launcher.databinding.FragmentSettingsFeaturesBinding
 import com.github.droidworksstudio.launcher.helper.AppHelper
@@ -205,6 +206,10 @@ class SettingsFeaturesFragment : Fragment(),
             miscellaneousWordTapImportControl.setOnClickListener {
                 dailyWordImportHost?.launchDailyWordImport()
             }
+
+            miscellaneousWordTapResetControl.setOnClickListener {
+                showDailyWordResetDialog()
+            }
         }
     }
 
@@ -338,6 +343,7 @@ class SettingsFeaturesFragment : Fragment(),
     }
 
     private var swipeThresholdDialog: AlertDialog? = null
+    private var dailyWordResetDialog: AlertDialog? = null
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun showSwipeThresholdDialog() {
@@ -403,6 +409,21 @@ class SettingsFeaturesFragment : Fragment(),
         // Assign the created dialog to launcherFontDialog
         swipeThresholdDialog = dialogBuilder.create()
         swipeThresholdDialog?.show()
+    }
+
+    private fun showDailyWordResetDialog() {
+        dailyWordResetDialog?.dismiss()
+        dailyWordResetDialog = MaterialAlertDialogBuilder(context)
+            .setTitle(getString(R.string.settings_word_reset_title))
+            .setMessage(getString(R.string.settings_word_reset_message))
+            .setPositiveButton(getString(R.string.settings_ok)) { _, _ ->
+                preferenceHelper.dailyWordList = emptyList()
+                context.showShortToast(getString(R.string.settings_word_reset_success))
+                appHelper.triggerHapticFeedback(context, "select")
+            }
+            .setNegativeButton(getString(R.string.settings_cancel), null)
+            .create()
+        dailyWordResetDialog?.show()
     }
 
     private var appSelectionDialog: AlertDialog? = null
@@ -633,5 +654,6 @@ class SettingsFeaturesFragment : Fragment(),
         filterStrengthDialog?.dismiss()
         swipeThresholdDialog?.dismiss()
         appSelectionDialog?.dismiss()
+        dailyWordResetDialog?.dismiss()
     }
 }
