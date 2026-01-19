@@ -417,9 +417,10 @@ class SettingsFeaturesFragment : Fragment(),
             .setTitle(getString(R.string.settings_word_reset_title))
             .setMessage(getString(R.string.settings_word_reset_message))
             .setPositiveButton(getString(R.string.settings_ok)) { _, _ ->
+                if (!isAdded) return@setPositiveButton
                 preferenceHelper.dailyWordList = emptyList()
-                context.showShortToast(getString(R.string.settings_word_reset_success))
-                appHelper.triggerHapticFeedback(context, "select")
+                requireContext().showShortToast(getString(R.string.settings_word_reset_success))
+                appHelper.triggerHapticFeedback(requireContext(), "select")
             }
             .setNegativeButton(getString(R.string.settings_cancel), null)
             .create()
