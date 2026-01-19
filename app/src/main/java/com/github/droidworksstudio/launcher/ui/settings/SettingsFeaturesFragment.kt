@@ -74,7 +74,6 @@ class SettingsFeaturesFragment : Fragment(),
                     } else {
                         preferenceHelper.dailyWordList = words
                         context.showShortToast(getString(R.string.settings_word_import_success))
-                        AppReloader.restartApp(context)
                     }
                 }
             } catch (e: Exception) {
