@@ -13,10 +13,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +41,7 @@ import com.github.droidworksstudio.launcher.databinding.ActivityMainBinding
 import com.github.droidworksstudio.launcher.helper.AppHelper
 import com.github.droidworksstudio.launcher.helper.AppReloader
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
+import com.github.droidworksstudio.launcher.listener.DailyWordImportHost
 import com.github.droidworksstudio.launcher.repository.AppInfoRepository
 import com.github.droidworksstudio.launcher.utils.Constants
 import com.github.droidworksstudio.launcher.viewmodel.AppViewModel
@@ -54,7 +57,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DailyWordImportHost {
 
     private lateinit var locationManager: LocationManager
 
@@ -83,6 +86,28 @@ class MainActivity : AppCompatActivity() {
 
     private var lastKnownLocation: Location? = null
 
+    private val importDailyWordsLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri ?: return@registerForActivityResult
+            try {
+                contentResolver.openInputStream(uri)?.use { inputStream ->
+                    val content = inputStream.bufferedReader().use { reader ->
+                        reader.readText()
+                    }
+                    val words = preferenceHelper.parseDailyWordListContent(content)
+                    if (words.isEmpty()) {
+                        showLongToast(getString(R.string.settings_word_import_empty))
+                    } else {
+                        preferenceHelper.dailyWordList = words
+                        showShortToast(getString(R.string.settings_word_import_success))
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Failed to import word list", e)
+                showLongToast(getString(R.string.settings_word_import_failed))
+            }
+        }
+
     private fun saveLocation(latitude: Float = 0f, longitude: Float = 0f) {
         with(sharedPreferences.edit()) {
             putFloat(Constants.LATITUDE, latitude)
@@ -107,6 +132,10 @@ class MainActivity : AppCompatActivity() {
         setupOrientation()
         setupLocationManager()
         setLanguage()
+    }
+
+    override fun launchDailyWordImport() {
+        importDailyWordsLauncher.launch("text/plain")
     }
 
     @Suppress("DEPRECATION")

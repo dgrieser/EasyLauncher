@@ -3,7 +3,6 @@ package com.github.droidworksstudio.launcher.ui.settings
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -13,21 +12,19 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.github.droidworksstudio.common.getAppNameFromPackageName
-import com.github.droidworksstudio.common.showLongToast
 import com.github.droidworksstudio.common.showShortToast
 import com.github.droidworksstudio.launcher.R
 import com.github.droidworksstudio.launcher.databinding.FragmentSettingsFeaturesBinding
 import com.github.droidworksstudio.launcher.helper.AppHelper
 import com.github.droidworksstudio.launcher.helper.AppReloader
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
+import com.github.droidworksstudio.launcher.listener.DailyWordImportHost
 import com.github.droidworksstudio.launcher.listener.ScrollEventListener
 import com.github.droidworksstudio.launcher.repository.AppInfoRepository
 import com.github.droidworksstudio.launcher.utils.Constants
@@ -60,27 +57,7 @@ class SettingsFeaturesFragment : Fragment(),
 
     private lateinit var context: Context
 
-    private val importDailyWordsLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uri ?: return@registerForActivityResult
-            try {
-                context.contentResolver.openInputStream(uri)?.use { inputStream ->
-                    val content = inputStream.bufferedReader().use { reader ->
-                        reader.readText()
-                    }
-                    val words = preferenceHelper.parseDailyWordListContent(content)
-                    if (words.isEmpty()) {
-                        context.showLongToast(getString(R.string.settings_word_import_empty))
-                    } else {
-                        preferenceHelper.dailyWordList = words
-                        context.showShortToast(getString(R.string.settings_word_import_success))
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("SettingsFeatures", "Failed to import word list", e)
-                context.showLongToast("Failed to import word list.")
-            }
-        }
+    private var dailyWordImportHost: DailyWordImportHost? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,6 +68,16 @@ class SettingsFeaturesFragment : Fragment(),
         _binding = binding
 
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        dailyWordImportHost = context as? DailyWordImportHost
+    }
+
+    override fun onDetach() {
+        dailyWordImportHost = null
+        super.onDetach()
     }
 
     // Called after the fragment view is created
@@ -217,9 +204,31 @@ class SettingsFeaturesFragment : Fragment(),
             }
 
             miscellaneousWordTapImportControl.setOnClickListener {
-                importDailyWordsLauncher.launch("text/plain")
+                dailyWordImportHost?.launchDailyWordImport()
+            }
+
+            miscellaneousWordTapResetControl.setOnClickListener {
+                showResetDailyWordDialog()
             }
         }
+    }
+
+    private var resetDailyWordDialog: AlertDialog? = null
+
+    private fun showResetDailyWordDialog() {
+        resetDailyWordDialog?.dismiss()
+        val dialogBuilder = MaterialAlertDialogBuilder(context).apply {
+            setTitle(R.string.settings_word_reset_title)
+            setMessage(R.string.settings_word_reset_message)
+            setPositiveButton(R.string.settings_word_reset) { _, _ ->
+                preferenceHelper.dailyWordList = emptyList()
+                requireContext().showShortToast(getString(R.string.settings_word_reset_success))
+            }
+            setNegativeButton(android.R.string.cancel, null)
+        }
+
+        resetDailyWordDialog = dialogBuilder.create()
+        resetDailyWordDialog?.show()
     }
 
     private var searchEngineDialog: AlertDialog? = null
@@ -647,5 +656,6 @@ class SettingsFeaturesFragment : Fragment(),
         filterStrengthDialog?.dismiss()
         swipeThresholdDialog?.dismiss()
         appSelectionDialog?.dismiss()
+        resetDailyWordDialog?.dismiss()
     }
 }
