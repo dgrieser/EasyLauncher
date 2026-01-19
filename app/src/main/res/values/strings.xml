@@ -149,10 +149,15 @@
 
     <string name="settings_word_tap_app_title">Word Tap Action</string>
     <string name="settings_word_tap_app_description">Launch an app when tapping on the daily word</string>
+    <string name="settings_daily_word_list_title">Daily word list</string>
     <string name="settings_word_import">Import</string>
+    <string name="settings_word_reset">Reset</string>
     <string name="settings_word_import_success">Word list imported</string>
+    <string name="settings_word_reset_success">Word list reset</string>
     <string name="settings_word_import_empty">No words found in file</string>
     <string name="settings_word_import_failed">Failed to import word list.</string>
+    <string name="settings_word_reset_title">Reset daily word list?</string>
+    <string name="settings_word_reset_message">This will remove your imported words and restore the default list.</string>
 
     <string name="settings_select_search_engine">Select a Search Engine</string>
     <string name="settings_search_engine">Search Engine</string>
