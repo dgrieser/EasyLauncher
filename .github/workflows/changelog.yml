@@ -1,6 +1,10 @@
 name: Update CHANGELOG.md
 
-on: [] # Disabled to stop automatic CHANGELOG.md generation in GitHub Actions.
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
 
 jobs:
   changelog:
