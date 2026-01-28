@@ -432,14 +432,22 @@ class AppHelper @Inject constructor() {
     }
 
     fun getActionType(actionType: Constants.Swipe): NavOptions {
-        return when (actionType) {
-            Constants.Swipe.DoubleTap -> {
+        return buildNavOptions(actionType)
+    }
+
+    fun buildNavOptions(
+        actionType: Constants.Swipe,
+        popUpToId: Int? = null,
+        popUpToInclusive: Boolean = false,
+        launchSingleTop: Boolean = false,
+    ): NavOptions {
+        val builder = when (actionType) {
+            Constants.Swipe.DoubleTap, Constants.Swipe.WordTap -> {
                 NavOptions.Builder()
                     .setEnterAnim(R.anim.zoom_in)
                     .setExitAnim(R.anim.zoom_out)
                     .setPopEnterAnim(R.anim.zoom_in)
                     .setPopExitAnim(R.anim.zoom_out)
-                    .build()
             }
 
             Constants.Swipe.Up -> {
@@ -448,7 +456,6 @@ class AppHelper @Inject constructor() {
                     .setExitAnim(R.anim.slide_out_top)
                     .setPopEnterAnim(R.anim.slide_in_bottom)
                     .setPopExitAnim(R.anim.slide_out_bottom)
-                    .build()
             }
 
             Constants.Swipe.Down -> {
@@ -457,7 +464,6 @@ class AppHelper @Inject constructor() {
                     .setExitAnim(R.anim.slide_out_bottom)
                     .setPopEnterAnim(R.anim.slide_in_top)
                     .setPopExitAnim(R.anim.slide_out_top)
-                    .build()
             }
 
             Constants.Swipe.Left -> {
@@ -466,7 +472,6 @@ class AppHelper @Inject constructor() {
                     .setExitAnim(R.anim.slide_out_right)
                     .setPopEnterAnim(R.anim.slide_in_left)
                     .setPopExitAnim(R.anim.slide_out_left)
-                    .build()
             }
 
             Constants.Swipe.Right -> {
@@ -475,18 +480,15 @@ class AppHelper @Inject constructor() {
                     .setExitAnim(R.anim.slide_out_left)
                     .setPopEnterAnim(R.anim.slide_in_right)
                     .setPopExitAnim(R.anim.slide_out_right)
-                    .build()
-            }
-
-            Constants.Swipe.WordTap -> {
-                NavOptions.Builder()
-                    .setEnterAnim(R.anim.zoom_in)
-                    .setExitAnim(R.anim.zoom_out)
-                    .setPopEnterAnim(R.anim.zoom_in)
-                    .setPopExitAnim(R.anim.zoom_out)
-                    .build()
             }
         }
+
+        return builder.apply {
+            popUpToId?.let { setPopUpTo(it, popUpToInclusive) }
+            if (launchSingleTop) {
+                setLaunchSingleTop(true)
+            }
+        }.build()
     }
 
     sealed class WeatherResult {
