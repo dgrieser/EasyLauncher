@@ -359,29 +359,24 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
             }
 
             R.id.SettingsFragment -> {
-                Handler(Looper.getMainLooper()).post {
-                    if (!navController.popBackStack(R.id.HomeFragment, false)) {
-                        val actionTypeNavOptions = navOptionsFor(Constants.Swipe.Up, navController.graph.startDestinationId)
-                        navController.navigate(
-                            R.id.HomeFragment,
-                            null,
-                            actionTypeNavOptions
-                        )
-                    }
-                }
+                navigateToHome()
             }
 
             else -> {
-                Handler(Looper.getMainLooper()).post {
-                    if (!navController.popBackStack(R.id.HomeFragment, false)) {
-                        val actionTypeNavOptions = navOptionsFor(Constants.Swipe.Up, navController.graph.startDestinationId)
-                        navController.navigate(
-                            R.id.HomeFragment,
-                            null,
-                            actionTypeNavOptions
-                        )
-                    }
-                }
+                navigateToHome()
+            }
+        }
+    }
+
+    private fun navigateToHome() {
+        Handler(Looper.getMainLooper()).post {
+            if (!navController.popBackStack(R.id.HomeFragment, false)) {
+                val actionTypeNavOptions = navOptionsFor(Constants.Swipe.Up, navController.graph.startDestinationId)
+                navController.navigate(
+                    R.id.HomeFragment,
+                    null,
+                    actionTypeNavOptions
+                )
             }
         }
     }
