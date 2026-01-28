@@ -483,15 +483,12 @@ class AppHelper @Inject constructor() {
             }
         }
 
-        if (popUpToId != null) {
-            builder.setPopUpTo(popUpToId, popUpToInclusive)
-        }
-
-        if (launchSingleTop) {
-            builder.setLaunchSingleTop(true)
-        }
-
-        return builder.build()
+        return builder.apply {
+            popUpToId?.let { setPopUpTo(it, popUpToInclusive) }
+            if (launchSingleTop) {
+                setLaunchSingleTop(true)
+            }
+        }.build()
     }
 
     sealed class WeatherResult {
