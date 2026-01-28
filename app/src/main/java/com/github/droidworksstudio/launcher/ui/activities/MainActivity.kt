@@ -388,11 +388,12 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
 
     private fun navOptionsFor(actionType: Constants.Swipe, popUpToId: Int? = null): NavOptions {
         return if (preferenceHelper.disableAnimations) {
-            val builder = NavOptions.Builder().setLaunchSingleTop(true)
-            if (popUpToId != null) {
-                builder.setPopUpTo(popUpToId, false)
-            }
-            builder.build()
+            return NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .apply {
+                    popUpToId?.let { setPopUpTo(it, false) }
+                }
+                .build()
         } else {
             appHelper.buildNavOptions(
                 actionType = actionType,
