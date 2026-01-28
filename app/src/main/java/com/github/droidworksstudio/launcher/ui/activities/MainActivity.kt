@@ -326,7 +326,13 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
         navController = findNavController(R.id.nav_host_fragment_content_main)
         when (navController.currentDestination?.id) {
             R.id.HomeFragment -> return
-            else -> navController.navigate(R.id.HomeFragment)
+            else -> {
+                val popped = navController.popBackStack(R.id.HomeFragment, false)
+                if (!popped) {
+                    val navOptions = navOptionsFor(Constants.Swipe.Up, navController.graph.startDestinationId)
+                    navController.navigate(R.id.HomeFragment, null, navOptions)
+                }
+            }
         }
     }
 
@@ -340,46 +346,60 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
             R.id.FavoriteFragment,
             R.id.HiddenFragment,
                 -> {
-                val actionTypeNavOptions: NavOptions? =
-                    if (preferenceHelper.disableAnimations) null
-                    else appHelper.getActionType(Constants.Swipe.Up)
-
                 Handler(Looper.getMainLooper()).post {
-                    navController.navigate(
-                        R.id.SettingsFragment,
-                        null,
-                        actionTypeNavOptions
-                    )
+                    if (!navController.popBackStack(R.id.SettingsFragment, false)) {
+                        val actionTypeNavOptions = navOptionsFor(Constants.Swipe.Up, R.id.SettingsFragment)
+                        navController.navigate(
+                            R.id.SettingsFragment,
+                            null,
+                            actionTypeNavOptions
+                        )
+                    }
                 }
             }
 
             R.id.SettingsFragment -> {
-                val actionTypeNavOptions: NavOptions? =
-                    if (preferenceHelper.disableAnimations) null
-                    else appHelper.getActionType(Constants.Swipe.Up)
-
                 Handler(Looper.getMainLooper()).post {
-                    navController.navigate(
-                        R.id.HomeFragment,
-                        null,
-                        actionTypeNavOptions
-                    )
+                    if (!navController.popBackStack(R.id.HomeFragment, false)) {
+                        val actionTypeNavOptions = navOptionsFor(Constants.Swipe.Up, navController.graph.startDestinationId)
+                        navController.navigate(
+                            R.id.HomeFragment,
+                            null,
+                            actionTypeNavOptions
+                        )
+                    }
                 }
             }
 
             else -> {
-                val actionTypeNavOptions: NavOptions? =
-                    if (preferenceHelper.disableAnimations) null
-                    else appHelper.getActionType(Constants.Swipe.Up)
-
                 Handler(Looper.getMainLooper()).post {
-                    navController.navigate(
-                        R.id.HomeFragment,
-                        null,
-                        actionTypeNavOptions
-                    )
+                    if (!navController.popBackStack(R.id.HomeFragment, false)) {
+                        val actionTypeNavOptions = navOptionsFor(Constants.Swipe.Up, navController.graph.startDestinationId)
+                        navController.navigate(
+                            R.id.HomeFragment,
+                            null,
+                            actionTypeNavOptions
+                        )
+                    }
                 }
             }
+        }
+    }
+
+    private fun navOptionsFor(actionType: Constants.Swipe, popUpToId: Int? = null): NavOptions {
+        return if (preferenceHelper.disableAnimations) {
+            val builder = NavOptions.Builder().setLaunchSingleTop(true)
+            if (popUpToId != null) {
+                builder.setPopUpTo(popUpToId, false)
+            }
+            builder.build()
+        } else {
+            appHelper.buildNavOptions(
+                actionType = actionType,
+                popUpToId = popUpToId,
+                popUpToInclusive = false,
+                launchSingleTop = true
+            )
         }
     }
 
