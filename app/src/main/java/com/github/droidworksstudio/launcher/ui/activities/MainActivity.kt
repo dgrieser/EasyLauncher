@@ -388,7 +388,7 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
 
     private fun navOptionsFor(actionType: Constants.Swipe, popUpToId: Int? = null): NavOptions {
         return if (preferenceHelper.disableAnimations) {
-            return NavOptions.Builder()
+            NavOptions.Builder()
                 .setLaunchSingleTop(true)
                 .apply {
                     popUpToId?.let { setPopUpTo(it, false) }
