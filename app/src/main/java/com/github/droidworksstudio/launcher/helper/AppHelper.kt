@@ -440,6 +440,8 @@ class AppHelper @Inject constructor() {
         popUpToId: Int? = null,
         popUpToInclusive: Boolean = false,
         launchSingleTop: Boolean = false,
+        saveState: Boolean = false,
+        restoreState: Boolean = false,
     ): NavOptions {
         val builder = when (actionType) {
             Constants.Swipe.DoubleTap, Constants.Swipe.WordTap -> {
@@ -483,12 +485,19 @@ class AppHelper @Inject constructor() {
             }
         }
 
-        return builder.apply {
-            popUpToId?.let { setPopUpTo(it, popUpToInclusive) }
-            if (launchSingleTop) {
-                setLaunchSingleTop(true)
-            }
-        }.build()
+        if (popUpToId != null) {
+            builder.setPopUpTo(popUpToId, popUpToInclusive, saveState)
+        }
+
+        if (launchSingleTop) {
+            builder.setLaunchSingleTop(true)
+        }
+
+        if (restoreState) {
+            builder.setRestoreState(true)
+        }
+
+        return builder.build()
     }
 
     sealed class WeatherResult {
