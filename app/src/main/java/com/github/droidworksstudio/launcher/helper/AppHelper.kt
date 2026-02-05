@@ -440,6 +440,8 @@ class AppHelper @Inject constructor() {
         popUpToId: Int? = null,
         popUpToInclusive: Boolean = false,
         launchSingleTop: Boolean = false,
+        saveState: Boolean = false,
+        restoreState: Boolean = false,
     ): NavOptions {
         val builder = when (actionType) {
             Constants.Swipe.DoubleTap, Constants.Swipe.WordTap -> {
@@ -484,9 +486,12 @@ class AppHelper @Inject constructor() {
         }
 
         return builder.apply {
-            popUpToId?.let { setPopUpTo(it, popUpToInclusive) }
+            popUpToId?.let { setPopUpTo(it, popUpToInclusive, saveState) }
             if (launchSingleTop) {
                 setLaunchSingleTop(true)
+            }
+            if (restoreState) {
+                setRestoreState(true)
             }
         }.build()
     }
