@@ -369,39 +369,29 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
             }
 
             R.id.SettingsFragment -> {
-                Handler(Looper.getMainLooper()).post {
-                    if (!navController.popBackStack(R.id.HomeFragment, false)) {
-                        val actionTypeNavOptions = navOptionsFor(
-                            actionType = Constants.Swipe.Up,
-                            popUpToId = navController.graph.startDestinationId,
-                            saveState = true,
-                            restoreState = true
-                        )
-                        navController.navigate(
-                            R.id.HomeFragment,
-                            null,
-                            actionTypeNavOptions
-                        )
-                    }
-                }
+                navigateToHomeFromSettings()
             }
 
             else -> {
-                Handler(Looper.getMainLooper()).post {
-                    if (!navController.popBackStack(R.id.HomeFragment, false)) {
-                        val actionTypeNavOptions = navOptionsFor(
-                            actionType = Constants.Swipe.Up,
-                            popUpToId = navController.graph.startDestinationId,
-                            saveState = true,
-                            restoreState = true
-                        )
-                        navController.navigate(
-                            R.id.HomeFragment,
-                            null,
-                            actionTypeNavOptions
-                        )
-                    }
-                }
+                navigateToHomeFromSettings()
+            }
+        }
+    }
+
+    private fun navigateToHomeFromSettings() {
+        Handler(Looper.getMainLooper()).post {
+            if (!navController.popBackStack(R.id.HomeFragment, false)) {
+                val actionTypeNavOptions = navOptionsFor(
+                    actionType = Constants.Swipe.Up,
+                    popUpToId = navController.graph.startDestinationId,
+                    saveState = true,
+                    restoreState = true
+                )
+                navController.navigate(
+                    R.id.HomeFragment,
+                    null,
+                    actionTypeNavOptions
+                )
             }
         }
     }
@@ -413,14 +403,15 @@ class MainActivity : AppCompatActivity(), DailyWordImportHost {
         restoreState: Boolean = false,
     ): NavOptions {
         return if (preferenceHelper.disableAnimations) {
-            val builder = NavOptions.Builder().setLaunchSingleTop(true)
-            if (popUpToId != null) {
-                builder.setPopUpTo(popUpToId, false, saveState)
-            }
-            if (restoreState) {
-                builder.setRestoreState(true)
-            }
-            builder.build()
+            NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .apply {
+                    popUpToId?.let { setPopUpTo(it, false, saveState) }
+                    if (restoreState) {
+                        setRestoreState(true)
+                    }
+                }
+                .build()
         } else {
             appHelper.buildNavOptions(
                 actionType = actionType,
