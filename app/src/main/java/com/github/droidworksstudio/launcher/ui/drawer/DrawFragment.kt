@@ -14,7 +14,6 @@ import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -73,7 +72,6 @@ class DrawFragment : Fragment(),
     lateinit var fingerHelper: BiometricHelper
 
     private val viewModel: AppViewModel by viewModels()
-    private val preferenceViewModel: com.github.droidworksstudio.launcher.viewmodel.PreferenceViewModel by activityViewModels()
 
     private val drawAdapter: DrawAdapter by lazy {
         DrawAdapter(
@@ -106,10 +104,6 @@ class DrawFragment : Fragment(),
         observeClickListener()
         observeSwipeTouchListener()
         observeScrollTouchListener()
-
-        preferenceViewModel.hideSearchButtonLiveData.observe(viewLifecycleOwner) { hide ->
-            binding.drawSearchButton.visibility = if (hide) View.GONE else View.VISIBLE
-        }
 
         // Initialize observation of drawer apps
         observeDrawerApps()
@@ -162,6 +156,9 @@ class DrawFragment : Fragment(),
 
     @SuppressLint("RestrictedApi")
     private fun setupSearch() {
+        binding.drawSearchButton.visibility =
+            if (preferenceHelper.hideSearchButton) View.GONE else View.VISIBLE
+
         binding.searchViewText.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {

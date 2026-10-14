@@ -58,8 +58,7 @@
     <string name="advanced_settings_community_support_title">Community Support</string>
 
     <string name="advanced_settings_share_application_title">Share Application</string>
-    <string name="advanced_settings_share_application_description">Elevate your experience with %1$s! Get it now on fDroid and see what everyone is talking about!
-</string>
+    <string name="advanced_settings_share_application_description">Elevate your experience with %1$s! Get it now on fDroid and see what everyone is talking about!\n</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="home_fragment_label">Home Fragment</string>
@@ -68,6 +67,7 @@
     <string name="hidden_fragment_label">Hidden Fragment</string>
     <string name="settings_fragment_label">Settings Fragment</string>
     <string name="widgets_fragment_label">Widgets Fragment</string>
+    <string name="draw_order_fragment_label">Draw Order Fragment</string>
 
     <!-- Strings used for fragments header labels -->
     <string name="draw_fragment_name">All Apps</string>
@@ -76,6 +76,7 @@
 
     <string name="favorite_fragment_no_apps">No Favorite Apps</string>
     <string name="hidden_fragment_no_apps">No Hidden Apps</string>
+    <string name="draw_fragment_no_apps">No Apps</string>
 
     <string name="search">Search</string>
 
@@ -113,7 +114,7 @@
     <string name="settings_search_from_start">Search From Start</string>
     <string name="settings_display_lock_settings">Lock Settings</string>
     <string name="settings_display_disable_animations">Disable Animations</string>
-    <string name="settings_hide_search_button">Hide search button</string>
+    <string name="settings_hide_search_button">Hide Search Button</string>
     <string name="settings_hide_favorites_in_all_apps">Hide Favorite Apps in All Apps</string>
 
     <string name="settings_appearance_text_size_title">Size</string>
@@ -148,14 +149,13 @@
     <string name="settings_swipe_right">Swipe Right</string>
 
     <string name="settings_word_tap_app_title">Word Tap Action</string>
-    <string name="settings_word_tap_app_description">Launch an app when tapping on the daily word</string>
-    <string name="settings_daily_word_list_title">Daily word list</string>
+    <string name="settings_daily_word_list_title">Daily Word List</string>
     <string name="settings_word_import">Import</string>
     <string name="settings_word_reset">Reset</string>
     <string name="settings_word_import_success">Word list imported</string>
     <string name="settings_word_reset_success">Word list reset</string>
     <string name="settings_word_import_empty">No words found in file</string>
-    <string name="settings_word_import_failed">Failed to import word list.</string>
+    <string name="settings_word_import_failed">Failed to import word list</string>
     <string name="settings_word_reset_title">Reset daily word list?</string>
     <string name="settings_word_reset_message">This will remove your imported words and restore the default list.</string>
 

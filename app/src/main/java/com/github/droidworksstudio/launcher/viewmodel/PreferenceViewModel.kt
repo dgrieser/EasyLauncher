@@ -51,12 +51,12 @@ class PreferenceViewModel @Inject constructor(
     private val lockSettingsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val disableAnimationsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val hideFavoritesInAllAppsLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val hideSearchButtonLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val hideSearchButtonLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val appGroupPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
-    val appPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
-    val clockDatePaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
-    val dateAlarmPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
-    val alarmWordPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    private val appPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    private val clockDatePaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    private val dateAlarmPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    private val alarmWordPaddingSizeLiveData: MutableLiveData<Float> = MutableLiveData()
 
     private val weatherOrderNumberLiveData: MutableLiveData<Int> = MutableLiveData()
     private val batteryOrderNumberLiveData: MutableLiveData<Int> = MutableLiveData()
@@ -72,10 +72,6 @@ class PreferenceViewModel @Inject constructor(
     private val swipeDownActionLiveData: MutableLiveData<Constants.Action> = MutableLiveData()
     private val swipeLeftActionLiveData: MutableLiveData<Constants.Action> = MutableLiveData()
     private val swipeRightActionLiveData: MutableLiveData<Constants.Action> = MutableLiveData()
-
-    init {
-        hideSearchButtonLiveData.postValue(preferenceHelper.hideSearchButton)
-    }
 
     fun setFirstLaunch(firstLaunch: Boolean) {
         preferenceHelper.firstLaunch = firstLaunch

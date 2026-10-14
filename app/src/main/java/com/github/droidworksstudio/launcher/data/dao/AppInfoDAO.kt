@@ -38,10 +38,10 @@ interface AppInfoDAO {
     fun getAllAppsFlow(): Flow<List<AppInfo>>
 
     @Query("SELECT * FROM app WHERE is_hidden = 0 ORDER BY CASE WHEN global_app_order = -1 THEN 1 ELSE 0 END, global_app_order ASC, app_name COLLATE NOCASE ASC")
-    fun getDrawAppsWithFavorites(): Flow<List<AppInfo>>
+    fun getDrawAppsFlow(): Flow<List<AppInfo>>
 
     @Query("SELECT * FROM app WHERE is_hidden = 0 AND is_favorite = 0 ORDER BY CASE WHEN global_app_order = -1 THEN 1 ELSE 0 END, global_app_order ASC, app_name COLLATE NOCASE ASC")
-    fun getDrawAppsWithoutFavorites(): Flow<List<AppInfo>>
+    fun getDrawAppsWithoutFavoritesFlow(): Flow<List<AppInfo>>
 
     @Query("SELECT * FROM app WHERE is_favorite = 1 ORDER BY app_order ASC, id ASC")
     fun getFavoriteAppsFlow(): Flow<List<AppInfo>>
@@ -53,7 +53,7 @@ interface AppInfoDAO {
     fun getLockAppsFlow(): Flow<List<AppInfo>>
 
     @Query("SELECT * FROM app WHERE is_hidden = 0 ORDER BY CASE WHEN global_app_order = -1 THEN 1 ELSE 0 END, global_app_order ASC, app_name COLLATE NOCASE ASC")
-    fun searchAppsWithFavorites(): Flow<List<AppInfo>>
+    fun searchApps(): Flow<List<AppInfo>>
 
     @Query("SELECT * FROM app WHERE is_hidden = 0 AND is_favorite = 0 ORDER BY CASE WHEN global_app_order = -1 THEN 1 ELSE 0 END, global_app_order ASC, app_name COLLATE NOCASE ASC")
     fun searchAppsWithoutFavorites(): Flow<List<AppInfo>>
@@ -87,9 +87,6 @@ interface AppInfoDAO {
 
     @Query("SELECT MAX(`app_order`) FROM app")
     fun getMaxOrder(): Int
-
-    @Query("SELECT MAX(`global_app_order`) FROM app")
-    fun getMaxGlobalOrder(): Int
 
     @Query("SELECT * FROM app WHERE is_favorite = 1")
     fun getFavoriteAppInfo(): List<AppInfo>

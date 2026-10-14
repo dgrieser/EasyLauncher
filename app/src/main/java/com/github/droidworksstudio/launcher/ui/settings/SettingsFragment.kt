@@ -85,13 +85,13 @@ class SettingsFragment : Fragment(),
                 navController.navigate(R.id.FavoriteFragment)
             }
 
+            allApps.setOnClickListener {
+                navController.navigate(R.id.DrawOrderFragment)
+            }
+
             hiddenApps.setOnClickListener {
                 navController.navigate(R.id.HiddenFragment)
             }
-
-        binding.allApps.setOnClickListener {
-            navController.navigate(R.id.DrawOrderFragment)
-        }
 
             advancedSettings.setOnClickListener {
                 navController.navigate(R.id.SettingsAdvancedFragment)

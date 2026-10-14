@@ -250,10 +250,8 @@ class AppHelper @Inject constructor() {
         }
     }
 
-    fun wordOfTheDay(resources: Resources, customWords: List<String>? = null): String {
-        val dailyWordsArray = if (!customWords.isNullOrEmpty()) {
-            customWords
-        } else {
+    fun wordOfTheDay(resources: Resources, customWords: List<String> = emptyList()): String {
+        val dailyWordsArray = customWords.ifEmpty {
             resources.getStringArray(R.array.settings_appearance_daily_word_default).toList()
         }
         val dayOfYear = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
@@ -367,6 +365,14 @@ class AppHelper @Inject constructor() {
         activity.startActivityForResult(intent, Constants.BACKUP_READ_APPS, null)
     }
 
+    fun loadFileDailyWordList(activity: Activity) {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/plain"
+        }
+        activity.startActivityForResult(intent, Constants.DAILY_WORD_LIST_READ, null)
+    }
+
     suspend fun backupAppInfo(context: Context, dao: AppInfoDAO, uri: Uri) {
         try {
             dao.getAllAppsFlow()
@@ -433,7 +439,7 @@ class AppHelper @Inject constructor() {
 
     fun getActionType(actionType: Constants.Swipe): NavOptions {
         return when (actionType) {
-            Constants.Swipe.DoubleTap -> {
+            Constants.Swipe.DoubleTap, Constants.Swipe.WordTap -> {
                 NavOptions.Builder()
                     .setEnterAnim(R.anim.zoom_in)
                     .setExitAnim(R.anim.zoom_out)
@@ -475,15 +481,6 @@ class AppHelper @Inject constructor() {
                     .setExitAnim(R.anim.slide_out_left)
                     .setPopEnterAnim(R.anim.slide_in_right)
                     .setPopExitAnim(R.anim.slide_out_right)
-                    .build()
-            }
-
-            Constants.Swipe.WordTap -> {
-                NavOptions.Builder()
-                    .setEnterAnim(R.anim.zoom_in)
-                    .setExitAnim(R.anim.zoom_out)
-                    .setPopEnterAnim(R.anim.zoom_in)
-                    .setPopExitAnim(R.anim.zoom_out)
                     .build()
             }
         }

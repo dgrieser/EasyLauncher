@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -24,7 +24,6 @@ import com.github.droidworksstudio.launcher.databinding.FragmentSettingsFeatures
 import com.github.droidworksstudio.launcher.helper.AppHelper
 import com.github.droidworksstudio.launcher.helper.AppReloader
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
-import com.github.droidworksstudio.launcher.listener.DailyWordImportHost
 import com.github.droidworksstudio.launcher.listener.ScrollEventListener
 import com.github.droidworksstudio.launcher.repository.AppInfoRepository
 import com.github.droidworksstudio.launcher.utils.Constants
@@ -42,7 +41,7 @@ class SettingsFeaturesFragment : Fragment(),
     private var _binding: FragmentSettingsFeaturesBinding? = null
     private val binding get() = _binding!!
 
-    private val preferenceViewModel: PreferenceViewModel by activityViewModels()
+    private val preferenceViewModel: PreferenceViewModel by viewModels()
 
     @Inject
     lateinit var preferenceHelper: PreferenceHelper
@@ -57,8 +56,6 @@ class SettingsFeaturesFragment : Fragment(),
 
     private lateinit var context: Context
 
-    private var dailyWordImportHost: DailyWordImportHost? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -68,16 +65,6 @@ class SettingsFeaturesFragment : Fragment(),
         _binding = binding
 
         return binding.root
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        dailyWordImportHost = context as? DailyWordImportHost
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        dailyWordImportHost = null
     }
 
     // Called after the fragment view is created
@@ -132,11 +119,15 @@ class SettingsFeaturesFragment : Fragment(),
 
     private fun updateWordTapControlText(
         context: Context,
-        appPackageName: String?,
+        appPackageName: String,
         textView: TextView,
     ) {
-        val appName = appPackageName?.let { context.getAppNameFromPackageName(it) }
-        textView.text = appName ?: getString(R.string.settings_word_tap_app_title)
+        val appName = appPackageName.takeIf { it.isNotEmpty() }?.let { context.getAppNameFromPackageName(it) }
+        textView.text = if (appName != null) {
+            context.getString(R.string.settings_actions_open_app_run, appName)
+        } else {
+            context.getString(R.string.settings_word_tap_app_title)
+        }
     }
 
     override fun onStop() {
@@ -203,11 +194,11 @@ class SettingsFeaturesFragment : Fragment(),
                 showAppSelectionDialog(Constants.Swipe.WordTap)
             }
 
-            miscellaneousWordTapImportControl.setOnClickListener {
-                dailyWordImportHost?.launchDailyWordImport()
+            miscellaneousDailyWordListImportControl.setOnClickListener {
+                appHelper.loadFileDailyWordList(requireActivity())
             }
 
-            miscellaneousWordTapResetControl.setOnClickListener {
+            miscellaneousDailyWordListResetControl.setOnClickListener {
                 showDailyWordResetDialog()
             }
         }
@@ -411,6 +402,7 @@ class SettingsFeaturesFragment : Fragment(),
         swipeThresholdDialog?.show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun showDailyWordResetDialog() {
         dailyWordResetDialog?.dismiss()
         dailyWordResetDialog = MaterialAlertDialogBuilder(context)
@@ -437,7 +429,7 @@ class SettingsFeaturesFragment : Fragment(),
             appSelectionDialog?.dismiss()
 
             // Collect the flow of installed apps
-            appInfoRepository.getDrawApps().collect { installedApps ->
+            appInfoRepository.getDrawApps(includeFavorites = true).collect { installedApps ->
                 // Extract app names and package names
                 val appNames = installedApps.map { it.appName }.toTypedArray()
                 val packageNames = installedApps.map { it.packageName }
@@ -453,9 +445,8 @@ class SettingsFeaturesFragment : Fragment(),
                             Constants.Swipe.Down,
                             Constants.Swipe.Left,
                             Constants.Swipe.Right,
-                            -> handleSwipeAction(swipeType, selectedPackageName)
-
-                            Constants.Swipe.WordTap -> handleWordTapAction(selectedPackageName)
+                            Constants.Swipe.WordTap,
+                                -> handleSwipeAction(swipeType, selectedPackageName)
                         }
                         val feedbackType = "select"
                         appHelper.triggerHapticFeedback(context, feedbackType)
@@ -544,7 +535,7 @@ class SettingsFeaturesFragment : Fragment(),
                     Constants.Swipe.Down -> handleSwipeAction(context, Constants.Swipe.Down, selectedAction, binding)
                     Constants.Swipe.Left -> handleSwipeAction(context, Constants.Swipe.Left, selectedAction, binding)
                     Constants.Swipe.Right -> handleSwipeAction(context, Constants.Swipe.Right, selectedAction, binding)
-                    else -> {}
+                    Constants.Swipe.WordTap -> {}
                 }
                 val feedbackType = "select"
                 appHelper.triggerHapticFeedback(context, feedbackType)
@@ -584,14 +575,12 @@ class SettingsFeaturesFragment : Fragment(),
                 binding.gesturesSwipeRightControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
                 preferenceHelper.swipeRightApp = selectedPackageName
             }
-            else -> {}
-        }
-    }
 
-    private fun handleWordTapAction(selectedPackageName: String) {
-        val selectedApp = context.getAppNameFromPackageName(selectedPackageName)
-        binding.miscellaneousWordTapAppControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
-        preferenceHelper.wordTapApp = selectedPackageName
+            Constants.Swipe.WordTap -> {
+                binding.miscellaneousWordTapAppControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
+                preferenceHelper.wordTapApp = selectedPackageName
+            }
+        }
     }
 
     // Function to handle setting action and updating UI
@@ -607,7 +596,7 @@ class SettingsFeaturesFragment : Fragment(),
                     Constants.Swipe.Down -> context.getAppNameFromPackageName(preferenceHelper.swipeDownApp)
                     Constants.Swipe.Left -> context.getAppNameFromPackageName(preferenceHelper.swipeLeftApp)
                     Constants.Swipe.Right -> context.getAppNameFromPackageName(preferenceHelper.swipeRightApp)
-                    else -> ""
+                    Constants.Swipe.WordTap -> context.getAppNameFromPackageName(preferenceHelper.wordTapApp)
                 }
                 binding.apply {
                     when (swipe) {
@@ -616,7 +605,7 @@ class SettingsFeaturesFragment : Fragment(),
                         Constants.Swipe.Down -> gesturesSwipeDownControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
                         Constants.Swipe.Left -> gesturesSwipeLeftControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
                         Constants.Swipe.Right -> gesturesSwipeRightControl.text = getString(R.string.settings_actions_open_app_run, selectedApp)
-                        else -> {}
+                        Constants.Swipe.WordTap -> {}
                     }
                 }
                 showAppSelectionDialog(swipe)
@@ -630,7 +619,7 @@ class SettingsFeaturesFragment : Fragment(),
                         Constants.Swipe.Down -> gesturesSwipeDownControl.text = preferenceHelper.swipeDownAction.getString(context)
                         Constants.Swipe.Left -> gesturesSwipeLeftControl.text = preferenceHelper.swipeLeftAction.getString(context)
                         Constants.Swipe.Right -> gesturesSwipeRightControl.text = preferenceHelper.swipeRightAction.getString(context)
-                        else -> {}
+                        Constants.Swipe.WordTap -> {}
                     }
                 }
             }
@@ -645,7 +634,7 @@ class SettingsFeaturesFragment : Fragment(),
             Constants.Swipe.Down -> setSwipeDown(action)
             Constants.Swipe.Left -> setSwipeLeft(action)
             Constants.Swipe.Right -> setSwipeRight(action)
-            else -> {}
+            Constants.Swipe.WordTap -> {}
         }
     }
 

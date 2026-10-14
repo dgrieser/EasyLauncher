@@ -125,6 +125,9 @@ object Constants {
 
     const val BACKUP_WRITE_APPS = 456
     const val BACKUP_READ_APPS = 654
+
+    const val DAILY_WORD_LIST_READ = 321
+
     const val TRIPLE_TAP_DELAY_MS = 300
     const val LONG_PRESS_DELAY_MS = 500
 

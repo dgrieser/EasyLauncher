@@ -232,6 +232,7 @@ class HomeFragment : Fragment(),
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     @SuppressLint("ClickableViewAccessibility", "InflateParams")
     private fun observeSwipeTouchListener() {
         binding.apply {
@@ -241,19 +242,7 @@ class HomeFragment : Fragment(),
             clock.setOnClickListener { context.launchClock() }
             date.setOnClickListener { context.launchCalendar() }
             battery.setOnClickListener { context.openBatteryManager() }
-            word.setOnClickListener {
-                val packageName = preferenceHelper.wordTapApp
-                if (packageName.isNotEmpty()) {
-                    if (context.isPackageInstalled(packageName)) {
-                        openApp(packageName)
-                    } else {
-                        Log.e("HomeViewHolder", "App $packageName is not installed")
-                        context.showLongToast("App $packageName is not installed")
-                    }
-                } else {
-                    Log.e("HomeViewHolder", "No package name found in preferences")
-                }
-            }
+            word.setOnClickListener { handleOtherAction(Constants.Action.OpenApp, Constants.Swipe.WordTap) }
         }
     }
 
@@ -314,21 +303,6 @@ class HomeFragment : Fragment(),
             )
         }
 
-        preferenceViewModel.clockDatePaddingSizeLiveData.observe(viewLifecycleOwner) { padding ->
-            binding.clock.setPadding(0, 0, 0, padding.toInt())
-            binding.clock.requestLayout()
-        }
-
-        preferenceViewModel.dateAlarmPaddingSizeLiveData.observe(viewLifecycleOwner) { padding ->
-            binding.date.setPadding(0, 0, 0, padding.toInt())
-            binding.date.requestLayout()
-        }
-
-        preferenceViewModel.alarmWordPaddingSizeLiveData.observe(viewLifecycleOwner) { padding ->
-            binding.alarm.setPadding(0, 0, 0, padding.toInt())
-            binding.alarm.requestLayout()
-        }
-
         binding.apply {
             mainView.hideKeyboard()
 
@@ -349,11 +323,7 @@ class HomeFragment : Fragment(),
             date.format24Hour = datePattern
 
             alarm.text = appHelper.getNextAlarm(context, preferenceHelper)
-            val customWords = preferenceHelper.dailyWordList
-            word.text = appHelper.wordOfTheDay(
-                resources,
-                customWords.ifEmpty { null }
-            )
+            word.text = appHelper.wordOfTheDay(resources, preferenceHelper.dailyWordList)
         }
     }
 

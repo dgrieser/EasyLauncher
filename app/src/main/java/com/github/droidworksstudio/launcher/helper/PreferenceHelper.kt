@@ -194,25 +194,9 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getFloat(Constants.DAILY_WORD_TEXT_SIZE, 18f)
         set(value) = prefs.edit().putFloat(Constants.DAILY_WORD_TEXT_SIZE, value).apply()
 
-    private var _dailyWordList: List<String>? = null
-
     var dailyWordList: List<String>
-        get() {
-            if (_dailyWordList == null) {
-                _dailyWordList = prefs.getString(Constants.DAILY_WORD_LIST, null)
-                    ?.let { parseDailyWordListContent(it) }
-                    ?: emptyList()
-            }
-            return _dailyWordList!!
-        }
-        set(value) {
-            _dailyWordList = value
-            if (value.isEmpty()) {
-                prefs.edit().remove(Constants.DAILY_WORD_LIST).apply()
-            } else {
-                prefs.edit().putString(Constants.DAILY_WORD_LIST, serializeDailyWordList(value)).apply()
-            }
-        }
+        get() = parseDailyWordListContent(prefs.getString(Constants.DAILY_WORD_LIST, "").toString())
+        set(value) = prefs.edit().putString(Constants.DAILY_WORD_LIST, value.joinToString("\n")).apply()
 
     var weatherOrderNumber: Int
         get() = prefs.getInt(Constants.WIDGET_WEATHER, 1)
@@ -392,10 +376,6 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
 
     fun saveToString(): String {
         val all: HashMap<String, Any?> = HashMap(prefs.all)
-        val customWords = dailyWordList
-        if (customWords.isNotEmpty()) {
-            all[Constants.DAILY_WORD_LIST] = customWords
-        }
         return Gson().toJson(all)
     }
 
@@ -404,10 +384,6 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
             .map { it.trim() }
             .filter { it.isNotEmpty() }
             .toList()
-    }
-
-    private fun serializeDailyWordList(list: List<String>): String {
-        return list.joinToString("\n")
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -447,8 +423,9 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
                                     list.add(element.asString)
                                 }
                             }
+                            // Older backups stored the daily word list as an array
                             map[key] = if (key == Constants.DAILY_WORD_LIST) {
-                                list
+                                list.joinToString("\n")
                             } else {
                                 list.toSet()
                             }
@@ -472,30 +449,13 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
 
             for ((key, value) in all) {
                 when (value) {
-                    is String -> {
-                        if (key == Constants.DAILY_WORD_LIST) {
-                            val list = parseDailyWordListContent(value)
-                            if (list.isNotEmpty()) {
-                                editor.putString(key, serializeDailyWordList(list))
-                            }
-                        } else {
-                            editor.putString(key, value)
-                        }
-                    }
+                    is String -> editor.putString(key, value)
                     is Boolean -> editor.putBoolean(key, value)
                     is Int -> editor.putInt(key, value)
                     is Float -> editor.putFloat(key, value)
                     is MutableSet<*> -> {
                         val list = value.filterIsInstance<String>().toSet()
                         editor.putStringSet(key, list)
-                    }
-                    is List<*> -> {
-                        if (key == Constants.DAILY_WORD_LIST) {
-                            val list = value.filterIsInstance<String>()
-                            if (list.isNotEmpty()) {
-                                editor.putString(key, serializeDailyWordList(list))
-                            }
-                        }
                     }
 
                     else -> {

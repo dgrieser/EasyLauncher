@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.PopupMenu
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.ItemTouchHelper
-import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.github.droidworksstudio.launcher.R
 import com.github.droidworksstudio.launcher.data.entities.AppInfo
@@ -17,7 +17,7 @@ import com.github.droidworksstudio.launcher.listener.OnItemClickedListener
 @SuppressLint("ClickableViewAccessibility")
 class DrawOrderViewHolder(
     private val binding: ItemFavoriteBinding,
-    private val onAppLongClickedListener: OnItemClickedListener.OnAppLongClickedListener,
+    private val onAppSortClickedListener: OnItemClickedListener.OnAppSortClickedListener,
     private val preferenceHelper: PreferenceHelper,
     private val touchHelper: ItemTouchHelper?,
 ) :
@@ -68,11 +68,11 @@ class DrawOrderViewHolder(
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.action_sort_manually -> {
-                        onAppLongClickedListener.onSortManually(appInfo)
+                        onAppSortClickedListener.onSortManually(appInfo)
                         true
                     }
                     R.id.action_sort_automatically -> {
-                        onAppLongClickedListener.onSortAutomatically(appInfo)
+                        onAppSortClickedListener.onSortAutomatically(appInfo)
                         true
                     }
                     else -> false

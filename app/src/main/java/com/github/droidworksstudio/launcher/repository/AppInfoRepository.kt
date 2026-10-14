@@ -33,11 +33,11 @@ class AppInfoRepository @Inject constructor(
     @Inject
     lateinit var packageManager: PackageManager
 
-    fun getDrawApps(): Flow<List<AppInfo>> {
-        return if (preferenceHelper.hideFavoritesInAllApps) {
-            appDao.getDrawAppsWithoutFavorites()
+    fun getDrawApps(includeFavorites: Boolean = !preferenceHelper.hideFavoritesInAllApps): Flow<List<AppInfo>> {
+        return if (includeFavorites) {
+            appDao.getDrawAppsFlow()
         } else {
-            appDao.getDrawAppsWithFavorites()
+            appDao.getDrawAppsWithoutFavoritesFlow()
         }
     }
 
@@ -63,7 +63,7 @@ class AppInfoRepository @Inject constructor(
         return if (preferenceHelper.hideFavoritesInAllApps) {
             appDao.searchAppsWithoutFavorites()
         } else {
-            appDao.searchAppsWithFavorites()
+            appDao.searchApps()
         }
     }
 
@@ -142,7 +142,6 @@ class AppInfoRepository @Inject constructor(
 
             val existingPackageNames = allApps?.map { it.packageName } ?: emptyList()
 
-            var maxGlobalOrder = appDao.getMaxGlobalOrder()
             val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
             val launcherApps =
                 context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
@@ -172,7 +171,6 @@ class AppInfoRepository @Inject constructor(
                                             lock = false,
                                             createTime = currentDateTime.toString(),
                                             userHandle = userId,
-                                            globalAppOrder = -1
                                         )
                                     } else {
                                         val existingApp = getAppByPackageName(packageName)
@@ -197,7 +195,6 @@ class AppInfoRepository @Inject constructor(
                                             lock = false,
                                             createTime = currentDateTime.toString(),
                                             userHandle = userId,
-                                            globalAppOrder = -1
                                         )
                                     } else {
                                         val existingApp = getAppByPackageNameWork(packageName)

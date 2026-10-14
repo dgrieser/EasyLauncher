@@ -10,6 +10,9 @@ class OnItemClickedListener {
 
     interface OnAppLongClickedListener {
         fun onAppLongClicked(appInfo: AppInfo) {}
+    }
+
+    interface OnAppSortClickedListener {
         fun onSortManually(appInfo: AppInfo) {}
         fun onSortAutomatically(appInfo: AppInfo) {}
     }

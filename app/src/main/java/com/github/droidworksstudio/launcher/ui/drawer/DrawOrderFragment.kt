@@ -16,14 +16,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.github.droidworksstudio.common.launchApp
-import com.github.droidworksstudio.common.showLongToast
-import com.github.droidworksstudio.launcher.R
 import com.github.droidworksstudio.launcher.adapter.drawer.DrawOrderAdapter
 import com.github.droidworksstudio.launcher.data.entities.AppInfo
 import com.github.droidworksstudio.launcher.databinding.FragmentDrawOrderBinding
 import com.github.droidworksstudio.launcher.helper.AppHelper
-import com.github.droidworksstudio.launcher.helper.BiometricHelper
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
 import com.github.droidworksstudio.launcher.listener.OnItemClickedListener
 import com.github.droidworksstudio.launcher.listener.OnItemMoveListener
@@ -31,16 +27,12 @@ import com.github.droidworksstudio.launcher.listener.OnSwipeTouchListener
 import com.github.droidworksstudio.launcher.viewmodel.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.Collections
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class DrawOrderFragment : Fragment(),
-    OnItemClickedListener.OnAppStateClickListener,
-    OnItemClickedListener.BottomSheetDismissListener,
-    OnItemClickedListener.OnAppLongClickedListener,
-    OnItemMoveListener.OnItemActionListener {
+    OnItemClickedListener.OnAppSortClickedListener {
     private var _binding: FragmentDrawOrderBinding? = null
 
     private val binding get() = _binding!!
@@ -56,23 +48,6 @@ class DrawOrderFragment : Fragment(),
     lateinit var appHelper: AppHelper
 
     private val drawOrderAdapter: DrawOrderAdapter by lazy { DrawOrderAdapter(this, preferenceHelper) }
-
-    override fun onSortManually(appInfo: AppInfo) {
-        val items = drawOrderAdapter.currentList.toMutableList()
-        val manuallySortedApps = items.filter { it.globalAppOrder != -1 }.toMutableList()
-        manuallySortedApps.add(appInfo)
-        manuallySortedApps.forEachIndexed { index, app ->
-            app.globalAppOrder = index
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.updateAppOrder(manuallySortedApps)
-        }
-    }
-
-    override fun onSortAutomatically(appInfo: AppInfo) {
-        appInfo.globalAppOrder = -1
-        viewModel.update(appInfo)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -167,8 +142,8 @@ class DrawOrderFragment : Fragment(),
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
             ): Int {
-                val appInfo = drawOrderAdapter.currentList[viewHolder.bindingAdapterPosition]
-                val dragFlags = if (appInfo.globalAppOrder != -1) {
+                val appInfo = drawOrderAdapter.currentList.getOrNull(viewHolder.bindingAdapterPosition)
+                val dragFlags = if (appInfo != null && appInfo.globalAppOrder != -1) {
                     ItemTouchHelper.UP or ItemTouchHelper.DOWN
                 } else {
                     0
@@ -228,11 +203,19 @@ class DrawOrderFragment : Fragment(),
         }
     }
 
-    override fun onAppStateClicked(appInfo: AppInfo) {
-        viewModel.update(appInfo)
+    override fun onSortManually(appInfo: AppInfo) {
+        val manuallySortedApps = drawOrderAdapter.currentList
+            .filter { it.globalAppOrder != -1 && it.id != appInfo.id } + appInfo
+        manuallySortedApps.forEachIndexed { index, app ->
+            app.globalAppOrder = index
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.updateAppOrder(manuallySortedApps)
+        }
     }
 
-    override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {
-        return true
+    override fun onSortAutomatically(appInfo: AppInfo) {
+        appInfo.globalAppOrder = -1
+        viewModel.update(appInfo)
     }
 }

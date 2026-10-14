@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="92dp"
-            android:text="@string/hidden_fragment_no_apps"
+            android:text="@string/draw_fragment_no_apps"
             android:textSize="18sp"
             android:visibility="gone" />
     </FrameLayout>
