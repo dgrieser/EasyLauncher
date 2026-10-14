@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">Улюблені програми</string>
     <string name="hidden_apps">Приховані програми</string>
+    <string name="all_apps">Усі програми</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">Налаштування</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">Прихований фрагмент</string>
     <string name="settings_fragment_label">Фрагмент налаштувань</string>
     <string name="widgets_fragment_label">Фрагмент віджетів</string>
+    <string name="draw_order_fragment_label">Фрагмент порядку програм</string>
+    <string name="draw_fragment_name">Усі програми</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">Улюблені програми</string>
     <string name="hidden_fragment_name">Приховані програми</string>
     <string name="favorite_fragment_no_apps">Немає улюблених програм</string>
     <string name="hidden_fragment_no_apps">Немає прихованих програм</string>
+    <string name="draw_fragment_no_apps">Немає програм</string>
     <string name="search">Пошук</string>
     <string name="bottom_dialog_app_rename">Перейменувати</string>
     <string name="bottom_dialog_add_to_home">Додати на головний екран</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">Налаштування блокування</string>
     <string name="settings_display_disable_animations">Вимкнути анімацію</string>
     <string name="settings_hide_search_button">Сховати кнопку пошуку</string>
+    <string name="settings_hide_favorites_in_all_apps">Приховувати улюблені програми серед усіх програм</string>
     <string name="settings_appearance_text_size_title">Розмір</string>
     <string name="settings_appearance_color_title">Колір</string>
     <string name="settings_appearance_alignment_title">Вирівнювання</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">Дата\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Час\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">Програми\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">Улюблені програми\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">Усі програми\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Група програм\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">Відступ годинник/дата\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">Відступ дата/будильник\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">Відступ будильник/слово\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">Будильник\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">Слово\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">Акумулятор\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">Проведіть пальцем вниз</string>
     <string name="settings_swipe_left">Проведіть вліво</string>
     <string name="settings_swipe_right">Проведіть праворуч</string>
+    <string name="settings_word_tap_app_title">Дія при натисканні на слово</string>
+    <string name="settings_daily_word_list_title">Список слів дня</string>
+    <string name="settings_word_import">Імпортувати</string>
+    <string name="settings_word_reset">Скинути</string>
+    <string name="settings_word_import_success">Список слів імпортовано</string>
+    <string name="settings_word_reset_success">Список слів скинуто</string>
+    <string name="settings_word_import_empty">У файлі не знайдено слів</string>
+    <string name="settings_word_import_failed">Не вдалося імпортувати список слів</string>
+    <string name="settings_word_reset_title">Скинути список слів дня?</string>
+    <string name="settings_word_reset_message">Імпортовані слова буде видалено, а стандартний список відновлено.</string>
     <string name="settings_select_search_engine">Виберіть пошукову систему</string>
     <string name="settings_search_engine">Пошукова система</string>
     <string name="settings_select_app_language">Виберіть мову програми</string>

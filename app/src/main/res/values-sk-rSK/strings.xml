@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">Obľúbené aplikácie</string>
     <string name="hidden_apps">Skryté aplikácie</string>
+    <string name="all_apps">Všetky aplikácie</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">nastavenie</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">Skrytý Fragment</string>
     <string name="settings_fragment_label">Nastavenia Fragment</string>
     <string name="widgets_fragment_label">Fragment widgetov</string>
+    <string name="draw_order_fragment_label">Fragment poradia aplikácií</string>
+    <string name="draw_fragment_name">Všetky aplikácie</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">Obľúbené aplikácie</string>
     <string name="hidden_fragment_name">Skryté aplikácie</string>
     <string name="favorite_fragment_no_apps">Žiadne obľúbené aplikácie</string>
     <string name="hidden_fragment_no_apps">Žiadne skryté aplikácie</string>
+    <string name="draw_fragment_no_apps">Žiadne aplikácie</string>
     <string name="search">Vyhľadávanie</string>
     <string name="bottom_dialog_app_rename">Premenovať</string>
     <string name="bottom_dialog_add_to_home">Pridať na domovskú obrazovku</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">Nastavenia zámku</string>
     <string name="settings_display_disable_animations">Zakázať animácie</string>
     <string name="settings_hide_search_button">Skryť tlačidlo vyhľadávania</string>
+    <string name="settings_hide_favorites_in_all_apps">Skryť obľúbené aplikácie vo Všetkých aplikáciách</string>
     <string name="settings_appearance_text_size_title">Veľkosť</string>
     <string name="settings_appearance_color_title">Farba</string>
     <string name="settings_appearance_alignment_title">Zarovnanie</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">Dátum\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Čas\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">Aplikácie\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">Obľúbené aplikácie\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">Všetky aplikácie\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Skupina aplikácií\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">Odsadenie hodiny/dátum\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">Odsadenie dátum/budík\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">Odsadenie budík/slovo\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">Budík\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">Slovo\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">Batéria\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">Potiahnite prstom smerom nadol</string>
     <string name="settings_swipe_left">Potiahnite prstom doľava</string>
     <string name="settings_swipe_right">Prejdite prstom doprava</string>
+    <string name="settings_word_tap_app_title">Akcia po ťuknutí na slovo</string>
+    <string name="settings_daily_word_list_title">Zoznam slov dňa</string>
+    <string name="settings_word_import">Importovať</string>
+    <string name="settings_word_reset">Resetovať</string>
+    <string name="settings_word_import_success">Zoznam slov bol importovaný</string>
+    <string name="settings_word_reset_success">Zoznam slov bol resetovaný</string>
+    <string name="settings_word_import_empty">V súbore sa nenašli žiadne slová</string>
+    <string name="settings_word_import_failed">Import zoznamu slov zlyhal</string>
+    <string name="settings_word_reset_title">Resetovať zoznam slov dňa?</string>
+    <string name="settings_word_reset_message">Týmto sa odstránia importované slová a obnoví sa predvolený zoznam.</string>
     <string name="settings_select_search_engine">Vyberte vyhľadávací nástroj</string>
     <string name="settings_search_engine">Vyhľadávač</string>
     <string name="settings_select_app_language">Vyberte jazyk aplikácie</string>

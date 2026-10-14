@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">Favori Uygulamalar</string>
     <string name="hidden_apps">Gizli Uygulamalar</string>
+    <string name="all_apps">Tüm Uygulamalar</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">Ayarlar</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">Gizli Parça</string>
     <string name="settings_fragment_label">Ayarlar Parçası</string>
     <string name="widgets_fragment_label">Widget Parçası</string>
+    <string name="draw_order_fragment_label">Uygulama Sırası Parçası</string>
+    <string name="draw_fragment_name">Tüm Uygulamalar</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">Favori Uygulamalar</string>
     <string name="hidden_fragment_name">Gizli uygulamalar</string>
     <string name="favorite_fragment_no_apps">Favori Uygulama Yok</string>
     <string name="hidden_fragment_no_apps">Gizli Uygulama Yok</string>
+    <string name="draw_fragment_no_apps">Uygulama Yok</string>
     <string name="search">Aramak</string>
     <string name="bottom_dialog_app_rename">Yeniden isimlendirmek</string>
     <string name="bottom_dialog_add_to_home">Ana Ekrana Ekle</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">Kilit Ayarları</string>
     <string name="settings_display_disable_animations">Animasyonları devre dışı bırak</string>
     <string name="settings_hide_search_button">Arama düğmesini gizle</string>
+    <string name="settings_hide_favorites_in_all_apps">Favori Uygulamaları Tüm Uygulamalarda Gizle</string>
     <string name="settings_appearance_text_size_title">Boyut</string>
     <string name="settings_appearance_color_title">Renk</string>
     <string name="settings_appearance_alignment_title">Hizalama</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">Tarih\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Zaman\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">Uygulamalar\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">Favori Uygulamalar\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">Tüm Uygulamalar\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Uygulamalar Grubu\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">Boşluk Saat/Tarih\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">Boşluk Tarih/Alarm\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">Boşluk Alarm/Kelime\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">Alarm\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">Kelime\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">Pil\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">Aşagı kaydır</string>
     <string name="settings_swipe_left">Sola sürükle</string>
     <string name="settings_swipe_right">Sağa kaydır</string>
+    <string name="settings_word_tap_app_title">Kelimeye Dokunma Eylemi</string>
+    <string name="settings_daily_word_list_title">Günlük Kelime Listesi</string>
+    <string name="settings_word_import">İçe Aktar</string>
+    <string name="settings_word_reset">Sıfırla</string>
+    <string name="settings_word_import_success">Kelime listesi içe aktarıldı</string>
+    <string name="settings_word_reset_success">Kelime listesi sıfırlandı</string>
+    <string name="settings_word_import_empty">Dosyada kelime bulunamadı</string>
+    <string name="settings_word_import_failed">Kelime listesi içe aktarılamadı</string>
+    <string name="settings_word_reset_title">Günlük kelime listesi sıfırlansın mı?</string>
+    <string name="settings_word_reset_message">Bu işlem içe aktardığınız kelimeleri kaldırır ve varsayılan listeyi geri yükler.</string>
     <string name="settings_select_search_engine">Bir Arama Motoru Seçin</string>
     <string name="settings_search_engine">Arama motoru</string>
     <string name="settings_select_app_language">Bir Uygulama Dili Seçin</string>

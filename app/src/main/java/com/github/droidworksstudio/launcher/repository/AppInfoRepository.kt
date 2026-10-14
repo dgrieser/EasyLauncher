@@ -60,11 +60,7 @@ class AppInfoRepository @Inject constructor(
     }
 
     fun searchNote(): Flow<List<AppInfo>> {
-        return if (preferenceHelper.hideFavoritesInAllApps) {
-            appDao.searchAppsWithoutFavorites()
-        } else {
-            appDao.searchApps()
-        }
+        return appDao.searchApps()
     }
 
     suspend fun updateFavoriteAppInfo(appInfo: AppInfo) = withContext(Dispatchers.IO) {

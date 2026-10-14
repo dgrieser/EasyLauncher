@@ -403,7 +403,7 @@ class WidgetFragment : Fragment(),
                     findNavController().navigate(
                         R.id.HomeFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                     )
                 }
             }
@@ -419,7 +419,7 @@ class WidgetFragment : Fragment(),
                     findNavController().navigate(
                         R.id.HomeFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                     )
                 }
             }

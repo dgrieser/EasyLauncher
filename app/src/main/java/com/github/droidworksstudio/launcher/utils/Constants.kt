@@ -60,9 +60,9 @@ object Constants {
     const val APPS_PADDING = "APPS_PADDING"
     const val APP_TEXT_PADDING = "APP_TEXT_PADDING"
 
-    const val HOME_CLOCK_DATE_PADDING = "home_clock_date_padding"
-    const val HOME_DATE_ALARM_PADDING = "home_date_alarm_padding"
-    const val HOME_ALARM_WORD_PADDING = "home_alarm_word_padding"
+    const val HOME_CLOCK_DATE_PADDING = "HOME_CLOCK_DATE_PADDING"
+    const val HOME_DATE_ALARM_PADDING = "HOME_DATE_ALARM_PADDING"
+    const val HOME_ALARM_WORD_PADDING = "HOME_ALARM_WORD_PADDING"
 
     const val SHOW_APP_ICON = "SHOW_APP_ICON"
 
@@ -81,8 +81,8 @@ object Constants {
     const val ALL_APP_ALIGNMENT = "ALL_APP_ALIGNMENT"
     const val HOME_ALARM_CLOCK_ALIGNMENT = "HOME_ALARM_CLOCK_ALIGNMENT"
     const val HOME_DAILY_WORD_ALIGNMENT = "HOME_DAILY_WORD_ALIGNMENT"
-    const val HIDE_FAVORITES_IN_ALL_APPS = "hide_favorites_in_all_apps"
-    const val HIDE_SEARCH_BUTTON = "hide_search_button"
+    const val HIDE_FAVORITES_IN_ALL_APPS = "HIDE_FAVORITES_IN_ALL_APPS"
+    const val HIDE_SEARCH_BUTTON = "HIDE_SEARCH_BUTTON"
 
     const val NOTIFICATION_SERVICE = "statusbar"
     const val NOTIFICATION_MANAGER = "android.app.StatusBarManager"
