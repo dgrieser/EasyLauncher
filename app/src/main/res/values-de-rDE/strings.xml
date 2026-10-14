@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">Lieblings-Apps</string>
     <string name="hidden_apps">Versteckte Apps</string>
+    <string name="all_apps">Alle Apps</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">Einstellungen</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">Verstecktes Fragment</string>
     <string name="settings_fragment_label">Einstellungen-Fragment</string>
     <string name="widgets_fragment_label">Widgets-Fragment</string>
+    <string name="draw_order_fragment_label">App-Reihenfolge-Fragment</string>
+    <string name="draw_fragment_name">Alle Apps</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">Lieblings-Apps</string>
     <string name="hidden_fragment_name">Versteckte Apps</string>
     <string name="favorite_fragment_no_apps">Keine Lieblings-Apps</string>
     <string name="hidden_fragment_no_apps">Keine versteckten Apps</string>
+    <string name="draw_fragment_no_apps">Keine Apps</string>
     <string name="search">Suchen</string>
     <string name="bottom_dialog_app_rename">Umbenennen</string>
     <string name="bottom_dialog_add_to_home">Zum Startbildschirm hinzufügen</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">Sperreinstellungen</string>
     <string name="settings_display_disable_animations">Animationen deaktivieren</string>
     <string name="settings_hide_search_button">Such-Button ausblenden</string>
+    <string name="settings_hide_favorites_in_all_apps">Lieblings-Apps in Alle Apps ausblenden</string>
     <string name="settings_appearance_text_size_title">Größe</string>
     <string name="settings_appearance_color_title">Farbe</string>
     <string name="settings_appearance_alignment_title">Ausrichtung</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">Datum\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Zeit\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">Apps\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">Lieblings-Apps\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">Alle Apps\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Apps-Gruppe\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">Abstand Uhr/Datum\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">Abstand Datum/Alarm\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">Abstand Alarm/Wort\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">Alarm\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">Wort\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">Batterie\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">Nach unten wischen</string>
     <string name="settings_swipe_left">Nach links wischen</string>
     <string name="settings_swipe_right">Wische nach rechts</string>
+    <string name="settings_word_tap_app_title">Aktion beim Tippen auf das Wort</string>
+    <string name="settings_daily_word_list_title">Wortliste für Wort des Tages</string>
+    <string name="settings_word_import">Importieren</string>
+    <string name="settings_word_reset">Zurücksetzen</string>
+    <string name="settings_word_import_success">Wortliste importiert</string>
+    <string name="settings_word_reset_success">Wortliste zurückgesetzt</string>
+    <string name="settings_word_import_empty">Keine Wörter in der Datei gefunden</string>
+    <string name="settings_word_import_failed">Wortliste konnte nicht importiert werden</string>
+    <string name="settings_word_reset_title">Wortliste für Wort des Tages zurücksetzen?</string>
+    <string name="settings_word_reset_message">Importierte Wörter werden entfernt und die Standardliste wird wiederhergestellt.</string>
     <string name="settings_select_search_engine">Wählen Sie eine Suchmaschine</string>
     <string name="settings_search_engine">Suchmaschine</string>
     <string name="settings_select_app_language">Wählen Sie eine App-Sprache</string>

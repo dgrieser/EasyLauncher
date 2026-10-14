@@ -464,9 +464,41 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
                 }
             }
             editor.apply()
+            migratePreferences()
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    // Keys renamed since upstream EasyLauncher or earlier versions of this fork: old key -> new keys
+    private val renamedKeys = mapOf(
+        "HOME_APP_ALIGNMENT" to listOf(Constants.FAVORITE_APP_ALIGNMENT, Constants.ALL_APP_ALIGNMENT),
+        "home_clock_date_padding" to listOf(Constants.HOME_CLOCK_DATE_PADDING),
+        "home_date_alarm_padding" to listOf(Constants.HOME_DATE_ALARM_PADDING),
+        "home_alarm_word_padding" to listOf(Constants.HOME_ALARM_WORD_PADDING),
+        "hide_favorites_in_all_apps" to listOf(Constants.HIDE_FAVORITES_IN_ALL_APPS),
+        "hide_search_button" to listOf(Constants.HIDE_SEARCH_BUTTON),
+    )
+
+    fun migratePreferences() {
+        val all = prefs.all
+        if (renamedKeys.keys.none { all.containsKey(it) }) return
+
+        val editor = prefs.edit()
+        for ((oldKey, newKeys) in renamedKeys) {
+            val value = all[oldKey] ?: continue
+            for (newKey in newKeys) {
+                if (all.containsKey(newKey)) continue
+                when (value) {
+                    is String -> editor.putString(newKey, value)
+                    is Boolean -> editor.putBoolean(newKey, value)
+                    is Int -> editor.putInt(newKey, value)
+                    is Float -> editor.putFloat(newKey, value)
+                }
+            }
+            editor.remove(oldKey)
+        }
+        editor.apply()
     }
 
     fun clear() {

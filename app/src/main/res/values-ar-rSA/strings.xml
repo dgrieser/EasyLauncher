@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">التطبيقات المفضلة</string>
     <string name="hidden_apps">التطبيقات المخفية</string>
+    <string name="all_apps">جميع التطبيقات</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">الإعدادات</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">جزء المخفية</string>
     <string name="settings_fragment_label">جزء الإعدادات</string>
     <string name="widgets_fragment_label">جزء الودجات</string>
+    <string name="draw_order_fragment_label">جزء ترتيب التطبيقات</string>
+    <string name="draw_fragment_name">جميع التطبيقات</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">التطبيقات المفضلة</string>
     <string name="hidden_fragment_name">التطبيقات المخفية</string>
     <string name="favorite_fragment_no_apps">لا توجد تطبيقات مفضلة</string>
     <string name="hidden_fragment_no_apps">لا توجد تطبيقات مخفية</string>
+    <string name="draw_fragment_no_apps">لا توجد تطبيقات</string>
     <string name="search">بحث</string>
     <string name="bottom_dialog_app_rename">إعادة تسمية</string>
     <string name="bottom_dialog_add_to_home">إضافة إلى الشاشة الرئيسية</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">قفل الإعدادات</string>
     <string name="settings_display_disable_animations">تعطيل الرسوم المتحركة</string>
     <string name="settings_hide_search_button">إخفاء زر البحث</string>
+    <string name="settings_hide_favorites_in_all_apps">إخفاء التطبيقات المفضلة في جميع التطبيقات</string>
     <string name="settings_appearance_text_size_title">الحجم</string>
     <string name="settings_appearance_color_title">اللون</string>
     <string name="settings_appearance_alignment_title">المحاذاة</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">التاريخ\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">الوقت\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">التطبيقات\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">التطبيقات المفضلة\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">جميع التطبيقات\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">مجموعة التطبيقات\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">مسافة الساعة/التاريخ\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">مسافة التاريخ/المنبه\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">مسافة المنبه/الكلمة\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">المنبه\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">الكلمة\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">البطارية\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">السحب للأسفل</string>
     <string name="settings_swipe_left">السحب لليسار</string>
     <string name="settings_swipe_right">السحب لليمين</string>
+    <string name="settings_word_tap_app_title">إجراء النقر على الكلمة</string>
+    <string name="settings_daily_word_list_title">قائمة كلمات اليوم</string>
+    <string name="settings_word_import">استيراد</string>
+    <string name="settings_word_reset">إعادة تعيين</string>
+    <string name="settings_word_import_success">تم استيراد قائمة الكلمات</string>
+    <string name="settings_word_reset_success">تمت إعادة تعيين قائمة الكلمات</string>
+    <string name="settings_word_import_empty">لم يتم العثور على كلمات في الملف</string>
+    <string name="settings_word_import_failed">فشل استيراد قائمة الكلمات</string>
+    <string name="settings_word_reset_title">إعادة تعيين قائمة كلمات اليوم؟</string>
+    <string name="settings_word_reset_message">سيؤدي هذا إلى إزالة الكلمات المستوردة واستعادة القائمة الافتراضية.</string>
     <string name="settings_select_search_engine">اختر محرك بحث</string>
     <string name="settings_search_engine">محرك البحث</string>
     <string name="settings_select_app_language">اختر لغة التطبيق</string>

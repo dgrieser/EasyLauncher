@@ -26,6 +26,8 @@ class Application : Application() {
 
         ContextProvider.init(this)
 
+        preferenceHelper.migratePreferences()
+
         setCustomFont(applicationContext)
 
         val pkgName = getString(R.string.app_name)

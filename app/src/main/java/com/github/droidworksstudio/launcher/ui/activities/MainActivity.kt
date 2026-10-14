@@ -297,7 +297,7 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment_content_main)
         when (navController.currentDestination?.id) {
             R.id.HomeFragment -> return
-            else -> navController.navigate(R.id.HomeFragment)
+            else -> navController.navigate(R.id.HomeFragment, null, appHelper.popUpTo(R.id.HomeFragment, null))
         }
     }
 
@@ -309,6 +309,7 @@ class MainActivity : AppCompatActivity() {
             R.id.SettingsWidgetFragment,
             R.id.SettingsAdvancedFragment,
             R.id.FavoriteFragment,
+            R.id.DrawOrderFragment,
             R.id.HiddenFragment,
                 -> {
                 val actionTypeNavOptions: NavOptions? =
@@ -319,7 +320,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(
                         R.id.SettingsFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.SettingsFragment, actionTypeNavOptions)
                     )
                 }
             }
@@ -333,7 +334,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(
                         R.id.HomeFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                     )
                 }
             }
@@ -347,7 +348,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(
                         R.id.HomeFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                     )
                 }
             }

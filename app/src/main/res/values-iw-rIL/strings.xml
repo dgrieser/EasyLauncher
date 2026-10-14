@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">יישומים מועדפים</string>
     <string name="hidden_apps">יישומים מוסתרים</string>
+    <string name="all_apps">כל האפליקציות</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">הגדרות</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">מקטע מוסתר</string>
     <string name="settings_fragment_label">מקטע הגדרות</string>
     <string name="widgets_fragment_label">מקטע ווידג\'טים</string>
+    <string name="draw_order_fragment_label">מקטע סדר אפליקציות</string>
+    <string name="draw_fragment_name">כל האפליקציות</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">אפליקציות מועדפות</string>
     <string name="hidden_fragment_name">אפליקציות נסתרות</string>
     <string name="favorite_fragment_no_apps">אין אפליקציות מועדפות</string>
     <string name="hidden_fragment_no_apps">אין אפליקציות נסתרות</string>
+    <string name="draw_fragment_no_apps">אין אפליקציות</string>
     <string name="search">חיפוש</string>
     <string name="bottom_dialog_app_rename">שנה שם</string>
     <string name="bottom_dialog_add_to_home">הוסף לדף הבית</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">הגדרות נעילה</string>
     <string name="settings_display_disable_animations">השבת אנימציות</string>
     <string name="settings_hide_search_button">הסתר לחצן חיפוש</string>
+    <string name="settings_hide_favorites_in_all_apps">הסתר אפליקציות מועדפות בכל האפליקציות</string>
     <string name="settings_appearance_text_size_title">גודל</string>
     <string name="settings_appearance_color_title">צבע</string>
     <string name="settings_appearance_alignment_title">יישור</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">תאריך\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">זמן\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">אפליקציות\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">אפליקציות מועדפות\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">כל האפליקציות\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">קבוצת אפליקציות\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">ריווח שעון/תאריך\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">ריווח תאריך/שעון מעורר\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">ריווח שעון מעורר/מילה\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">אזעקה\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">מילה\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">סוללה\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">החלק למטה</string>
     <string name="settings_swipe_left">החלק שמאלה</string>
     <string name="settings_swipe_right">החלק ימינה</string>
+    <string name="settings_word_tap_app_title">פעולה בהקשה על המילה</string>
+    <string name="settings_daily_word_list_title">רשימת מילים יומיות</string>
+    <string name="settings_word_import">ייבוא</string>
+    <string name="settings_word_reset">איפוס</string>
+    <string name="settings_word_import_success">רשימת המילים יובאה</string>
+    <string name="settings_word_reset_success">רשימת המילים אופסה</string>
+    <string name="settings_word_import_empty">לא נמצאו מילים בקובץ</string>
+    <string name="settings_word_import_failed">ייבוא רשימת המילים נכשל</string>
+    <string name="settings_word_reset_title">לאפס את רשימת המילים היומיות?</string>
+    <string name="settings_word_reset_message">פעולה זו תסיר את המילים שייבאת ותשחזר את רשימת ברירת המחדל.</string>
     <string name="settings_select_search_engine">בחר מנוע חיפוש</string>
     <string name="settings_search_engine">מנוע חיפוש</string>
     <string name="settings_select_app_language">בחר שפת אפליקציה</string>

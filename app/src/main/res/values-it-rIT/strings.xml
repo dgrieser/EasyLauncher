@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">App preferite</string>
     <string name="hidden_apps">App nascoste</string>
+    <string name="all_apps">Tutte le app</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">Impostazioni</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">Frammento nascosto</string>
     <string name="settings_fragment_label">Frammento Impostazioni</string>
     <string name="widgets_fragment_label">Frammento di widget</string>
+    <string name="draw_order_fragment_label">Frammento ordine app</string>
+    <string name="draw_fragment_name">Tutte le app</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">App preferite</string>
     <string name="hidden_fragment_name">App nascoste</string>
     <string name="favorite_fragment_no_apps">Nessuna app preferita</string>
     <string name="hidden_fragment_no_apps">Nessuna app nascosta</string>
+    <string name="draw_fragment_no_apps">Nessuna app</string>
     <string name="search">Ricerca</string>
     <string name="bottom_dialog_app_rename">Rinominare</string>
     <string name="bottom_dialog_add_to_home">Aggiungere alla schermata Home</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">Blocca impostazioni</string>
     <string name="settings_display_disable_animations">Disabilitare le animazioni</string>
     <string name="settings_hide_search_button">Nascondi pulsante di ricerca</string>
+    <string name="settings_hide_favorites_in_all_apps">Nascondi app preferite in Tutte le app</string>
     <string name="settings_appearance_text_size_title">Misurare</string>
     <string name="settings_appearance_color_title">Colore</string>
     <string name="settings_appearance_alignment_title">Allineamento</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">Data\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Orario\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">Applicazioni\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">App preferite\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">Tutte le app\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Gruppo App\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">Spaziatura orologio/data\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">Spaziatura data/allarme\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">Spaziatura allarme/parola\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">Allarme\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">Parola\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">Batteria\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">Scorri verso il basso</string>
     <string name="settings_swipe_left">Scorrere verso sinistra</string>
     <string name="settings_swipe_right">Scorri verso destra</string>
+    <string name="settings_word_tap_app_title">Azione al tocco sulla parola</string>
+    <string name="settings_daily_word_list_title">Elenco parole del giorno</string>
+    <string name="settings_word_import">Importa</string>
+    <string name="settings_word_reset">Ripristina</string>
+    <string name="settings_word_import_success">Elenco parole importato</string>
+    <string name="settings_word_reset_success">Elenco parole ripristinato</string>
+    <string name="settings_word_import_empty">Nessuna parola trovata nel file</string>
+    <string name="settings_word_import_failed">Impossibile importare l\'elenco parole</string>
+    <string name="settings_word_reset_title">Ripristinare l\'elenco delle parole del giorno?</string>
+    <string name="settings_word_reset_message">Le parole importate verranno rimosse e verrà ripristinato l\'elenco predefinito.</string>
     <string name="settings_select_search_engine">Seleziona un motore di ricerca</string>
     <string name="settings_search_engine">Motore di ricerca</string>
     <string name="settings_select_app_language">Seleziona una lingua per l\'app</string>

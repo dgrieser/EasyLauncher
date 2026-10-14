@@ -118,7 +118,7 @@ class SettingsFragment : Fragment(),
                     findNavController().navigate(
                         R.id.HomeFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                     )
                 }
             }
@@ -133,7 +133,7 @@ class SettingsFragment : Fragment(),
                     findNavController().navigate(
                         R.id.HomeFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                     )
                 }
             }

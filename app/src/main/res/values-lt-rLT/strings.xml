@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">Mėgstamiausios programos</string>
     <string name="hidden_apps">Paslėptos programos</string>
+    <string name="all_apps">Visos programos</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">Nustatymai</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">Paslėptas fragmentas</string>
     <string name="settings_fragment_label">Nustatymai Fragmentas</string>
     <string name="widgets_fragment_label">Valdiklių fragmentas</string>
+    <string name="draw_order_fragment_label">Programų tvarkos fragmentas</string>
+    <string name="draw_fragment_name">Visos programos</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">Mėgstamiausios programos</string>
     <string name="hidden_fragment_name">Paslėptos programos</string>
     <string name="favorite_fragment_no_apps">Nėra mėgstamiausių programų</string>
     <string name="hidden_fragment_no_apps">Nėra paslėptų programų</string>
+    <string name="draw_fragment_no_apps">Nėra programų</string>
     <string name="search">Paieška</string>
     <string name="bottom_dialog_app_rename">Pervardyti</string>
     <string name="bottom_dialog_add_to_home">Pridėti prie pagrindinio ekrano</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">Užrakinimo nustatymai</string>
     <string name="settings_display_disable_animations">Išjungti animacijas</string>
     <string name="settings_hide_search_button">Slėpti paieškos mygtuką</string>
+    <string name="settings_hide_favorites_in_all_apps">Slėpti mėgstamiausias programas tarp visų programų</string>
     <string name="settings_appearance_text_size_title">Dydis</string>
     <string name="settings_appearance_color_title">Spalva</string>
     <string name="settings_appearance_alignment_title">Lygiavimas</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">Data\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Laikas\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">Programos\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">Mėgstamiausios programos\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">Visos programos\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Programų grupė\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">Tarpas laikrodis/data\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">Tarpas data/žadintuvas\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">Tarpas žadintuvas/žodis\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">Signalizacija\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">Žodis\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">Baterija\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">Braukite žemyn</string>
     <string name="settings_swipe_left">Braukite kairėn</string>
     <string name="settings_swipe_right">Braukite dešinėn</string>
+    <string name="settings_word_tap_app_title">Veiksmas palietus žodį</string>
+    <string name="settings_daily_word_list_title">Dienos žodžių sąrašas</string>
+    <string name="settings_word_import">Importuoti</string>
+    <string name="settings_word_reset">Nustatyti iš naujo</string>
+    <string name="settings_word_import_success">Žodžių sąrašas importuotas</string>
+    <string name="settings_word_reset_success">Žodžių sąrašas nustatytas iš naujo</string>
+    <string name="settings_word_import_empty">Faile nerasta žodžių</string>
+    <string name="settings_word_import_failed">Nepavyko importuoti žodžių sąrašo</string>
+    <string name="settings_word_reset_title">Nustatyti dienos žodžių sąrašą iš naujo?</string>
+    <string name="settings_word_reset_message">Bus pašalinti importuoti žodžiai ir atkurtas numatytasis sąrašas.</string>
     <string name="settings_select_search_engine">Pasirinkite paieškos variklį</string>
     <string name="settings_search_engine">Paieškos variklis</string>
     <string name="settings_select_app_language">Pasirinkite programos kalbą</string>

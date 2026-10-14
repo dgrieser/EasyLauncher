@@ -226,7 +226,7 @@ class DrawFragment : Fragment(),
                                 findNavController().navigate(
                                     R.id.HomeFragment,
                                     null,
-                                    actionTypeNavOptions
+                                    appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                                 )
                             }
                         }
@@ -245,7 +245,7 @@ class DrawFragment : Fragment(),
                                     findNavController().navigate(
                                         R.id.HomeFragment,
                                         null,
-                                        actionTypeNavOptions
+                                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                                     )
                                 }
                             } else binding.searchViewText.showKeyboard()
@@ -269,7 +269,7 @@ class DrawFragment : Fragment(),
                     findNavController().navigate(
                         R.id.HomeFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                     )
                 }
             }
@@ -284,7 +284,7 @@ class DrawFragment : Fragment(),
                     findNavController().navigate(
                         R.id.HomeFragment,
                         null,
-                        actionTypeNavOptions
+                        appHelper.popUpTo(R.id.HomeFragment, actionTypeNavOptions)
                     )
                 }
             }
@@ -344,6 +344,13 @@ class DrawFragment : Fragment(),
                     }
 
 
+                    // Search covers favorites too, but the unfiltered list follows the drawer setting
+                    val drawerResults = if (preferenceHelper.hideFavoritesInAllApps) {
+                        searchResults.filterNot { it.favorite }
+                    } else {
+                        searchResults
+                    }
+
                     val numberOfItemsLeft = finalResults.size
                     val appResults = finalResults.firstOrNull()
 
@@ -361,7 +368,7 @@ class DrawFragment : Fragment(),
                             }
                         }
                         if (trimmedQuery.isEmpty()) {
-                            drawAdapter.submitList(searchResults)
+                            drawAdapter.submitList(drawerResults)
                         }
                     } else {
                         if (numberOfItemsLeft == 0 && !requireContext().searchOnPlayStore(trimmedQuery)) {
@@ -370,7 +377,7 @@ class DrawFragment : Fragment(),
                             appResults?.let { appInfo ->
                                 observeBioAuthCheck(appInfo)
                             }
-                            drawAdapter.submitList(searchResults)
+                            drawAdapter.submitList(drawerResults)
                         }
                     }
                 }

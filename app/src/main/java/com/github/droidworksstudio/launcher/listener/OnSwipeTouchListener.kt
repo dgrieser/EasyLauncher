@@ -24,6 +24,7 @@ import kotlin.math.abs
 internal open class OnSwipeTouchListener(context: Context?, private val preferenceHelper: PreferenceHelper) : OnTouchListener {
     private var longPressOn = false
     private var doubleTapOn = false
+    private var swipeHandled = false
     private val gestureDetector: GestureDetector
 
     @SuppressLint("ClickableViewAccessibility")
@@ -39,6 +40,7 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
         private val swipeScrollThreshold: Int = (preferenceHelper.swipeThreshold / 2)
 
         override fun onDown(event: MotionEvent): Boolean {
+            swipeHandled = false
             return true
         }
 
@@ -85,13 +87,13 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
                 // Horizontal swipe
                 if (abs(diffX) > abs(diffY)) {
                     if (abs(diffX) > swipeThreshold && abs(distanceX) > swipeScrollThreshold) {
-                        if (diffX > 0) onSwipeRight() else onSwipeLeft()
+                        handleSwipe { if (diffX > 0) onSwipeRight() else onSwipeLeft() }
                     }
                 }
                 // Vertical swipe
                 else {
                     if (abs(diffY) > swipeThreshold && abs(distanceY) > swipeScrollThreshold) {
-                        if (diffY > 0) onSwipeDown() else onSwipeUp()
+                        handleSwipe { if (diffY > 0) onSwipeDown() else onSwipeUp() }
                     }
                 }
             } catch (_: NullPointerException) {
@@ -111,11 +113,11 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
                 val diffX = event2.x - event1.x
                 if (abs(diffX) > abs(diffY)) {
                     if (abs(diffX) > swipeThreshold && abs(velocityX) > swipeVelocityThreshold) {
-                        if (diffX > 0) onSwipeRight() else onSwipeLeft()
+                        handleSwipe { if (diffX > 0) onSwipeRight() else onSwipeLeft() }
                     }
                 } else {
                     if (abs(diffY) > swipeThreshold && abs(velocityY) > swipeVelocityThreshold) {
-                        if (diffY < 0) onSwipeUp() else onSwipeDown()
+                        handleSwipe { if (diffY < 0) onSwipeUp() else onSwipeDown() }
                     }
                 }
             } catch (_: NullPointerException) {
@@ -123,6 +125,14 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
             }
             return false
         }
+    }
+
+    // onScroll keeps reporting a swipe while the finger moves and onFling reports it again on release;
+    // act once per gesture so e.g. navigateUp() does not pop past the previous screen
+    private fun handleSwipe(swipe: () -> Unit) {
+        if (swipeHandled) return
+        swipeHandled = true
+        swipe()
     }
 
     open fun onSwipeRight() {}

@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">Favoritapps</string>
     <string name="hidden_apps">Skjulte apps</string>
+    <string name="all_apps">Alle apps</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">Indstillinger</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">Skjult Fragment</string>
     <string name="settings_fragment_label">Indstillinger Fragment</string>
     <string name="widgets_fragment_label">Widgets Fragment</string>
+    <string name="draw_order_fragment_label">Fragment for app-rækkefølge</string>
+    <string name="draw_fragment_name">Alle apps</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">Favoritapps</string>
     <string name="hidden_fragment_name">Skjulte Apps</string>
     <string name="favorite_fragment_no_apps">Ingen favoritapps</string>
     <string name="hidden_fragment_no_apps">Ingen skjulte apps</string>
+    <string name="draw_fragment_no_apps">Ingen apps</string>
     <string name="search">Søg</string>
     <string name="bottom_dialog_app_rename">Omdøb</string>
     <string name="bottom_dialog_add_to_home">Føj til Startskærm</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">Lås Indstillinger</string>
     <string name="settings_display_disable_animations">Deaktiver animationer</string>
     <string name="settings_hide_search_button">Skjul søgeknap</string>
+    <string name="settings_hide_favorites_in_all_apps">Skjul favoritapps i Alle apps</string>
     <string name="settings_appearance_text_size_title">Størrelse</string>
     <string name="settings_appearance_color_title">Farve</string>
     <string name="settings_appearance_alignment_title">Justering</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">Dato\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Tid\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">Apps\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">Favoritapps\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">Alle apps\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">Apps-gruppe\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">Afstand ur/dato\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">Afstand dato/alarm\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">Afstand alarm/ord\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">Alarm\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">Ord\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">Batteri\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">Stryg Ned</string>
     <string name="settings_swipe_left">Stryg til Venstre</string>
     <string name="settings_swipe_right">Stryg til Højre</string>
+    <string name="settings_word_tap_app_title">Handling ved tryk på ord</string>
+    <string name="settings_daily_word_list_title">Liste over daglige ord</string>
+    <string name="settings_word_import">Importér</string>
+    <string name="settings_word_reset">Nulstil</string>
+    <string name="settings_word_import_success">Ordliste importeret</string>
+    <string name="settings_word_reset_success">Ordliste nulstillet</string>
+    <string name="settings_word_import_empty">Ingen ord fundet i filen</string>
+    <string name="settings_word_import_failed">Kunne ikke importere ordliste</string>
+    <string name="settings_word_reset_title">Nulstil listen over daglige ord?</string>
+    <string name="settings_word_reset_message">Dette fjerner dine importerede ord og gendanner standardlisten.</string>
     <string name="settings_select_search_engine">Vælg en Søgemaskine</string>
     <string name="settings_search_engine">Søgemaskine</string>
     <string name="settings_select_app_language">Vælg et app-sprog</string>

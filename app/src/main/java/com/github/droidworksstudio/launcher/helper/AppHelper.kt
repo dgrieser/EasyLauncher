@@ -486,6 +486,18 @@ class AppHelper @Inject constructor() {
         }
     }
 
+    // Going back to a destination must pop the back stack up to it rather than stack another copy,
+    // otherwise the stack grows with every gesture until saving state throws TransactionTooLargeException
+    fun popUpTo(destinationId: Int, navOptions: NavOptions?): NavOptions {
+        return NavOptions.Builder()
+            .setEnterAnim(navOptions?.enterAnim ?: -1)
+            .setExitAnim(navOptions?.exitAnim ?: -1)
+            .setPopEnterAnim(navOptions?.popEnterAnim ?: -1)
+            .setPopExitAnim(navOptions?.popExitAnim ?: -1)
+            .setPopUpTo(destinationId, true)
+            .build()
+    }
+
     sealed class WeatherResult {
         data class Success(val weatherResponse: WeatherResponse) : WeatherResult()
         data class Failure(val errorMessage: String) : WeatherResult()

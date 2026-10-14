@@ -3,6 +3,7 @@
     <!-- Strings used for basic parts of the launcher -->
     <string name="favorite_apps">Favoriete apps</string>
     <string name="hidden_apps">Verborgen apps</string>
+    <string name="all_apps">Alle apps</string>
     <!-- Strings used for actions within the app -->
     <string name="action_settings">Instellingen</string>
     <!-- Strings used for settings menus -->
@@ -47,11 +48,14 @@
     <string name="hidden_fragment_label">Verborgen appfragment</string>
     <string name="settings_fragment_label">Instellingsfragment</string>
     <string name="widgets_fragment_label">Widgetsfragment</string>
+    <string name="draw_order_fragment_label">App-volgordefragment</string>
+    <string name="draw_fragment_name">Alle apps</string>
     <!-- Strings used for fragments header labels -->
     <string name="favorite_fragment_name">Favoriete apps</string>
     <string name="hidden_fragment_name">Verborgen apps</string>
     <string name="favorite_fragment_no_apps">Geen favoriete apps</string>
     <string name="hidden_fragment_no_apps">Geen verborgen apps</string>
+    <string name="draw_fragment_no_apps">Geen apps</string>
     <string name="search">Zoek</string>
     <string name="bottom_dialog_app_rename">Hernoemen</string>
     <string name="bottom_dialog_add_to_home">Toevoegen aan startscherm</string>
@@ -85,6 +89,7 @@
     <string name="settings_display_lock_settings">Instellingen vergrendelen</string>
     <string name="settings_display_disable_animations">Animaties uitschakelen</string>
     <string name="settings_hide_search_button">Verberg zoekknop</string>
+    <string name="settings_hide_favorites_in_all_apps">Favoriete apps verbergen in Alle apps</string>
     <string name="settings_appearance_text_size_title">Grootte</string>
     <string name="settings_appearance_color_title">Kleur</string>
     <string name="settings_appearance_alignment_title">Uitlijning</string>
@@ -95,7 +100,12 @@
     <string name="appearance_bottom_dialog_desc_date">Datum\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_time">Tijd\u0020:\u0020 </string>
     <string name="appearance_bottom_dialog_desc_app">Apps\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_favorite_app">Favoriete apps\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_all_app">Alle apps\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_app_group">App-groep\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_clock_date">Afstand klok/datum\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_date_alarm">Afstand datum/alarm\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_alarm_word">Afstand alarm/woord\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_alarm">Alarm\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_word">Woord\u0020:\u0020</string>
     <string name="appearance_bottom_dialog_desc_battery">Batterij\u0020:\u0020 </string>
@@ -106,6 +116,16 @@
     <string name="settings_swipe_down">Omlaag vegen</string>
     <string name="settings_swipe_left">Naar links vegen</string>
     <string name="settings_swipe_right">Naar rechts vegen</string>
+    <string name="settings_word_tap_app_title">Actie bij tikken op woord</string>
+    <string name="settings_daily_word_list_title">Lijst met dagelijkse woorden</string>
+    <string name="settings_word_import">Importeren</string>
+    <string name="settings_word_reset">Resetten</string>
+    <string name="settings_word_import_success">Woordenlijst geïmporteerd</string>
+    <string name="settings_word_reset_success">Woordenlijst gereset</string>
+    <string name="settings_word_import_empty">Geen woorden gevonden in bestand</string>
+    <string name="settings_word_import_failed">Importeren van woordenlijst mislukt</string>
+    <string name="settings_word_reset_title">Lijst met dagelijkse woorden resetten?</string>
+    <string name="settings_word_reset_message">Hiermee worden uw geïmporteerde woorden verwijderd en wordt de standaardlijst hersteld.</string>
     <string name="settings_select_search_engine">Selecteer een zoekmachine</string>
     <string name="settings_search_engine">Zoekmachine</string>
     <string name="settings_select_app_language">Selecteer een app-taal</string>
