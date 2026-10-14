@@ -37,7 +37,7 @@
 	    	<br>
             <a href='https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/app.easy.launcher.yml'><img alt="F-Droid (including pre-releases)" src="https://img.shields.io/f-droid/v/app.easy.launcher?color=FFB86C&style=flat-square&label=F-Droid"></a>
             <br>
-            <img src='https://img.shields.io/badge/Maintained-yes-FF5555?style=flat-square' alt="Maintained">
+            <img src='https://img.shields.io/badge/Maintained-NO-FF5555?style=flat-square' alt="Maintained">
         </p>
     </div>
 </div>
@@ -96,14 +96,6 @@ We try to balance customizability and minimalization well still being simple :)<
     - Please can we discuss before sending pull requests.
     - Make pull requests to `main` branch.
 - Any help in translating EasyLauncher into other languages is greatly appreciated. **[Crowdin](https://crowdin.com/project/easy-launcher)**.
-
-## Credits
-
-- This project is partially based on code
-  from [neophtex/AsterLauncher](https://github.com/neophtex/AsterLauncher), though it has been
-  significantly modified.
-
-Sure, here is a revised and improved version of the license description:
 
 ---
 

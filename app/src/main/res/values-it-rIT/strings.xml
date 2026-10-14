@@ -185,7 +185,7 @@
         <item>Centro</item>
         <item>Giusto</item>
     </string-array>
-    <string name="home_no_alarm_set">No alarm is set.</string>
+    <string name="home_no_alarm_set">Non è impostato alcun allarme.</string>
     <string name="sort_manually">Ordina manualmente</string>
     <string name="sort_automatically">Ordina automaticamente</string>
 </resources>
