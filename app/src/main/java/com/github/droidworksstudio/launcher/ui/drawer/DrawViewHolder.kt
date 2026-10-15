@@ -41,6 +41,8 @@ class DrawViewHolder(
             appDrawName.setTextColor(preferenceHelper.appColor)
             appDrawName.textSize = preferenceHelper.appTextSize
             appDrawName.gravity = preferenceHelper.allAppAlignment
+            // The row spans the list width, align the label inside it
+            linearLayout.gravity = preferenceHelper.allAppAlignment or Gravity.CENTER_VERTICAL
 
             if (preferenceHelper.showAppIcon) {
                 val appInfoMap = root.context.getAllProfileAppIcons()

@@ -41,6 +41,8 @@ class HomeViewHolder @Inject constructor(
             appHomeName.setTextColor(preferenceHelper.appColor)
             appHomeName.textSize = preferenceHelper.appTextSize
             appHomeName.gravity = preferenceHelper.favoriteAppAlignment
+            // The row spans the list width, align the label inside it
+            linearLayout.gravity = preferenceHelper.favoriteAppAlignment or Gravity.CENTER_VERTICAL
 
             if (preferenceHelper.showAppIcon) {
                 val appInfoMap = root.context.getAllProfileAppIcons()

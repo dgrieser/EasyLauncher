@@ -24,7 +24,8 @@ import kotlin.math.abs
 internal open class OnSwipeTouchListener(context: Context?, private val preferenceHelper: PreferenceHelper) : OnTouchListener {
     private var longPressOn = false
     private var doubleTapOn = false
-    private var swipeHandled = false
+    var swipeHandled = false
+        private set
     private val gestureDetector: GestureDetector
 
     @SuppressLint("ClickableViewAccessibility")
@@ -91,7 +92,7 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
                     }
                 }
                 // Vertical swipe
-                else {
+                else if (handlesVerticalSwipes) {
                     if (abs(diffY) > swipeThreshold && abs(distanceY) > swipeScrollThreshold) {
                         handleSwipe { if (diffY > 0) onSwipeDown() else onSwipeUp() }
                     }
@@ -115,7 +116,7 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
                     if (abs(diffX) > swipeThreshold && abs(velocityX) > swipeVelocityThreshold) {
                         handleSwipe { if (diffX > 0) onSwipeRight() else onSwipeLeft() }
                     }
-                } else {
+                } else if (handlesVerticalSwipes) {
                     if (abs(diffY) > swipeThreshold && abs(velocityY) > swipeVelocityThreshold) {
                         handleSwipe { if (diffY < 0) onSwipeUp() else onSwipeDown() }
                     }
@@ -134,6 +135,9 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
         swipeHandled = true
         swipe()
     }
+
+    // Listeners that leave vertical swipes to a scrolling list must not claim them
+    open val handlesVerticalSwipes: Boolean = true
 
     open fun onSwipeRight() {}
     open fun onSwipeLeft() {}
