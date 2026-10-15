@@ -45,6 +45,7 @@ import com.github.droidworksstudio.launcher.helper.BiometricHelper
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
 import com.github.droidworksstudio.launcher.listener.OnItemClickedListener
 import com.github.droidworksstudio.launcher.listener.OnSwipeTouchListener
+import com.github.droidworksstudio.launcher.listener.SwipeItemTouchListener
 import com.github.droidworksstudio.launcher.listener.ScrollEventListener
 import com.github.droidworksstudio.launcher.ui.bottomsheetdialog.AppInfoBottomSheetFragment
 import com.github.droidworksstudio.launcher.utils.Constants
@@ -178,12 +179,14 @@ class HomeFragment : Fragment(),
     private fun setupRecyclerView() {
         val marginInPixels = preferenceHelper.homeAppsPadding
 
-        // Ensure correct type for layout params
+        // Ensure correct type for layout params; the list spans the full width so labels only wrap when
+        // they really do not fit, the items take care of the horizontal alignment
         val layoutParams = (binding.appListAdapter.layoutParams as? LinearLayout.LayoutParams)
             ?: LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
 
         // Determine the gravity and margin based on the alignment preference
         val gravity = if (preferenceHelper.homeAlignmentBottom)
@@ -238,6 +241,8 @@ class HomeFragment : Fragment(),
         binding.apply {
             touchArea.setOnTouchListener(getSwipeGestureListener(context))
             appListTouchArea.setOnTouchListener(getSwipeGestureListener(context))
+            // Swipes starting on a favorite app label must trigger the gestures as well
+            appListAdapter.addOnItemTouchListener(SwipeItemTouchListener(getSwipeGestureListener(context, swipesOnly = true)))
 
             clock.setOnClickListener { context.launchClock() }
             date.setOnClickListener { context.launchCalendar() }
@@ -342,10 +347,12 @@ class HomeFragment : Fragment(),
 
     }
 
-    private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
+    // swipesOnly leaves long presses and taps to the app labels the listener is put on top of
+    private fun getSwipeGestureListener(context: Context, swipesOnly: Boolean = false): OnSwipeTouchListener {
         return object : OnSwipeTouchListener(context, preferenceHelper) {
             override fun onLongClick() {
                 super.onLongClick()
+                if (swipesOnly) return
                 trySettings()
                 return
             }
@@ -353,6 +360,7 @@ class HomeFragment : Fragment(),
             @RequiresApi(Build.VERSION_CODES.P)
             override fun onDoubleClick() {
                 super.onDoubleClick()
+                if (swipesOnly) return
                 handleOtherAction(preferenceHelper.doubleTapAction, Constants.Swipe.DoubleTap)
             }
 

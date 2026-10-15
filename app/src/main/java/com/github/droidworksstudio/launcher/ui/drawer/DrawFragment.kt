@@ -39,6 +39,7 @@ import com.github.droidworksstudio.launcher.helper.BiometricHelper
 import com.github.droidworksstudio.launcher.helper.PreferenceHelper
 import com.github.droidworksstudio.launcher.listener.OnItemClickedListener
 import com.github.droidworksstudio.launcher.listener.OnSwipeTouchListener
+import com.github.droidworksstudio.launcher.listener.SwipeItemTouchListener
 import com.github.droidworksstudio.launcher.listener.ScrollEventListener
 import com.github.droidworksstudio.launcher.ui.bottomsheetdialog.AppInfoBottomSheetFragment
 import com.github.droidworksstudio.launcher.utils.Constants
@@ -111,12 +112,14 @@ class DrawFragment : Fragment(),
 
     private fun setupRecyclerView() {
 
-        // Ensure correct type for layout params
+        // Ensure correct type for layout params; the list spans the full width so it scrolls everywhere and
+        // labels only wrap when they really do not fit, the items take care of the horizontal alignment
         val layoutParams = (binding.drawAdapter.layoutParams as? LinearLayout.LayoutParams)
             ?: LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
 
         // Set gravity to align RecyclerView to the bottom
         layoutParams.gravity = when (preferenceHelper.allAppAlignment) {
@@ -197,6 +200,8 @@ class DrawFragment : Fragment(),
             mainView.setOnTouchListener(getSwipeGestureListener(context))
             touchArea.setOnTouchListener(getSwipeGestureListener(context))
             appListTouchArea.setOnTouchListener(getSwipeGestureListener(context))
+            // Horizontal swipes on the list leave the drawer, vertical ones keep scrolling it
+            drawAdapter.addOnItemTouchListener(SwipeItemTouchListener(getSwipeGestureListener(context)))
         }
     }
 
@@ -257,8 +262,10 @@ class DrawFragment : Fragment(),
     }
 
 
-    private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
+    private fun getSwipeGestureListener(context: Context): OnSwipeTouchListener {
         return object : OnSwipeTouchListener(context, preferenceHelper) {
+            override val handlesVerticalSwipes = false
+
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
                 val actionTypeNavOptions: NavOptions? =
