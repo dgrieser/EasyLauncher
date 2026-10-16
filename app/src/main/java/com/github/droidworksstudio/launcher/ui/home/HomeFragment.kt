@@ -241,8 +241,9 @@ class HomeFragment : Fragment(),
         binding.apply {
             touchArea.setOnTouchListener(getSwipeGestureListener(context))
             appListTouchArea.setOnTouchListener(getSwipeGestureListener(context))
-            // Swipes starting on a favorite app label must trigger the gestures as well
-            appListAdapter.addOnItemTouchListener(SwipeItemTouchListener(getSwipeGestureListener(context, swipesOnly = true)))
+            // Gestures on the list must work as well: swipes everywhere, long press and double tap
+            // beside the favorite app labels
+            appListAdapter.addOnItemTouchListener(SwipeItemTouchListener(getSwipeGestureListener(context)))
 
             clock.setOnClickListener { context.launchClock() }
             date.setOnClickListener { context.launchCalendar() }
@@ -347,12 +348,10 @@ class HomeFragment : Fragment(),
 
     }
 
-    // swipesOnly leaves long presses and taps to the app labels the listener is put on top of
-    private fun getSwipeGestureListener(context: Context, swipesOnly: Boolean = false): OnSwipeTouchListener {
+    private fun getSwipeGestureListener(context: Context): OnSwipeTouchListener {
         return object : OnSwipeTouchListener(context, preferenceHelper) {
             override fun onLongClick() {
                 super.onLongClick()
-                if (swipesOnly) return
                 trySettings()
                 return
             }
@@ -360,7 +359,6 @@ class HomeFragment : Fragment(),
             @RequiresApi(Build.VERSION_CODES.P)
             override fun onDoubleClick() {
                 super.onDoubleClick()
-                if (swipesOnly) return
                 handleOtherAction(preferenceHelper.doubleTapAction, Constants.Swipe.DoubleTap)
             }
 
