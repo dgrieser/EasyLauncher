@@ -26,6 +26,9 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
     private var doubleTapOn = false
     var swipeHandled = false
         private set
+
+    // Cleared while a gesture starts on a view handling its own taps and long presses, e.g. an app label
+    var tapsEnabled = true
     private val gestureDetector: GestureDetector
 
     @SuppressLint("ClickableViewAccessibility")
@@ -48,12 +51,13 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
         override fun onSingleTapUp(event: MotionEvent): Boolean {
             if (doubleTapOn) {
                 doubleTapOn = false
-                onTripleClick()
+                if (tapsEnabled) onTripleClick()
             }
             return super.onSingleTapUp(event)
         }
 
         override fun onDoubleTap(event: MotionEvent): Boolean {
+            if (!tapsEnabled) return super.onDoubleTap(event)
             doubleTapOn = true
             Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS.toLong()) {
                 if (doubleTapOn) {
@@ -65,6 +69,7 @@ internal open class OnSwipeTouchListener(context: Context?, private val preferen
         }
 
         override fun onLongPress(event: MotionEvent) {
+            if (!tapsEnabled) return super.onLongPress(event)
             longPressOn = true
             Timer().schedule(Constants.LONG_PRESS_DELAY_MS.toLong()) {
                 if (longPressOn) onLongClick()
